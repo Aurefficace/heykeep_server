@@ -33,6 +33,31 @@ class User implements UserInterface
      */
     private $password;
 
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $created_date;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $updated_date;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $name;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $avatar;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isactif;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -109,5 +134,65 @@ class User implements UserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    public function getCreatedDate(): ?\DateTimeInterface
+    {
+        return $this->created_date;
+    }
+
+    public function setCreatedDate(\DateTimeInterface $created_date): self
+    {
+        $this->created_date = $created_date;
+
+        return $this;
+    }
+
+    public function getUpdatedDate(): ?\DateTimeInterface
+    {
+        return $this->updated_date;
+    }
+
+    public function setUpdatedDate(?\DateTimeInterface $updated_date): self
+    {
+        $this->updated_date = $updated_date;
+
+        return $this;
+    }
+
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    public function setName(string $name): self
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    public function getAvatar(): ?string
+    {
+        return $this->avatar;
+    }
+
+    public function setAvatar(?string $avatar): self
+    {
+        $this->avatar = $avatar;
+
+        return $this;
+    }
+
+    public function getIsactif(): ?bool
+    {
+        return $this->isactif;
+    }
+
+    public function setIsactif(bool $isactif): self
+    {
+        $this->isactif = $isactif;
+
+        return $this;
     }
 }
