@@ -24,7 +24,7 @@ class Space
     private $name;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="text", nullable=true)
      */
     private $description;
 
@@ -45,7 +45,7 @@ class Space
     private $level;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Space", mappedBy="level", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="App\Entity\Space", mappedBy="level", orphanRemoval=false)
      */
     private $id_parent_space;
 
@@ -59,10 +59,16 @@ class Space
      */
     private $image;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Categorie", mappedBy="id_space")
+     */
+    private $categorie;
+
     public function __construct()
     {
         $this->id_owner = new ArrayCollection();
         $this->id_parent_space = new ArrayCollection();
+        $this->categorie = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -195,6 +201,37 @@ class Space
     public function setImage(?string $image): self
     {
         $this->image = $image;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Categorie[]
+     */
+    public function getCategorie(): Collection
+    {
+        return $this->categorie;
+    }
+
+    public function addCategorie(Categorie $categorie): self
+    {
+        if (!$this->categorie->contains($categorie)) {
+            $this->categorie[] = $categorie;
+            $categorie->setIdSpace($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCategorie(Categorie $categorie): self
+    {
+        if ($this->categorie->contains($categorie)) {
+            $this->categorie->removeElement($categorie);
+            // set the owning side to null (unless already changed)
+            if ($categorie->getIdSpace() === $this) {
+                $categorie->setIdSpace(null);
+            }
+        }
 
         return $this;
     }
