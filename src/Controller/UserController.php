@@ -76,6 +76,17 @@ class UserController extends AbstractController
         return $this->json(['result' => true]);
     }
 
+
+    /**
+     * @Route("/user/{id}", name="api_user", methods={"GET"})
+     */
+    public function getUserById($id)
+    {
+        $user = $this->getDoctrine()->getRepository(User::class)->find($id);
+       
+        return $this->json($user);
+    }
+
     /**
      * @Route("/profile", name="api_profile")
      * @IsGranted("ROLE_USER")
