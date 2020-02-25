@@ -10,3 +10,7 @@ Pour lancer en local sur : http://127.0.0.1:8000/
 
 Pour arrêter :  
 `symfony server:stop`
+
+##Utilisateur de test
+matthias@matthias.com  
+*admin345*
