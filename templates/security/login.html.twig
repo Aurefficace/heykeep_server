@@ -11,7 +11,7 @@
 
     {% if app.user %}
         <div class="mb-3">
-            Vous êtes connecté {{ app.user.username }}, <a href="{{ path('app_logout') }}">Se déconnecter</a>
+            Vous êtes connecté {{ app.user.username }}, <a href="{{ path('api_logout') }}">Se déconnecter</a>
         </div>
     {% endif %}
     <p>Identifiant : stephanie@steph.fr Mot de passe : stephanie123!</p>
@@ -19,8 +19,8 @@
     <h2 class="h4 mb-4 red-text">Se connecter</h2>
 
     <!-- Email -->
-    <label class="mt-3" for="inputPseudo">Pseudo</label>
-    <input type="text" value="{{ last_username }}" name="pseudo" id="inputPseudo" class="form-control" required autofocus>
+    <label class="mt-3" for="email">Pseudo</label>
+    <input type="text" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" required autofocus>
 
     <!-- Password -->
     <label class="mt-3" for="inputPassword">Mot de passe</label>
