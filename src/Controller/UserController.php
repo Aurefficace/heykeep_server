@@ -17,7 +17,7 @@ class UserController extends AbstractController
 
 {
     /**
-     * @Route("/register", name="api_register", methods={"POST"})
+     * @Route("/api/register", name="api_register", methods={"POST"})
      */
     public function register(UserPasswordEncoderInterface $passwordEncoder, EntityManagerInterface $om, Request $request)
     {
@@ -69,7 +69,7 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/login", name="api_login", methods={"POST"})
+     * @Route("/api/login", name="api_login", methods={"POST"})
      */
     public function login()
     {
@@ -78,7 +78,7 @@ class UserController extends AbstractController
 
 
     /**
-     * @Route("/user/{id}", name="api_user", methods={"GET"})
+     * @Route("/api/user/{id}", name="api_user", methods={"GET"})
      */
     public function getUserById($id)
     {
@@ -88,7 +88,7 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/profile", name="api_profile")
+     * @Route("/api/profile", name="api_profile")
      * @IsGranted("ROLE_USER")
      */
     public function profile()
@@ -106,7 +106,7 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/", name="api_home")
+     * @Route("/api/", name="api_home")
      */
     public function home()
     {
