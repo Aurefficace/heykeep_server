@@ -1,0 +1,26 @@
+@font-face{
+    font-family: 'Chillow';
+      font-style: normal;
+      src: url('../font/ChillowRegular.woff'),
+           url('../font/ChillowRegular.woff2');
+    }
+
+h1,h2{
+    font-family: 'Chillow' !important;
+    text-transform: lowercase;
+}
+body{
+    font-family: 'Quicksand'!important;
+}
+.red_text{
+    color: #d74850;
+}
+.blue_text{
+    color: #323441;
+}
+.bg-blue{
+    background-color: #323441!important;
+}
+.bg-red{
+    background-color: #d74850!important;
+}
