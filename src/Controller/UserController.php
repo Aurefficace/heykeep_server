@@ -24,7 +24,7 @@ class UserController extends AbstractController
         $user = new User();
         $email                  = $request->request->get("email");
         $password               = $request->request->get("password");
-        $passwordConfirmation   = $request->request->get("password_confirmation");
+        $passwordConfirmation   = $request->request->get("passwordConfirmation");
         $name   = $request->request->get("name");
         $avatar = "src/test";
         $isactif = true;
