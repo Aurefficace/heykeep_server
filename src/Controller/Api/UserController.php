@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Api;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
@@ -12,12 +12,14 @@ use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
-
+/**
+ * @Route("/api")
+ */
 class UserController extends AbstractController
 
 {
     /**
-     * @Route("/api/register", name="api_register", methods={"POST"})
+     * @Route("/register", name="api_register", methods={"POST"})
      */
     public function register(UserPasswordEncoderInterface $passwordEncoder, EntityManagerInterface $om, Request $request)
     {
@@ -69,7 +71,7 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/api/login", name="api_login", methods={"POST"})
+     * @Route("/login", name="api_login", methods={"POST"})
      */
     public function login()
     {
@@ -78,7 +80,7 @@ class UserController extends AbstractController
 
 
     /**
-     * @Route("/api/user/{id}", name="api_user", methods={"GET"})
+     * @Route("/user/{id}", name="api_user", methods={"GET"})
      */
     public function getUserById($id)
     {
@@ -88,7 +90,7 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/api/profile", name="api_profile")
+     * @Route("/profile", name="api_profile")
      * @IsGranted("ROLE_USER")
      */
     public function profile()
@@ -106,7 +108,7 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/api/", name="api_home")
+     * @Route("/", name="api_home")
      */
     public function home()
     {
