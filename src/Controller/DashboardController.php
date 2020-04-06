@@ -9,12 +9,11 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class DashboardController extends AbstractController
 {
-
     /**
-     * @Route("/logout", name="app_logout")
+     * @Route("/", name="dashboard")
      */
-    public function logout()
+    public function dashboardAction()
     {
-        throw new \Exception('This method can be blank - it will be intercepted by the logout key on your firewall');
+        return $this->render('dashboard.html.twig');
     }
 }
