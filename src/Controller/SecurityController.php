@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Bundle\SwiftmailerBundle;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class SecurityController extends AbstractController
@@ -44,7 +45,7 @@ class SecurityController extends AbstractController
     /**
      * @Route("/forgottenPassword", name="app_forgottenPassword")
      */
-    public function forgottenPassword(Request $request, \Swift_Mailer $mailer, UserPasswordEncoderInterface $passwordEncoder): Response
+    public function forgottenPassword(Request $request, \Swift_Mailer $mailer): Response
     {
         if ($request->isMethod('POST')) {
 
@@ -57,12 +58,12 @@ class SecurityController extends AbstractController
                 return $this->redirectToRoute('app_login');
             }
 
-            $lien = md5(sha1(microtime()));
+            $token = md5(sha1(microtime()));
             $forgottenPassword = new ForgottenPassword();
             
             
             $forgottenPassword->setIdUser($user);
-            $forgottenPassword->setToken($lien);
+            $forgottenPassword->setToken($token);
             $forgottenPassword->setCreatedDate(new DateTime());
             try {
 
@@ -72,16 +73,13 @@ class SecurityController extends AbstractController
                 return $e;
             }
 
-
-            $token = $entityManager->getRepository(ForgottenPassword::class)->findOneBy(['IdUser' => $user->getId()]);
-            dump($token);
-            exit();
-
+           
+            $url = $this->generateUrl('app_reset_password', array('token' => $token), UrlGeneratorInterface::ABSOLUTE_URL);
             $message = (new \Swift_Message('Mot de Passe oublié'))
                 ->setFrom('heykeep@heykeep.com')
                 ->setTo($user->getEmail())
                 ->setBody(
-                    "Tiens ton mot de passe: " . $user->getPassword(),
+                    "Clique sur ce lien pour réinitialiser ton mot de passe: ".$url,
                     'text/html'
                 );
             // $mailer->send($message)
@@ -90,5 +88,40 @@ class SecurityController extends AbstractController
             return $this->redirectToRoute('app_login');
         }
         return $this->render('security/forgottenPassword.html.twig');
+    }
+
+    /**
+     * @Route("/resetPassword", name="app_reset_password")
+     */
+    public function resetPassword(Request $request, UserPasswordEncoderInterface $passwordEncoder): Response
+    {
+        $token = $request->get('token');
+
+        if ($request->isMethod('POST') )
+        {
+
+            $password = $request->request->get("password");
+            
+            $entityManager = $this->getDoctrine()->getManager();
+            
+            $forgottenPassword = $entityManager->getRepository(ForgottenPassword::class)->findOneBy(['token' => $token]);
+            
+            $user = $entityManager->getRepository(User::class)->findOneBy(['id' => $forgottenPassword->getIdUser()]);
+          
+            if ($user === null) {
+                return $this->redirectToRoute('app_login');
+            }
+            $encodedPassword = $passwordEncoder->encodepassword($user, $password);
+            $user->setPassword($encodedPassword);
+            try {
+                $entityManager->persist($user);
+                $entityManager->flush();
+            } catch (\Exception $e) {
+                return $e;
+            }
+            return $this->redirectToRoute('app_login');
+        }
+        
+        return $this->render('security/resetPassword.html.twig');
     }
 }
