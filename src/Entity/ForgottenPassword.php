@@ -23,10 +23,9 @@ class ForgottenPassword
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(name="id_user_id", referencedColumnName="id")
      */
     private $id_user;
-
     /**
      * @ORM\Column(type="datetime")
      */
