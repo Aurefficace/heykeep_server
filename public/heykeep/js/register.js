@@ -22,6 +22,12 @@ form.children("div").steps({
     onStepChanging: function (event, currentIndex, newIndex)
     {
         form.validate().settings.ignore = ":disabled,:hidden";
+
+        var $currentTab = $("#"+$(event.target).attr("id")+"-p-"+currentIndex);
+        $("input", $currentTab).each(function(){
+            var inputId = $(this).attr("id");
+            $("span#recapitulatif-"+inputId).html($(this).val());
+        });
         return form.valid();
 
 
