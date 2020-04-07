@@ -1,9 +1,12 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Register{% endblock %}
-
+{% block stylesheets %} <link href="{{ asset('heykeep/css/register.css') }}" rel="stylesheet" type="text/css">{% endblock %}
 {% block body %}
-    <h1>Register</h1>
+    <div class="limiter">
+        <div class="container-login100">
+            <div class="wrap-login100">
+    <h1 class="blue_text mx-auto">Créez votre compte</h1>
 {#    {{ form_start(registrationForm) }}#}
 {#        {{ form_row(registrationForm.email) }}#}
 {#        {{ form_row(registrationForm.plainPassword) }}#}
@@ -11,47 +14,44 @@
 {#    {{ form_end(registrationForm) }}#}
     <form id="example-form" action="#">
         <div>
-            <h3>Account</h3>
+            <h3>Informations</h3>
             <section>
-                <label for="userName">User name *</label>
-                <input id="userName" name="userName" type="text" class="required">
-                <label for="password">Password *</label>
-                <input id="password" name="password" type="text" class="required">
-                <label for="confirm">Confirm Password *</label>
-                <input id="confirm" name="confirm" type="text" class="required">
-                <p>(*) Mandatory</p>
-            </section>
-            <h3>Profile</h3>
-            <section>
-                <label for="name">First name *</label>
-                <input id="name" name="name" type="text" class="required">
-                <label for="surname">Last name *</label>
-                <input id="surname" name="surname" type="text" class="required">
                 <label for="email">Email *</label>
                 <input id="email" name="email" type="text" class="required email">
-                <label for="address">Address</label>
-                <input id="address" name="address" type="text">
-                <p>(*) Mandatory</p>
+                <label for="password">Mot de passe *</label>
+                <input id="password" name="password" type="text" class="required">
+                <label for="confirm">Confirmez mot de passe *</label>
+                <input id="confirm" name="confirm" type="text" class="required">
+                <p>(*) Items obligatoires</p>
             </section>
-            <h3>Hints</h3>
+            <h3>Profil</h3>
             <section>
-                <ul>
-                    <li>Foo</li>
-                    <li>Bar</li>
-                    <li>Foobar</li>
-                </ul>
+                <label for="userName">Pseudo *</label>
+                <input id="userName" name="userName" type="text" class="required">
+                <label for="name">Prénom *</label>
+                <input id="name" name="name" type="text" class="required">
+                <label for="surname">Nom *</label>
+                <input id="surname" name="surname" type="text" class="required">
+
+                <p>(*) Items obligatoires</p>
             </section>
-            <h3>Finish</h3>
+            <h3>Validation</h3>
             <section>
                 <input id="acceptTerms" name="acceptTerms" type="checkbox" class="required"> <label for="acceptTerms">I agree with the Terms and Conditions.</label>
+
+            </section>
+            <h3>Récapitulatif</h3>
+            <section>
+                <button class="btn">Créez votre compte</button>
             </section>
         </div>
     </form>
-        <button class="btn">Register</button>
 
+            </div>
+        </div>
+    </div>
 {% endblock %}
 {% block javascripts %}
-{#    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.1/dist/jquery.validate.js"> </script>#}
     <script src="{{ asset('plugins/validator/jquery.validate.js') }}"></script>
     <script src="{{ asset('heykeep/js/jquery.steps.js') }}"></script>
     <script src="{{ asset('heykeep/js/register.js') }}"></script>
