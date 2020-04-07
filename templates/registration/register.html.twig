@@ -4,12 +4,11 @@
 
 {% block body %}
     <h1>Register</h1>
-
-    {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.email) }}
-        {{ form_row(registrationForm.plainPassword) }}
-        {{ form_row(registrationForm.agreeTerms) }}
-
+{#    {{ form_start(registrationForm) }}#}
+{#        {{ form_row(registrationForm.email) }}#}
+{#        {{ form_row(registrationForm.plainPassword) }}#}
+{#        {{ form_row(registrationForm.agreeTerms) }}#}
+{#    {{ form_end(registrationForm) }}#}
     <form id="example-form" action="#">
         <div>
             <h3>Account</h3>
@@ -49,9 +48,11 @@
         </div>
     </form>
         <button class="btn">Register</button>
-    {{ form_end(registrationForm) }}
+
 {% endblock %}
 {% block javascripts %}
+{#    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.1/dist/jquery.validate.js"> </script>#}
+    <script src="{{ asset('plugins/validator/jquery.validate.js') }}"></script>
     <script src="{{ asset('heykeep/js/jquery.steps.js') }}"></script>
     <script src="{{ asset('heykeep/js/register.js') }}"></script>
 {% endblock %}
