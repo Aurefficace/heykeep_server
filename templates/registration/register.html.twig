@@ -1,15 +1,58 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Register{% endblock %}
-
+{% block stylesheets %} <link href="{{ asset('heykeep/css/register.css') }}" rel="stylesheet" type="text/css">{% endblock %}
 {% block body %}
-    <h1>Register</h1>
+    <div class="limiter">
+        <div class="container-login100">
+            <div class="wrap-login100">
+    <h1 class="blue_text mx-auto">Créez votre compte</h1>
+{#    {{ form_start(registrationForm) }}#}
+{#        {{ form_row(registrationForm.email) }}#}
+{#        {{ form_row(registrationForm.plainPassword) }}#}
+{#        {{ form_row(registrationForm.agreeTerms) }}#}
+{#    {{ form_end(registrationForm) }}#}
+    <form id="example-form" action="#">
+        <div>
+            <h3>Informations</h3>
+            <section>
+                <label for="email">Email *</label>
+                <input id="email" name="email" type="text" class="required email">
+                <label for="password">Mot de passe *</label>
+                <input id="password" name="password" type="text" class="required">
+                <label for="confirm">Confirmez mot de passe *</label>
+                <input id="confirm" name="confirm" type="text" class="required">
+                <p>(*) Items obligatoires</p>
+            </section>
+            <h3>Profil</h3>
+            <section>
+                <label for="userName">Pseudo *</label>
+                <input id="userName" name="userName" type="text" class="required">
+                <label for="name">Prénom *</label>
+                <input id="name" name="name" type="text" class="required">
+                <label for="surname">Nom *</label>
+                <input id="surname" name="surname" type="text" class="required">
 
-    {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.email) }}
-        {{ form_row(registrationForm.plainPassword) }}
-        {{ form_row(registrationForm.agreeTerms) }}
+                <p>(*) Items obligatoires</p>
+            </section>
+            <h3>Validation</h3>
+            <section>
+                <input id="acceptTerms" name="acceptTerms" type="checkbox" class="required"> <label for="acceptTerms">I agree with the Terms and Conditions.</label>
 
-        <button class="btn">Register</button>
-    {{ form_end(registrationForm) }}
+            </section>
+            <h3>Récapitulatif</h3>
+            <section>
+                <button class="btn">Créez votre compte</button>
+            </section>
+        </div>
+    </form>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block javascripts %}
+    <script src="{{ asset('plugins/validator/jquery.validate.js') }}"></script>
+    <script src="{{ asset('heykeep/js/jquery.steps.js') }}"></script>
+    <script src="{{ asset('heykeep/js/register.js') }}"></script>
 {% endblock %}

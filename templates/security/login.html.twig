@@ -15,12 +15,14 @@
             Vous êtes connecté {{ app.user.username }}, <a href="{{ path('api_logout') }}">Se déconnecter</a>
         </div>
     {% endif %}
-    <p>Identifiant : stephanie@steph.fr Mot de passe : stephanie123!</p>
 		<div class="container-login100">
 			<div class="wrap-login100">
 				<div class="login100-pic js-tilt" data-tilt>
-                					<img src="{{ asset('heykeep/img/heykeep_logo.png') }}" alt="logo">
+                    <img src="{{ asset('heykeep/img/heykeep_logo.png') }}" alt="logo">
 					<img src="{{ asset('heykeep/img/illustration.png') }}" alt="illustration">
+				</div>
+				<div class="loginsmall js-tilt " data-tilt>
+					<img src="{{ asset('heykeep/img/logo-responsive.png') }}" alt="logo mobile">
 				</div>
 
 				<form class="login100-form validate-form" method="post">
@@ -63,9 +65,9 @@
 						</a>
 					</div>
 
-					<div class="text-center p-t-136">
-						<button class="btn bg-red rounded-pill text-white" type="submit">
-							Créer un compte
+					<div class="text-center p-t-136 mt-3">
+						<button class="btn bg-red rounded-pill text-white">
+							<a class="text-white" href="{{ path('app_register') }}">Créer un compte</a>
 						</button>
 					</div>
 				</form>
@@ -74,4 +76,8 @@
 	</div>
 
 <!-- Default form login -->
+{% endblock %}
+{% block javascripts %}
+	<script src="{{ asset('heykeep/js/tilt.jquery.min.js') }}"></script>
+	<script src="{{ asset('heykeep/js/main.js') }}"></script>
 {% endblock %}

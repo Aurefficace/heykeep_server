@@ -17,6 +17,10 @@
     </head>
     <body>
         {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
+            <script src="{{ asset('theme/js/jquery.js') }}"></script>
+            <script src="{{ asset('theme/js/popper.js') }}"></script>
+            <script src="{{ asset('theme/js/bootstrap.js') }}"></script>
+            <script src="{{ asset('theme/js/mdb.js') }}"></script>
+        {% block javascripts %}  {% endblock %}
     </body>
 </html>

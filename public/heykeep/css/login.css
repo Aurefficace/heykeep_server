@@ -68,7 +68,10 @@ button {
 button:hover {
 	cursor: pointer;
 }
-
+.hover-space:hover{
+  letter-spacing: 1px;
+  color: #323441;
+}
 
 /*//////////////////////////////////////////////////////////////////
 [ login ]*/
@@ -90,7 +93,9 @@ button:hover {
   justify-content: center;
   align-items: center;
   padding: 15px;
-  background: #e4ddd3;
+  background-image: url("../img/fond.jpg");
+  background-position: bottom;
+  background-size: cover;
 }
 
 .wrap-login100 {
@@ -112,7 +117,7 @@ button:hover {
 /*------------------------------------------------------------------
 [  ]*/
 .login100-pic {
-  width: 316px;
+  width: 370px;
 }
 
 .login100-pic img {
@@ -123,7 +128,7 @@ button:hover {
 /*------------------------------------------------------------------
 [  ]*/
 .login100-form {
-  width: 290px;
+  width: 310px;
 }
 
 .login100-form-title {
@@ -269,7 +274,11 @@ button:hover {
 .login100-form-btn:hover {
   background: #d74850;
 }
-
+.loginsmall{
+  margin: auto;
+  margin-bottom: 50px;
+  display: none;
+}
 
 
 /*------------------------------------------------------------------
@@ -299,7 +308,9 @@ button:hover {
   .login100-pic {
     display: none;
   }
-
+  .loginsmall {
+    display: block;
+  }
   .login100-form {
     width: 100%;
   }
