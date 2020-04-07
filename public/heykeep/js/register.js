@@ -24,6 +24,8 @@ form.children("div").steps({
     {
         form.validate().settings.ignore = ":disabled,:hidden";
         return form.valid();
+
+
     },
     onFinishing: function (event, currentIndex)
     {
@@ -35,3 +37,5 @@ form.children("div").steps({
         alert("coucou");        return form.submit();
     }
 });
+
+
