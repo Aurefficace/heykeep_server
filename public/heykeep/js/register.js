@@ -34,7 +34,7 @@ form.children("div").steps({
     },
     onFinished: function (event, currentIndex)
     {
-        alert("coucou");        return form.submit();
+       return form.submit();
     }
 });
 

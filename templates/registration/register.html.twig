@@ -17,7 +17,7 @@
                 <div class="register100-pic js-tilt mx-auto mb-3 mt-3" data-tilt>
                     <img src="{{ asset('heykeep/img/heykeep_logo.png') }}" alt="logo mobile">
                 </div>
-                <label for="email">Email *</label>#}
+{#                <label for="email">Email *</label>#}
                 {#                            <input id="email" name="email" type="text" class="required email">#}
                 {{ form_row(registrationForm.email) }}
                 {#<label for="plainPassword">Mot de passe *</label>#}
@@ -59,8 +59,8 @@
 
                         Tempus egestas sed sed risus pretium quam vulputate dignissim. Nec ultrices dui sapien eget. Nisi lacus sed viverra tellus in hac habitasse platea. Tincidunt vitae semper quis lectus nulla at volutpat diam ut. In iaculis nunc sed augue lacus viverra vitae. Vehicula ipsum a arcu cursus vitae congue mauris rhoncus aenean. Purus in mollis nunc sed. Aenean euismod elementum nisi quis eleifend quam adipiscing. Purus semper eget duis at tellus at urna condimentum. Non curabitur gravida arcu ac tortor. Neque sodales ut etiam sit. Eleifend mi in nulla posuere. Mattis vulputate enim nulla aliquet porttitor. Sapien pellentesque habitant morbi tristique senectus. Viverra mauris in aliquam sem fringilla. Viverra nibh cras pulvinar mattis. Sodales neque sodales ut etiam sit amet. Egestas fringilla phasellus faucibus scelerisque eleifend donec pretium vulputate. Vitae congue mauris rhoncus aenean vel elit scelerisque mauris pellentesque.</p>
                 </div>
-                <label for="acceptTerms">J'ai lu et j'accepte les conditions d'utilisations.</label>
-                <input id="acceptTerms" name="acceptTerms" type="checkbox" class="required">
+{#                <label for="acceptTerms">J'ai lu et j'accepte les conditions d'utilisations.</label>#}
+{#                <input id="acceptTerms" name="acceptTerms" type="checkbox" class="required">#}
                 {{ form_row(registrationForm.agreeTerms) }}
             </section>
             <h3 class="red_text">Récapitulatif</h3>
@@ -71,10 +71,11 @@
                 <div>
                     <p>Votre e-mail est : <span id="recapitulatif-email"></span></p>
                 </div>
-                <button class="btn bg-red rounded-pill text-white mx-auto d-block">Créez votre compte</button>
+{#                <button class="btn bg-red rounded-pill text-white mx-auto d-block">Créez votre compte</button>#}
             </section>
         </div>
-    </form>
+                {{ form_end(registrationForm) }}
+
 
             </div>
         </div>
