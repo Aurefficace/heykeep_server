@@ -34,3 +34,11 @@ form.children("div").steps({
         alert("Submitted!");
     }
 });
+
+$("input", form).each(function(){
+    console.log("coucou", $(this));
+    $(this).focusout(function() {
+        var inputId = $(this).attr("id");
+        $("span#recapitulatif-"+inputId).html("coucou" /* Ici tu mets le contenu de l'input */);
+    });
+});
