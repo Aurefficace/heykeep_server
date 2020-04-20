@@ -54,14 +54,15 @@ class SecurityController extends AbstractController
 
             $user = $entityManager->getRepository(User::class)->findOneBy(['email' => $email]);
 
-            if ($user === null) {
-                return $this->redirectToRoute('app_login');
+
+            if ($user == null) {
+                return $this->render('security/forgottenPassword.html.twig', ['errorUser'=> $email]);
             }
 
             $token = md5(sha1(microtime()));
             $forgottenPassword = new ForgottenPassword();
-            
-            
+
+
             $forgottenPassword->setIdUser($user);
             $forgottenPassword->setToken($token);
             $forgottenPassword->setCreatedDate(new DateTime());
@@ -73,19 +74,19 @@ class SecurityController extends AbstractController
                 return $e;
             }
 
-           
+
             $url = $this->generateUrl('app_reset_password', array('token' => $token), UrlGeneratorInterface::ABSOLUTE_URL);
             $message = (new \Swift_Message('Mot de Passe oublié'))
                 ->setFrom('heykeep@heykeep.com')
                 ->setTo($user->getEmail())
                 ->setBody(
-                    "Clique sur ce lien pour réinitialiser ton mot de passe: ".$url,
+                     $url,
                     'text/html'
                 );
             // $mailer->send($message)
-            dump($message);
-            exit();
-            return $this->redirectToRoute('app_login');
+            // dump($message->getBody());
+            // exit();
+            return $this->render('security/forgottenPassword.html.twig', ['message'=> $message->getBody()]);
         }
         return $this->render('security/forgottenPassword.html.twig');
     }
@@ -96,18 +97,24 @@ class SecurityController extends AbstractController
     public function resetPassword(Request $request, UserPasswordEncoderInterface $passwordEncoder): Response
     {
         $token = $request->get('token');
+        $entityManager = $this->getDoctrine()->getManager();
+        $forgottenPassword = $entityManager->getRepository(ForgottenPassword::class)->findOneBy(['token' => $token]);
+        $now = new DateTime();
+        $interval = (date_diff($forgottenPassword->getCreatedDate(), $now));
+     
 
-        if ($request->isMethod('POST') )
-        {
+        if ($interval->days >= 1) {
+            return $this->render('security/resetPassword.html.twig', ['linkValidity'=> "Le lien n'est plus valide"]);
+        }
+
+        if ($request->isMethod('POST')) {
 
             $password = $request->request->get("password");
-            
-            $entityManager = $this->getDoctrine()->getManager();
-            
-            $forgottenPassword = $entityManager->getRepository(ForgottenPassword::class)->findOneBy(['token' => $token]);
-            
+
+
+
             $user = $entityManager->getRepository(User::class)->findOneBy(['id' => $forgottenPassword->getIdUser()]);
-          
+
             if ($user === null) {
                 return $this->redirectToRoute('app_login');
             }
@@ -119,7 +126,7 @@ class SecurityController extends AbstractController
             } catch (\Exception $e) {
                 return $e;
             }
-            return $this->redirectToRoute('app_login');
+            return $this->render('security/resetPassword.html.twig', ['passwordReset'=> "Voter mot de passe à été réinitialisé"]);
         }
         
         return $this->render('security/resetPassword.html.twig');
