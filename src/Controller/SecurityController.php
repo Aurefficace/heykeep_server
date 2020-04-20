@@ -87,7 +87,7 @@ class SecurityController extends AbstractController
             // $mailer->send($message)
             // dump($message->getBody());
             // exit();
-            return new JsonResponse(['success' => 'fuck']);
+            return new JsonResponse(['success' => $message->getBody()]);
         }
         return $this->render('security/forgottenPassword.html.twig');
     }

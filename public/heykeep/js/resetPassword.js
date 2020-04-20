@@ -32,9 +32,12 @@
 
   forgottenForm.ajaxForm({
     success: function (datas) {
-      alert(datas);
       if (datas.success) {
-        $("#messages").append(datas.success);
+        jQuery('<a/>', {
+          "href": datas.success,
+          text: 'clique ici'
+      }).appendTo('#messages');
+        // $("#messages").append(datas.success);
         $("#messages").addClass("alert alert-success");
       }
       else if (datas.error) {
