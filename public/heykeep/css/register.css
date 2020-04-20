@@ -781,8 +781,8 @@ button:hover {
 {
     display: list-item;
 }
-#example-form{
-    width: 100%;
+#registration_form{
+    width: 100% !important;
 }
 .cgv{
     overflow: scroll;
