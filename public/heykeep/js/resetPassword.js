@@ -18,7 +18,7 @@
       if (datas.success) {
         $("#messages").append(datas.success);
         $("#messages").addClass("alert alert-success");
-        setTimeout((document.location.href = "/"), 10000);
+        setTimeout(() => (document.location.href = "/"), 5000);
       }
       else if (datas.error) {
         $("#messages").append(datas.error);

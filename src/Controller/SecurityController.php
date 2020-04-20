@@ -127,7 +127,7 @@ class SecurityController extends AbstractController
                 
                 return new JsonResponse(['error' => $e]);
             }
-            return new JsonResponse( ['success' => "Votre mot de passe à été réinitialisé"]);
+            return new JsonResponse( ['success' => "Votre mot de passe à été réinitialisé, vous allez être redirigé"]);
         }
         
         return $this->render('security/resetPassword.html.twig');
