@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Bundle\SwiftmailerBundle;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
@@ -86,7 +87,7 @@ class SecurityController extends AbstractController
             // $mailer->send($message)
             // dump($message->getBody());
             // exit();
-            return $this->render('security/forgottenPassword.html.twig', ['message'=> $message->getBody()]);
+            return new JsonResponse(['success' => 'fuck']);
         }
         return $this->render('security/forgottenPassword.html.twig');
     }
@@ -104,33 +105,29 @@ class SecurityController extends AbstractController
      
 
         if ($interval->days >= 1) {
-            return $this->render('security/resetPassword.html.twig', ['linkValidity'=> "Le lien n'est plus valide"]);
+            return $this->render('security/resetPassword.html.twig', ['linkValidity' => "Le lien n'est plus valide"]);
         }
 
         if ($request->isMethod('POST')) {
 
             $password = $request->request->get("password");
-            $passwordConfirmation = $request->request->get("passwordConfirmation");
-
-
 
             $user = $entityManager->getRepository(User::class)->findOneBy(['id' => $forgottenPassword->getIdUser()]);
 
             if ($user === null) {
                 return $this->redirectToRoute('app_login');
             }
-            if ($password != $passwordConfirmation) {
-                 return $this->render('security/resetPassword.html.twig', ['passwordConfirmation'=> "Les mots de passe sont différent"]);
-            }
+            
             $encodedPassword = $passwordEncoder->encodepassword($user, $password);
             $user->setPassword($encodedPassword);
             try {
                 $entityManager->persist($user);
                 $entityManager->flush();
             } catch (\Exception $e) {
-                return $e;
+                
+                return new JsonResponse(['error' => $e]);
             }
-            return $this->render('security/resetPassword.html.twig', ['passwordReset'=> "Voter mot de passe à été réinitialisé"]);
+            return new JsonResponse( ['success' => "Votre mot de passe à été réinitialisé"]);
         }
         
         return $this->render('security/resetPassword.html.twig');

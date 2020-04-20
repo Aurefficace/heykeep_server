@@ -1,18 +1,50 @@
 (function ($) {
-const form = $('#reset_password')
+  const form = $("#reset_password");
+  const forgottenForm = $("#forgotten_password");
+
   form.validate({
-    errorPlacement: function errorPlacement(error, element) { element.before(error); },
+    errorPlacement: function errorPlacement(error, element) {
+      element.before(error);
+    },
     rules: {
       passwordConfirmation: {
-            equalTo: "#inputPassword"
-        }
-    }
-});
+        equalTo: "#inputPassword",
+      },
+    },
+  });
 
+  form.ajaxForm({
+    success: function (datas) {
+      if (datas.success) {
+        $("#messages").append(datas.success);
+        $("#messages").addClass("alert alert-success");
+        setTimeout((document.location.href = "/"), 10000);
+      }
+      else if (datas.error) {
+        $("#messages").append(datas.error);
+        $("#messages").addClass("alert alert-danger");
+      }
+    },
+    error: function (xhr, status, error) {
 
-  if($('#success').length) {
-    setTimeout((document.location.href = '/'), 5000);
-  }
-  
+     },
+  });
+
+  forgottenForm.ajaxForm({
+    success: function (datas) {
+      alert(datas);
+      if (datas.success) {
+        $("#messages").append(datas.success);
+        $("#messages").addClass("alert alert-success");
+      }
+      else if (datas.error) {
+        $("#messages").append(datas.error);
+        $("#messages").addClass("alert alert-danger");
+      }
+    },
+    error: function (xhr, status, error) {
+      alert(datas);
+     },
+  });
   
 })(jQuery);

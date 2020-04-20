@@ -20,6 +20,7 @@
 		rel="stylesheet" href="{{ asset('theme/css/mdb.min.css') }}">
 		<!-- Your custom styles (optional) -->
 		<link rel="stylesheet" href="{{ asset('theme/css/style.css') }}"> {% block stylesheets %}{% endblock %}
+
 		</head>
 		{% include 'header.html.twig' %}
 		<body>
@@ -28,8 +29,10 @@
 			<script src="{{ asset('theme/js/popper.js') }}"></script>
 			<script src="{{ asset('theme/js/bootstrap.js') }}"></script>
 			<script src="{{ asset('theme/js/mdb.js') }}"></script>
-			<script src="{{ asset('plugins/validator/jquery.validate.js') }}"></script>
+			<script src="{{ asset('plugins/validator/jquery.validate.min.js') }}"></script>
 			<script src="{{ asset('plugins/validator/localization/messages_fr.js') }}"></script>
+			<script src="{{ asset('plugins/jquery/jquery.form.min.js') }}"></script>
+
 			{% block javascripts %}{% endblock %}
 		</body>
 		{% include 'footer.html.twig' %}
