@@ -15,6 +15,7 @@
          <link rel="stylesheet" href="{{ asset('theme/css/style.css') }}">
         {% block stylesheets %}{% endblock %}
     </head>
+    {% include 'header.html.twig' %}
     <body>
         {% block body %}{% endblock %}
             <script src="{{ asset('theme/js/jquery.js') }}"></script>
@@ -23,4 +24,5 @@
             <script src="{{ asset('theme/js/mdb.js') }}"></script>
         {% block javascripts %}  {% endblock %}
     </body>
+    {% include 'footer.html.twig' %}
 </html>

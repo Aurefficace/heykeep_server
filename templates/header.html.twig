@@ -1,0 +1,26 @@
+{% block stylesheets %}
+    <link href="{{ asset('heykeep/css/headerfooter.css') }}" rel="stylesheet" type="text/css">
+{% endblock %}
+<section class="header">
+    <nav class="navbar justify-content-between">
+        <a class="navbar-brand img-fluid logo" href="#"><img src="{{ asset('heykeep/img/heykeep_logo.png') }}" alt="logo"></a>
+        <ul class="navbar-nav ml-auto nav-flex-icons">
+            <li class="nav-item avatar">
+                <a class="nav-link p-0" href="#">
+                    <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-5.jpg" class="rounded-circle z-depth-0"
+                         alt="avatar image" >
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link waves-effect waves-light">
+                    <i class="fas fa-cog"></i>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link waves-effect waves-light">
+                    <i class="fas fa-sign-out-alt"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</section>
