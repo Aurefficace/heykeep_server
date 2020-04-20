@@ -1,5 +1,5 @@
 /*header*/
-.header {
+header {
     background-color: #E4DDD3 ;
 }
 .logo img {
@@ -10,8 +10,24 @@
     padding-right: 0.5rem;
     padding-left: 0.5rem;
 }
+.fa-cog {
+    color: #D74850;
+}
+
 .avatar img {
     max-height: 4rem;
 }
 
 /*footer*/
+footer {
+    background-color: #E4DDD3 ;
+}
+.fa-cloud-upload-alt {
+    color: #D74850;
+}
+.badge {
+    background-color: #D74850;
+    position: absolute;
+    top: 11px;
+    z-index: 1;
+}
