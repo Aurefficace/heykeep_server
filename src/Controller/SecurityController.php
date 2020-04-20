@@ -110,6 +110,7 @@ class SecurityController extends AbstractController
         if ($request->isMethod('POST')) {
 
             $password = $request->request->get("password");
+            $passwordConfirmation = $request->request->get("passwordConfirmation");
 
 
 
@@ -117,6 +118,9 @@ class SecurityController extends AbstractController
 
             if ($user === null) {
                 return $this->redirectToRoute('app_login');
+            }
+            if ($password != $passwordConfirmation) {
+                 return $this->render('security/resetPassword.html.twig', ['passwordConfirmation'=> "Les mots de passe sont différent"]);
             }
             $encodedPassword = $passwordEncoder->encodepassword($user, $password);
             $user->setPassword($encodedPassword);
