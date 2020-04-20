@@ -1,9 +1,9 @@
-var form = $("#example-form");
+const form = $("#registration_form");
 form.validate({
     errorPlacement: function errorPlacement(error, element) { element.before(error); },
     rules: {
         confirm: {
-            equalTo: "#password"
+            equalTo: "#registration_form_plainPassword"
         }
     }
 });
@@ -11,6 +11,7 @@ form.children("div").steps({
     headerTag: "h3",
     bodyTag: "section",
     transitionEffect: "slideLeft",
+    enableFinishButton: true,
     labels: {
         cancel: 'Annuler',
         current: '',
@@ -39,7 +40,7 @@ form.children("div").steps({
     },
     onFinished: function (event, currentIndex)
     {
-        alert("Submitted!");
+       return form.submit();
     }
 });
 
