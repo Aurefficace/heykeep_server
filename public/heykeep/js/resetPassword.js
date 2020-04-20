@@ -1,9 +1,17 @@
 (function ($) {
-  const urlLogin = "http://127.0.0.1:8000/login";
+const form = $('#reset_password')
+  form.validate({
+    errorPlacement: function errorPlacement(error, element) { element.before(error); },
+    rules: {
+      passwordConfirmation: {
+            equalTo: "#inputPassword"
+        }
+    }
+});
 
 
   if($('#success').length) {
-    setTimeout((document.location.href = urlLogin), 5000);
+    setTimeout((document.location.href = '/'), 5000);
   }
   
   
