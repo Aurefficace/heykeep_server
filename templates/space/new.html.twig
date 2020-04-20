@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Space{% endblock %}
+
+{% block body %}
+
+    <p class="h4 mb-4">Création espace</p>
+    <p>Toi aussi crée ton espace !</p>
+
+    {{ include('space/_form.html.twig') }}
+
+    <a href="{{ path('space_index') }}">back to list</a>
+{% endblock %}
