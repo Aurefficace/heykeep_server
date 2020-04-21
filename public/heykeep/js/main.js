@@ -1,6 +1,4 @@
-(function ($) {
-  "use strict";
-})(jQuery);
+
 /*===========[ notification ]=========================*/
 
 function showModal(message, type, titre) {
