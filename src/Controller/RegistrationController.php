@@ -39,6 +39,9 @@ class RegistrationController extends AbstractController
             $role = [];
             $dateNow = new DateTime();
             $isActif = true;
+            $file = $form['avatar']->getData();
+            $targetDirectory = $this->getParameter('kernel.project_dir').'/public/user/profile/'.$user->getId();
+            $file->move($targetDirectory, "avatar.".$file->guessExtension());
             $user->setRoles($role);
             $user->setCreatedDate($dateNow);
             $user->setIsactif($isActif);

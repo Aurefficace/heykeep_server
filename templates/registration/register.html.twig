@@ -23,18 +23,19 @@
                 {#<label for="plainPassword">Mot de passe *</label>#}
                 {# <input id="plainPassword" name="plainPassword" type="text" class="required email">#}
                 {{ form_row(registrationForm.plainPassword) }}
-                <label for="confirm">Confirmez mot de passe *</label>
-                <input id="confirm" name="confirm" type="text" class="required">
-                <p>(*) Items obligatoires</p>
-            </section>
-            <h3 class="red_text">Profil</h3>
-            <section>
-                <div class="register100-pic js-tilt mx-auto mb-3 mt-3" data-tilt>
-                    <img src="{{ asset('heykeep/img/heykeep_logo.png') }}" alt="logo mobile">
-                </div>
-                {#  <label for="userName">Pseudo *</label>#}
+                {#                <label for="confirm">Confirmez mot de passe *</label>
+                                <input id="confirm" name="confirm" type="text" class="required"> #}
+                                <p>(*) Items obligatoires</p>
+                            </section>
+                            <h3 class="red_text">Profil</h3>
+                            <section>
+                                <div class="register100-pic js-tilt mx-auto mb-3 mt-3" data-tilt>
+                                    <img src="{{ asset('heykeep/img/heykeep_logo.png') }}" alt="logo mobile">
+                                </div>
+                                {#  <label for="userName">Pseudo *</label>#}
                 {#                            <input id="userName" name="userName" type="text" class="required">#}
                 {{ form_row(registrationForm.name) }}
+                {{ form_row(registrationForm.avatar) }}
 
                 <p>(*) Items obligatoires</p>
             </section>
