@@ -9,7 +9,9 @@ h1,h2{
     font-family: 'Chillow' !important;
 }
 
-
+.hidden{
+    display:none;
+}
 /*===========[ notification ]=========================*/
 .toast.btn-success #closeButton {
     color: #fff;

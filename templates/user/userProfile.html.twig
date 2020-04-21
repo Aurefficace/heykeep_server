@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+{% block stylesheets %} <link href="{{ asset('heykeep/css/heykeep.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('heykeep/css/dashboard.css') }}" rel="stylesheet" type="text/css">
+{% endblock %}
+{% block title %}Dashboard{% endblock %}
+{% block body %}
+    {% if app.user %}
+        <div class="container">
+            <div class="row">
+                <div class="col-sm">
+                     Bienvenue sur ton profil 
+                </div>
+              <div class="col-sm">
+              <P>Modifier mes infos:</br>{{app.user.username}}</p>
+              <button id="b1">Réinitialiser son mot de passe</button>
+              <form id="form1" class="login100-form hidden" method="post" >
+					<div class="wrap-input100 validate-input" data-validate="Password is required">
+						<label for="password">Nouveau mot de passe *</label>
+						<input type="password" name="password" id="inputPassword" class="input100" required> 
+
+						<span class="symbol-input100-reset">
+							<i class="fa fa-lock" aria-hidden="true"></i>
+						</span>
+					</div>
+					<div class="wrap-input100 validate-input" data-validate="Password is required">
+						<label for="passwordConfirmation">Confirmation Nouveau Mot de passe *</label>
+						<input type="password" name="passwordConfirmation" id="inputPasswordConfirmation" class="input100" required>
+
+						<span class="symbol-input100-reset">
+							<i class="fa fa-lock" aria-hidden="true"></i>
+						</span>
+					</div>
+					<div class="container-login100-form-btn">
+						<button class="login100-form-btn" type="submit">
+							Réinitialiser Mot de Passe
+						</button>
+					</div>
+				</form>
+              <P>Catégories:</p>
+              <p>Gérer mes favoris:</p>
+              </div>
+    {% endif %}
+{% endblock %}
