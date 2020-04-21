@@ -35,10 +35,6 @@
                 {#  <label for="userName">Pseudo *</label>#}
                 {#                            <input id="userName" name="userName" type="text" class="required">#}
                 {{ form_row(registrationForm.name) }}
-                <label for="name">Prénom *</label>
-                <input id="name" name="name" type="text" class="required">
-                <label for="surname">Nom *</label>
-                <input id="surname" name="surname" type="text" class="required">
 
                 <p>(*) Items obligatoires</p>
             </section>
@@ -69,8 +65,15 @@
                     <img src="{{ asset('heykeep/img/heykeep_logo.png') }}" alt="logo mobile">
                 </div>
                 <div>
-                    <p>Votre e-mail est : <span id="recapitulatif-email"></span></p>
+                    <p>Votre E-mail est : <span id="recapitulatif-registration_form_email"></span></p>
                 </div>
+                <div>
+                    <p>Votre Pseudo est : <span id="recapitulatif-registration_form_name"></span></p>
+                </div>
+                <div>
+                    <p>Votre Mot de Passe est : <span id="recapitulatif-registration_form_plainPassword"></span></p>
+                </div>
+
 {#                <button class="btn bg-red rounded-pill text-white mx-auto d-block">Créez votre compte</button>#}
             </section>
         </div>
