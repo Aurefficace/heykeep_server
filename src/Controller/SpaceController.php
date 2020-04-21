@@ -13,7 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * @Route("/space")
  */
-class SpaceController extends AbstractController
+class SpaceController extends BaseController
 {
     /**
      * @Route("/", name="space_index", methods={"GET"})
@@ -42,6 +42,9 @@ class SpaceController extends AbstractController
             $entityManager->flush();
 
             return $this->redirectToRoute('space_index');
+        }
+        elseif ($form->isSubmitted() && !$form->isValid()) {
+            return $this->neweditSubmittedGlobal($form);
         }
 
         return $this->render('space/new.html.twig', [
