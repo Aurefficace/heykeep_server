@@ -9,7 +9,8 @@ function callAjaxMasterDetail(path, target, parent){
     });
 }
 
-function displayFadeIn(target) {
-    console.log(target)
-    $(target).fadeToggle();
+function displayFadeIn(target, parentone, parenttwo) {
+    $(target).fadeIn();
+    $(parentone).fadeOut();
+    $(parenttwo).fadeOut();
 }
