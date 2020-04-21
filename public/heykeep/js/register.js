@@ -2,6 +2,9 @@ const form = $("#registration_form");
 form.validate({
     errorPlacement: function errorPlacement(error, element) { element.before(error); },
     rules: {
+        registration_form_plainPassword: {
+            minlength: 6
+        },
         confirm: {
             equalTo: "#registration_form_plainPassword"
         }
