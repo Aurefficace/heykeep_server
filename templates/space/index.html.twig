@@ -1,10 +1,10 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Space index{% endblock %}
+{% block title %}Mes espaces{% endblock %}
 
 {% block body %}
 
-    <button type="button" class="btn btn-primary px-3" onclick="displayFadeIn('#listmaster')"> <i class="fas fa-th-list" aria-hidden="true"></i> Liste des espaces</button>
+    <button type="button" class="btn btn-primary px-3" onclick="displayFadeIn('#listmaster','#createnew','#editcurrent')"> <i class="fas fa-th-list" aria-hidden="true"></i> Liste des espaces</button>
     <button type="button" class="btn btn-primary px-3" onclick="callAjaxMasterDetail('{{ path('space_new')}}','#createnew','#listmaster')"><i class="fas fa-plus" aria-hidden="true"></i> Nouvel Espace</button>
     <div class="container my-5 py-5 z-depth-1">
 
@@ -40,9 +40,7 @@
                                 <a href="{{ path('space_show', {'id': space.id}) }}">
                                     <button type="button" class="btn btn-primary px-3"><i class="far fa-eye" aria-hidden="true"></i> Afficher</button>
                                 </a>
-                                <a href="{{ path('space_edit', {'id': space.id}) }}">
-                                    <button type="button" class="btn btn-primary px-3"><i class="far fa-edit" aria-hidden="true"></i> Editer</button>
-                                </a>
+                                <button type="button" class="btn btn-primary px-3" onclick="callAjaxMasterDetail('{{ path('space_edit', {'id': space.id}) }}','#editcurrent','#listmaster')"><i class="fas fa-plus" aria-hidden="true"></i> Editer</button>
                             </td>
                         </tr>
                     {% else %}
@@ -54,6 +52,7 @@
                 </table>
             </div>
             <div id="createnew"></div>
+            <div id="editcurrent"></div>
         </section>
     </div>
 {% endblock %}
