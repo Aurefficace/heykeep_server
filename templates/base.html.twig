@@ -7,7 +7,8 @@
 			{% endblock %}
 		</title>
 		<!-- favIcon -->
-		<link rel="icon" href="{{ asset('heykeep/img/favicon.png') }}" />
+		<link
+		rel="icon" href="{{ asset('heykeep/img/favicon.png') }}"/>
 		<!-- Font Awesome -->
 		<link
 		rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
@@ -22,13 +23,12 @@
 		rel="stylesheet" href="{{ asset('theme/css/mdb.min.css') }}">
 		<!-- Your custom styles (optional) -->
 		<link rel="stylesheet" href="{{ asset('theme/css/style.css') }}">
-		<link rel="stylesheet" href="{{ asset('heykeep/css/heykeep.css') }}">
-		{% block stylesheets %}{% endblock %}
+		<link rel="stylesheet" href="{{ asset('heykeep/css/heykeep.css') }}"> {% block stylesheets %}{% endblock %}
 
 		</head>
-		{% include 'header.html.twig' %}
 		<body>
-			<div role="alert" aria-live="assertive" aria-atomic="true" class="alert toast"  data-autohide="false">
+			{% include 'header.html.twig' %}
+			<div role="alert" aria-live="assertive" aria-atomic="true" class="alert toast" data-autohide="false">
 				<div class="">
 
 					<strong class="mr-auto" id="notifTitle"></strong>
@@ -40,6 +40,8 @@
 				<div class="toast-body" id="notifContent"></div>
 			</div>
 			{% block body %}{% endblock %}
+			{% include 'messagerie/messagerie.html.twig' %}
+			{% include 'footer.html.twig' %}
 			<script src="{{ asset('heykeep/js/main.js') }}"></script>
 			<script src="{{ asset('theme/js/jquery.js') }}"></script>
 			<script src="{{ asset('theme/js/popper.js') }}"></script>
@@ -51,6 +53,4 @@
 
 			{% block javascripts %}{% endblock %}
 		</body>
-		{% include 'messagerie/messagerie.html.twig' %}
-		{% include 'footer.html.twig' %}
 	</html>
