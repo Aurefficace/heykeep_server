@@ -8,3 +8,18 @@
 h1,h2{
     font-family: 'Chillow' !important;
 }
+
+
+/*===========[ notification ]=========================*/
+.toast.btn-success #closeButton {
+    color: #fff;
+    background-color: #00c851 !important;
+}
+.btn-warning #closeButton {
+    color: #fff;
+    background-color: #fb3 !important;
+}
+.toast.btn-danger #closeButton {
+    color: #fff;
+    background-color: #ff3547 !important;
+}

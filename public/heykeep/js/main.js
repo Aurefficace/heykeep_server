@@ -4,26 +4,26 @@
 /*===========[ notification ]=========================*/
 
 function showModal(message, type, titre) {
+    const toast = $(".toast");
+    toast.removeClass(" btn-success btn-danger btn-warning");
+    
   if (type === "success") {
-    $(".toast").addClass("alert btn-success");
-    $("#closeButton").addClass(" btn-success");
+    toast.addClass(" btn-success");
     $("#notifTitle").append(titre);
     $("#notifContent").append(message);
-    $(".toast").toast("show");
-    setTimeout(() => $(".toast").toast("hide"), 3000); // temps avant la disparition du modal < à la redirection 5s
+    toast.toast({delay: 7000}).toast("show");
+    
   } else if (type === "error") {
-    $(".toast").addClass("alert btn-danger");
-    $("#closeButton").addClass(" btn-danger");
+    toast.addClass("btn-danger");
     $("#notifTitle").append(titre);
     $("#notifContent").append(message);
     $(".toast").toast("show");
-    setTimeout(() => $(".toast").toast("hide"), 3000);
+
   } else if (type === "warning") {
-    $(".toast").addClass("alert btn-warning");
-    $("#closeButton").addClass(" btn-warning");
+    toast.addClass("btn-warning");
     $("#notifTitle").append(titre);
     $("#notifContent").append(message);
-    $(".toast").toast("show");
-    setTimeout(() => $(".toast").toast("hide"), 3000);
+    toast.toast({delay: 7000}).toast("show");
+ 
   }
 }
