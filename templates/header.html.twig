@@ -4,17 +4,15 @@
 
 <header>
     <nav class="navbar justify-content-between">
-        <a class="navbar-brand img-fluid logo" href="#"><img src="{{ asset('heykeep/img/heykeep_logo.png') }}" alt="logo"></a>
+        <a class="navbar-brand img-fluid logo" href="{{path ('dashboard')}}"><img src="{{ asset('heykeep/img/heykeep_logo.png') }}" alt="logo"></a>
         <ul class="navbar-nav ml-auto nav-flex-icons">
             <li class="nav-item avatar">
                 <a class="nav-link p-0" href="#">
-                    <img src="{{ asset('user/profile/13/avatar.jpg') }}" class="rounded-circle z-depth-0"
-                         alt="avatar image" >
+                    <img src="{{ asset('user/profile/'~ app.user.id~ '/' ~ app.user.avatar) }}" class="rounded-circle z-depth-0" alt="avatar image" >
                 </a>
             </li>
             <li class="nav-item">
-                <a href= {{path ('app_user_profile')}} 
-                
+                <a href="{{path ('app_user_profile')}}"
                 class="nav-link waves-effect waves-light">
                     <i class="fas fa-cog"></i>
                 </a>

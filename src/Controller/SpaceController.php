@@ -20,8 +20,10 @@ class SpaceController extends BaseController
      */
     public function index(SpaceRepository $spaceRepository): Response
     {
+
         return $this->render('space/index.html.twig', [
             'spaces' => $spaceRepository->findAll(),
+
         ]);
     }
 

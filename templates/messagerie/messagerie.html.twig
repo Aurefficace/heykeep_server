@@ -1,28 +1,36 @@
-
-
-
+{% block stylesheets %} <link href="{{ asset('heykeep/css/heykeep.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('heykeep/css/messagerie.css') }}" rel="stylesheet" type="text/css">
+{% endblock %}
 <!-- Full Height Modal Right -->
-<div class="modal fade right" id="fullHeightModalRight" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-  aria-hidden="true">
+<div
+	class="modal fade right" id="fullHeightModalRight" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 
-  <!-- Add class .modal-full-height and then add class .modal-right (or other classes from list above) to set a position to the modal -->
-  <div class="modal-dialog modal-full-height modal-right" role="document">
+	<!-- Add class .modal-full-height and then add class .modal-right (or other classes from list above) to set a position to the modal -->
+	<div class="modal-dialog modal-full-height modal-right" role="document">
 
 
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title w-100" id="myModalLabel"><i class="far fa-envelope"></i>Messagerie</h4>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        
-      </div>
-      <div class="modal-footer justify-content-center">
-        <i class="fas fa-plus-circle"></i>
-      </div>
-    </div>
-  </div>
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title w-100" id="myModalLabel">
+					<i class="far fa-envelope"></i>Messagerie</h4>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<div id="discussion_list"></div>
+				<div id="discussion_add"></div>
+
+			</div>
+			<div class="modal-footer justify-content-center messagerieButton">
+				<button</i onclick="callAjaxMasterDetail('{{ path('discussion_index')}}','#discussion_list','#discussion_add')" <i class="fas fa-bars"></button>
+				<button</i onclick="callAjaxMasterDetail('{{ path('discussion_new')}}','#discussion_add','#discussion_list')" <i class="fas fa-plus-circle"></button>
+			</div>
+		</div>
+	</div>
 </div>
 <!-- Full Height Modal Right -->
+
+{% block javascripts %}
+	<script src="{{ asset('heykeep/js/discussion.js') }}"></script>
+{% endblock %}
