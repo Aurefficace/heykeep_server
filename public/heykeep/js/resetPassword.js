@@ -1,4 +1,4 @@
-$( document ).ready(function()  {
+$(document).ready(function()  {
   const form = $("#reset_password");
   const forgottenForm = $("#forgotten_password");
 
