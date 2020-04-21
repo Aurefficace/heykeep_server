@@ -1,24 +1,6 @@
-<div class="container my-5 py-5 z-depth-1">
-    <!--Section: Content-->
-    <section class="px-md-5 mx-md-5 text-center text-lg-left dark-grey-text">
-        <!--Grid row-->
-        <div class="row d-flex justify-content-center">
-            <!--Grid column-->
-            <div class="col-md-6">
-
-                {#{{ form_start(form) }}#}
-                {{ form_start(form, {'attr': {'class': 'text-center'}}) }}
-                {#    {{ form_widget(form) }}#}
-
-                {{ form_row(form.name, {'attr': {'class': 'form-control mb-4' }}) }}
-
-                {{ form_row(form.description, {'attr': {'class': 'form-control mb-4', 'placeholder': 'Description' }}) }}
-
-                {#                    {{ form_row(form.categorie, {'attr': {'class': 'form-control mb-4' }}) }}#}
-
-                <button class="btn">{{ button_label|default('Save') }}</button>
-                {{ form_end(form) }}
-            </div>
-        </div>
-    </section>
-</div>
+{{ form_start(form, {'attr': {'class': 'text-center'}}) }}
+{{ form_row(form.name, {'attr': {'class': 'form-control mb-4' }}) }}
+{{ form_row(form.description, {'attr': {'class': 'form-control mb-4', 'placeholder': 'Description' }}) }}
+{#  {{ form_row(form.categorie, {'attr': {'class': 'form-control mb-4' }}) }}#}
+<button type="btn" class="btn btn-primary btn-sm">{{ button_label|default('Ajouter') }}</button>
+{{ form_end(form) }}

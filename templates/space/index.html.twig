@@ -3,41 +3,61 @@
 {% block title %}Space index{% endblock %}
 
 {% block body %}
-    <h1>Space index</h1>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Description</th>
-                <th>Created_date</th>
-                <th>Actif</th>
-                <th>Image</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for space in spaces %}
-            <tr>
-                <td>{{ space.id }}</td>
-                <td>{{ space.name }}</td>
-                <td>{{ space.description }}</td>
-                <td>{{ space.createdDate ? space.createdDate|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ space.actif ? 'Yes' : 'No' }}</td>
-                <td>{{ space.image }}</td>
-                <td>
-                    <a href="{{ path('space_show', {'id': space.id}) }}">show</a>
-                    <a href="{{ path('space_edit', {'id': space.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="7">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+    <button type="button" class="btn btn-primary px-3" onclick="displayFadeIn('#listmaster')"> <i class="fas fa-th-list" aria-hidden="true"></i> Liste des espaces</button>
+    <button type="button" class="btn btn-primary px-3" onclick="callAjaxMasterDetail('{{ path('space_new')}}','#createnew','#listmaster')"><i class="fas fa-plus" aria-hidden="true"></i> Nouvel Espace</button>
+    <div class="container my-5 py-5 z-depth-1">
 
-    <a href="{{ path('space_new') }}">Create new</a>
+        <!--Section: Content-->
+        <section class="px-md-5 mx-md-5 text-center text-lg-left dark-grey-text">
+            <!--Grid row-->
+            <div id="listmaster" class="row justify-content-center">
+
+                <h1>Liste des espaces</h1>
+
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Nom</th>
+                        <th>Description</th>
+                        <th>Date de création</th>
+                        <th>Actif</th>
+                        <th>Image</th>
+                        <th>actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for space in spaces %}
+                        <tr>
+                            <td>{{ space.id }}</td>
+                            <td>{{ space.name }}</td>
+                            <td>{{ space.description }}</td>
+                            <td>{{ space.createdDate ? space.createdDate|date('d-m-Y') : '' }}</td>
+                            <td>{{ space.actif ? 'Oui' : 'Non' }}</td>
+                            <td>{{ space.image }}</td>
+                            <td>
+                                <a href="{{ path('space_show', {'id': space.id}) }}">
+                                    <button type="button" class="btn btn-primary px-3"><i class="far fa-eye" aria-hidden="true"></i> Afficher</button>
+                                </a>
+                                <a href="{{ path('space_edit', {'id': space.id}) }}">
+                                    <button type="button" class="btn btn-primary px-3"><i class="far fa-edit" aria-hidden="true"></i> Editer</button>
+                                </a>
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="7">Vous n'avez encore aucun espace.</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <div id="createnew"></div>
+        </section>
+    </div>
 {% endblock %}
+{% block javascripts %}<script src="{{ asset('heykeep/js/space.js') }}"></script>{% endblock %}
+
+
+
