@@ -16,13 +16,10 @@
   form.ajaxForm({
     success: function (datas) {
       if (datas.success) {
-        $("#messages").append(datas.success);
-        $("#messages").addClass("alert alert-success");
-        setTimeout(() => (document.location.href = "/"), 5000);
+        this.showModal(datas.success, success, 'Success');
       }
       else if (datas.error) {
-        $("#messages").append(datas.error);
-        $("#messages").addClass("alert alert-danger");
+        this.showModal(datas.success, error, 'Erreur');
       }
     },
     error: function (xhr, status, error) {
