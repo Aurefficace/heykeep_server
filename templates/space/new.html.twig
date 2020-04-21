@@ -6,8 +6,7 @@
 
     <p class="h4 mb-4">Création espace</p>
     <p>Toi aussi crée ton espace !</p>
-
-    {{ include('space/_form.html.twig') }}
+{{ include('space/_form.html.twig', {'action' : path('space_new')}) }}
 <button type="btn" class="btn btn-primary btn-sm">{{ button_label|default('Ajouter') }}</button>
 {{ form_end(form) }}
 {#    <a href="{{ path('space_index') }}">back to list</a>#}

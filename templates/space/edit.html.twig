@@ -9,7 +9,7 @@
         <section class="px-md-5 mx-md-5 text-center text-lg-left dark-grey-text">
             <h1>Editer l'espace</h1>
             {{ include('space/_delete_form.html.twig') }}
-            {{ include('space/_form.html.twig') }}
+            {{ include('space/_form.html.twig', {'action' : path('space_edit', {'id' : space.id})}) }}
             <button type="btn" class="btn btn-indigo btn-sm">{{ button_label|default('Mettre à jour') }}</button>
             {{ form_end(form) }}
 
