@@ -21,8 +21,19 @@
 		<!-- Your custom styles (optional) -->
 		<link rel="stylesheet" href="{{ asset('theme/css/style.css') }}"> {% block stylesheets %}{% endblock %}
 		</head>
-		
+
 		<body>
+			<div role="alert" aria-live="assertive" aria-atomic="true" class="toast" data-autohide="false">
+				<div class="toast-header">
+
+					<strong class="mr-auto" id="notifTitle"></strong>
+
+					<button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="toast-body" id="notifContent"></div>
+			</div>
 			{% block body %}{% endblock %}
 			<script src="{{ asset('theme/js/jquery.js') }}"></script>
 			<script src="{{ asset('theme/js/popper.js') }}"></script>
@@ -31,6 +42,8 @@
 			<script src="{{ asset('plugins/validator/jquery.validate.min.js') }}"></script>
 			<script src="{{ asset('plugins/validator/localization/messages_fr.js') }}"></script>
 			<script src="{{ asset('plugins/jquery/jquery.form.min.js') }}"></script>
+			<script src="{{ asset('heykeep/js/main.js') }}"></script>
+
 
 			{% block javascripts %}{% endblock %}
 		</body>
