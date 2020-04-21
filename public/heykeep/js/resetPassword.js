@@ -1,4 +1,4 @@
-(function ($) {
+$(document).ready(function()  {
   const form = $("#reset_password");
   const forgottenForm = $("#forgotten_password");
 
@@ -16,10 +16,11 @@
   form.ajaxForm({
     success: function (datas) {
       if (datas.success) {
-        this.showModal(datas.success, success, 'Success');
+        showModal(datas.success, 'success', 'Success');
+        setTimeout(() => (document.location.href = "/"), 5000);
       }
       else if (datas.error) {
-        this.showModal(datas.success, error, 'Erreur');
+        showModal(datas.success, 'error', 'Erreur');
       }
     },
     error: function (xhr, status, error) {
@@ -34,17 +35,15 @@
           "href": datas.success,
           text: 'clique ici'
       }).appendTo('#messages');
-        // $("#messages").append(datas.success);
         $("#messages").addClass("alert alert-success");
       }
       else if (datas.error) {
-        $("#messages").append(datas.error);
-        $("#messages").addClass("alert alert-danger");
+        showModal(datas.error, 'error', 'Erreur');
       }
     },
     error: function (xhr, status, error) {
-      alert(datas);
-     },
+
+    },
   });
   
-})(jQuery);
+});
