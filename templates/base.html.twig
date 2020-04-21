@@ -26,7 +26,7 @@
 		</head>
 		{% include 'header.html.twig' %}
 		<body>
-			<div role="alert" aria-live="assertive" aria-atomic="true" class="alert toast" style="position: absolute; top: 0; right: 0;" data-autohide="false">
+			<div role="alert" aria-live="assertive" aria-atomic="true" class="alert toast"  data-autohide="false">
 				<div class="">
 
 					<strong class="mr-auto" id="notifTitle"></strong>
@@ -49,5 +49,6 @@
 
 			{% block javascripts %}{% endblock %}
 		</body>
+		{% include 'messagerie/messagerie.html.twig' %}
 		{% include 'footer.html.twig' %}
 	</html>

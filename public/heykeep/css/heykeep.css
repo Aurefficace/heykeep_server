@@ -1,27 +1,36 @@
-@font-face{
-    font-family: 'Chillow';
-      font-style: normal;
-      src: url('../font/ChillowRegular.woff'),
-           url('../font/ChillowRegular.woff2');
-    }
-
-h1,h2{
-    font-family: 'Chillow' !important;
+@font-face {
+  font-family: "Chillow";
+  font-style: normal;
+  src: url("../font/ChillowRegular.woff"), url("../font/ChillowRegular.woff2");
 }
 
-.hidden{
-    display:none;
+h1,
+h2 {
+  font-family: "Chillow" !important;
+}
+
+.hidden {
+  display: none;
 }
 /*===========[ notification ]=========================*/
+.toast {
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: none;
+}
+.toast .show {
+  display: block ;
+}
 .toast.btn-success #closeButton {
-    color: #fff;
-    background-color: #00c851 !important;
+  color: #fff;
+  background-color: #00c851 !important;
 }
 .btn-warning #closeButton {
-    color: #fff;
-    background-color: #fb3 !important;
+  color: #fff;
+  background-color: #fb3 !important;
 }
 .toast.btn-danger #closeButton {
-    color: #fff;
-    background-color: #ff3547 !important;
+  color: #fff;
+  background-color: #ff3547 !important;
 }
