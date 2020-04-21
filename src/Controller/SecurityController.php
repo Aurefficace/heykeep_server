@@ -57,7 +57,7 @@ class SecurityController extends AbstractController
 
 
             if ($user == null) {
-                return $this->render('security/forgottenPassword.html.twig', ['errorUser'=> $email]);
+                return new JsonResponse(['error' => "Aucun Utilisateur n'a été trouvé"]);;
             }
 
             $token = md5(sha1(microtime()));
@@ -85,8 +85,7 @@ class SecurityController extends AbstractController
                     'text/html'
                 );
             // $mailer->send($message)
-            // dump($message->getBody());
-            // exit();
+            
             return new JsonResponse(['success' => $message->getBody()]);
         }
         return $this->render('security/forgottenPassword.html.twig');
