@@ -1,6 +1,7 @@
 {% block stylesheets %}
     <link href="{{ asset('heykeep/css/headerfooter.css') }}" rel="stylesheet" type="text/css">
 {% endblock %}
+
 <header>
     <nav class="navbar justify-content-between">
         <a class="navbar-brand img-fluid logo" href="#"><img src="{{ asset('heykeep/img/heykeep_logo.png') }}" alt="logo"></a>
@@ -12,7 +13,9 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href= {{path ('app_user_profile')}} class="nav-link waves-effect waves-light">
+                <a href= {{path ('app_user_profile')}} 
+                
+                class="nav-link waves-effect waves-light">
                     <i class="fas fa-cog"></i>
                 </a>
             </li>
