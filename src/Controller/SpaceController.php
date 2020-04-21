@@ -16,27 +16,14 @@ use Symfony\Component\Routing\Annotation\Route;
 class SpaceController extends BaseController
 {
     /**
-     * @Route("/", name="space_index", methods={"GET","POST"})
+     * @Route("/", name="space_index", methods={"GET"})
      */
-    public function index(Request $request, SpaceRepository $spaceRepository): Response
+    public function index(SpaceRepository $spaceRepository): Response
     {
-        $space = new Space();
-        $form = $this->createForm(SpaceType::class, $space);
-        $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $space->setCreatedDate(new \DateTime('today'));
-            $space->setActif(true);
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($space);
-            $entityManager->flush();
-
-            return $this->redirectToRoute('space_index');
-        }
         return $this->render('space/index.html.twig', [
             'spaces' => $spaceRepository->findAll(),
-            'space' => $space,
-            'form' => $form->createView(),
+
         ]);
     }
 
