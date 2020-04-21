@@ -11,12 +11,12 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/discussion")
+ * @Route("/discussion_old")
  */
 class DiscussionController_old extends BaseController
 {
     /**
-     * @Route("/", name="discussion_index", methods={"GET"})
+     * @Route("/", name="old_discussion_index", methods={"GET"})
      */
     public function index(DiscussionRepository $discussionRepository): Response
     {
@@ -25,7 +25,7 @@ class DiscussionController_old extends BaseController
     }
 
     /**
-     * @Route("/new", name="discussion_new", methods={"GET","POST"})
+     * @Route("/old_new", name="old_discussion_new", methods={"GET","POST"})
      */
     public function new(Request $request, Space $space): Response
     {

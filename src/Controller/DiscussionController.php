@@ -39,7 +39,7 @@ class DiscussionController extends AbstractController
             $entityManager->persist($discussion);
             $entityManager->flush();
 
-            return $this->redirectToRoute('discussion_index');
+            return $this->redirectToRoute('/');
         }
 
         return $this->render('discussion/new.html.twig', [
