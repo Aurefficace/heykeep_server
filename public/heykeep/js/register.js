@@ -65,6 +65,6 @@ $(document).ready(function() {
     });
 
     $("#registration_form_avatar").on("change", function() {
-        readURL(this);
+        updateImagePreview(this, $('#previewavatar') );
     });
 });

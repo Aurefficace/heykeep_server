@@ -99,3 +99,15 @@ function runFunctionByName(name, arguments) {
         return;
     return fn.apply(window, arguments);
 }
+
+function updateImagePreview($input,$target) {
+  if ($input.files && $input.files[0]) {
+    const reader = new FileReader();
+
+    reader.onload = function (e) {
+      $target.attr('src', e.target.result);
+    };
+
+    reader.readAsDataURL($input.files[0]); // convert to base64 string
+  }
+}
