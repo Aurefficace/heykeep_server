@@ -49,15 +49,15 @@ function showModal(message, type, titre) {
 
 function showSpinner($zone) {
   let $spinner = $(".spinner-border", $zone);
-  if (typeof ($zone) === "undefined" || $spinner.length === 0) {
+  if (typeof $zone === "undefined" || $spinner.length === 0) {
     $spinner = $("#spinner-master");
   }
   $spinner.show();
 }
 function hideSpinner($zone) {
   let $spinner = $(".spinner-border", $zone);
-  if (typeof ($zone) === "undefined" || $spinner.length === 0) {
-      $spinner = $("#spinner-master");
+  if (typeof $zone === "undefined" || $spinner.length === 0) {
+    $spinner = $("#spinner-master");
   }
-$spinner.hide();
+  $spinner.hide();
 }
