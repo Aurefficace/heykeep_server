@@ -41,15 +41,16 @@ class DiscussionController extends AbstractController
         $discussion = new Discussion();
         $form = $this->createForm(DiscussionType::class, $discussion, ['attr' => ['idUser' => $userId]]);
         $form->handleRequest($request);
-
+        
         if ($form->isSubmitted() && $form->isValid()) {
+           
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($discussion);
             $entityManager->flush();
 
             return $this->redirectToRoute('/');
         }
-
+        
         return $this->render('discussion/new.html.twig', [
             'discussion' => $discussion,
             'form' => $form->createView(),

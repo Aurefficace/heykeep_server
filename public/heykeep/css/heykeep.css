@@ -37,7 +37,7 @@ h2 {
 
 
 /*===========[ spinner ]=========================*/
-#spinner {
+#spinner-master {
   display: none;
   position: absolute;
   width: 40px;
