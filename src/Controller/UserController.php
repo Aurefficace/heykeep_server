@@ -9,7 +9,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
-
+use App\Helpers\Utilities;
 /**
  * @Route("user")
  */
@@ -69,13 +69,7 @@ class UserController extends AbstractController
     $filePath = $this->getParameter('kernel.project_dir').'/public/user/profile/'.$user->getId();
     Utilities::uploadFile($filePath, $file, "avatar.");
     
-    //$targetDirectory = $this->getParameter('kernel.project_dir').'/public/user/profile/'.$user->getId(); // Création du chemin vers le futur lieu de stockage de l'avatar
-    //if(!is_dir($targetDirectory)) { // On test si le dossier existe déjà (ici c'est impossible car on utilise l'id du nouvel utilisateur)
-       // mkdir($targetDirectory); // On créé le dossier
-       // chmod($targetDirectory, 0777); //On met des droits en lecture, modification et exécution pour tous le monde => pas bien !!!
-    }
-   $file->move($targetDirectory, "avatar.".$file->guessExtension()); // On envoie le fichier sur le serveur
-    // Tindin !
+    
     return new JsonResponse( ['success' => "Votre avatar est changé"]);
 }
 }
