@@ -40,25 +40,26 @@ class RegistrationFormType extends AbstractType
                     ]),
                 ],
             ])
-            ->add('plainPassword', PasswordType::class, [
-                // instead of being set onto the object directly,
-                // this is read and encoded in the controller
+            ->add('password', RepeatedType::class, array(
+                'type' => PasswordType::class,
                 'required' => true,
-                'mapped' => false,
-                'label'  => 'Mot de passe*',
-                'constraints' => [
+                'constraints' => array(
                     new NotBlank([
                         'message' => 'Merci de choisir un mot de passe',
                     ]),
                     new Length([
                         'min' => 6,
-                        'minMessage' => 'Your password should be at least {{ limit }} characters',
+                        'minMessage' => 'Votre mot de passe doit se composer de {{ limit }} caractères minimum',
                         // max length allowed by Symfony for security reasons
                         'max' => 4096,
                     ]),
-                ],
-            ])
-            ->add('avatar', FileType::class);;
+                ),
+                'first_options'  => array('label'  => 'Mot de passe*'),
+                'second_options' => array('label'  => 'Confirmez Mot de passe*'),
+            ))
+            ->add('avatar', FileType::class, [
+                'label'  => 'Choisissez votre Avatar*',
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)

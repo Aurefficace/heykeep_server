@@ -3,11 +3,11 @@ $(document).ready(function() {
     form.validate({
         errorPlacement: function errorPlacement(error, element) { element.before(error); },
         rules: {
-            'registration_form[plainPassword]': {
+            'registration_form[password][first]': {
                 minlength: 6
             },
-            confirm: {
-                equalTo: "#registration_form_plainPassword"
+            'registration_form[password][second]': {
+                equalTo: "#registration_form_password_first"
             }
         }
     });

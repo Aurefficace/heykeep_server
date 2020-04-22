@@ -22,7 +22,7 @@
                 {{ form_row(registrationForm.email) }}
                 {#<label for="plainPassword">Mot de passe *</label>#}
                 {# <input id="plainPassword" name="plainPassword" type="text" class="required email">#}
-                {{ form_row(registrationForm.plainPassword) }}
+                {{ form_row(registrationForm.password) }}
                 {#                <label for="confirm">Confirmez mot de passe *</label>
                                 <input id="confirm" name="confirm" type="text" class="required"> #}
                                 <p>(*) Items obligatoires</p>
@@ -61,18 +61,18 @@
                 {{ form_row(registrationForm.agreeTerms) }}
             </section>
             <h3 class="red_text">Récapitulatif</h3>
-            <section>
+
                 <div class="register100-pic js-tilt mx-auto mb-3 mt-3" data-tilt>
                     <img src="{{ asset('heykeep/img/heykeep_logo.png') }}" alt="logo mobile">
                 </div>
-                <div>
+            <h4 class="blue_text">merci de vérifier vos informations</h4>
                     <p>Votre E-mail est : <span id="recapitulatif-registration_form_email"></span></p>
                 </div>
                 <div>
                     <p>Votre Pseudo est : <span id="recapitulatif-registration_form_name"></span></p>
                 </div>
                 <div>
-                    <p>Votre Mot de Passe est : <span id="recapitulatif-registration_form_plainPassword"></span></p>
+                    <p>Votre Avatar est : <span id="recapitulatif-registration_form_avatar"></span></p>
                 </div>
 
 {#                <button class="btn bg-red rounded-pill text-white mx-auto d-block">Créez votre compte</button>#}
