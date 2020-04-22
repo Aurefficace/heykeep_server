@@ -52,7 +52,7 @@ class SpaceController extends BaseController
             $entityManager->flush();
 
             if ($form['imagefile']->getData()) {
-                Utilities::uploadFile($this->getParameter('kernel.project_dir') . '/public/space/' . $space->getId(), $file);
+                Utilities::uploadFile($this->getParameter('kernel.project_dir') . '/public/space/' . $space->getId(), $file,"spaceimage.");
             }
 
             return $this->redirectToRoute('space_index');
@@ -91,7 +91,7 @@ class SpaceController extends BaseController
             }
             $this->getDoctrine()->getManager()->flush();
             if ($form['imagefile']->getData()) {
-                Utilities::uploadFile($this->getParameter('kernel.project_dir') . '/public/space/' . $space->getId(), $file);
+                Utilities::uploadFile($this->getParameter('kernel.project_dir') . '/public/space/' . $space->getId(), $file,"spaceimage.");
             }
 
             return $this->redirectToRoute('space_index');
