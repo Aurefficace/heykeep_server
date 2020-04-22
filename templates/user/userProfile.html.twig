@@ -13,7 +13,7 @@
               <div class="col-sm">
               <P>Modifier mes infos:</br>{{app.user.username}}</p>
               <button id="b1">Change ton  mot de passe</button>
-              <form id="form1" class="login100-form hidden" method="post" action="{{ path('app_user_reset_password') }}">
+              <form id="formResetPassword" class="login100-form hidden" method="post" action="{{ path('app_user_reset_password') }}">
 					<div class="wrap-input100 validate-input" data-validate="Password is required">
 						<label for="password">Nouveau mot de passe *</label>
 						<input type="password" name="password" id="inputPassword" class="input100" required> 
@@ -36,7 +36,14 @@
 						</button>
 					</div>  
 				</form>
-               
+				<button id="b3">Change ton avatar</button>
+			   <form id="formChangeAvatar" class="login100-form hidden" method="post" action="{{ path('app_User_reset_avatar') }}">
+					<div class="wrap-input100 validate-input" data-validate="Password is required">
+					</div>  
+					<label for="avatar">Changer mon avatar:</label>
+				<input type="file" id="avatar" onchange ="myFunction" name="avatar" accept="image/png, image/jpeg">
+				</form>
+			   
               <P>Catégories:</p>
               <p>Gérer mes favoris:</p>
                 </div>
