@@ -17,17 +17,18 @@ class DiscussionType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
       
-        
+        dump($options);
+        exit();
         $builder
             ->add('name')
             ->add('ispublic')
             ->add('id_space', EntityType::class, [
                 'class' => Space::class,
-                'query_builder' => function(EntityRepository $er) {
+                'query_builder' => function(EntityRepository $er)use ($options) {
                     return $er->createQueryBuilder('sp')
                         ->leftJoin('sp.id_owner' , 'id')
                         ->where('id = :val')
-                        ->setParameter('val',13)
+                        ->setParameter('val',$options['idUser'])
                         ->orderBy('sp.name', 'ASC');
                 },
                 'choice_label' => 'name',
