@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Space;
 use App\Form\SpaceType;
+use App\Helpers\Utilities;
 use App\Repository\SpaceRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -39,9 +40,15 @@ class SpaceController extends BaseController
         if ($form->isSubmitted() && $form->isValid()) {
             $space->setCreatedDate(new \DateTime('today'));
             $space->setActif(true);
+            $space->setLevel(0);
+            $space->setIdOwner($this->getUser());
+            $file = $form['imagefile']->getData(); // Récupération du fichier pour l'image de l'espace
+            $space->setImage("spaceimage.".$file->guessExtension()); // Affectation d'un nom standard au fichier d'image de l'espace
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($space);
             $entityManager->flush();
+
+            Utilities::uploadFile($this->getParameter('kernel.project_dir') . '/public/space/' . $space->getId(), $file);
 
             return $this->redirectToRoute('space_index');
         }
@@ -74,7 +81,10 @@ class SpaceController extends BaseController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $file = $form['imagefile']->getData();
+            $space->setImage("spaceimage.".$file->guessExtension());
             $this->getDoctrine()->getManager()->flush();
+            Utilities::uploadFile($this->getParameter('kernel.project_dir') . '/public/space/' . $space->getId(), $file);
 
             return $this->redirectToRoute('space_index');
         }

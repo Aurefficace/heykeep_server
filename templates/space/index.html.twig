@@ -35,7 +35,9 @@
                             <td>{{ space.description }}</td>
                             <td>{{ space.createdDate ? space.createdDate|date('d-m-Y') : '' }}</td>
                             <td>{{ space.actif ? 'Oui' : 'Non' }}</td>
-                            <td>{{ space.image }}</td>
+                            <td>{{ space.image }}
+                                <img src="{{ asset('space/'~ space.id~ '/' ~ space.image) }}" class="rounded-circle z-depth-0" alt="avatar image" >
+                            </td>
                             <td>
                                 <a href="{{ path('space_show', {'id': space.id}) }}">
                                     <button type="button" class="btn btn-primary px-3"><i class="far fa-eye" aria-hidden="true"></i> Afficher</button>
