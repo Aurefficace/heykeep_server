@@ -20,9 +20,16 @@ class DiscussionController extends AbstractController
      */
     public function index(DiscussionRepository $discussionRepository): Response
     {
+        $userId = $this->getUser()->getId();
+
         return $this->render('discussion/index.html.twig', [
-            'discussions' => $discussionRepository->findAll(),
+            'discussions' =>$discussionRepository->findByUserId($userId),
         ]);
+           
+         
+        // return $this->render('discussion/index.html.twig', [
+        //     'discussions' => $discussionRepository->findAll(),
+        // ]);
     }
 
     /**
@@ -30,8 +37,9 @@ class DiscussionController extends AbstractController
      */
     public function new(Request $request): Response
     {
+        $userId = $this->getUser()->getId();
         $discussion = new Discussion();
-        $form = $this->createForm(DiscussionType::class, $discussion);
+        $form = $this->createForm(DiscussionType::class, $discussion, ['attr' => ['idUser' => $userId]]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

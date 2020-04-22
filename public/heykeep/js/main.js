@@ -25,3 +25,15 @@ function showModal(message, type, titre) {
  
   }
 }
+
+
+/*===========[ spinner ]=========================*/
+
+function showSpinner() {
+ const $spinner = $("#spinner");
+ $spinner.show();
+}
+function hideSpinner() {
+ const $spinner = $("#spinner");
+ $spinner.hide();
+}

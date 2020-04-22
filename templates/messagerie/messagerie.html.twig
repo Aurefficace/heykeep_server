@@ -1,5 +1,6 @@
-{% block stylesheets %} <link href="{{ asset('heykeep/css/heykeep.css') }}" rel="stylesheet" type="text/css">
-    <link href="{{ asset('heykeep/css/messagerie.css') }}" rel="stylesheet" type="text/css">
+{% block stylesheets %}
+	<link href="{{ asset('heykeep/css/heykeep.css') }}" rel="stylesheet" type="text/css">
+	<link href="{{ asset('heykeep/css/messagerie.css') }}" rel="stylesheet" type="text/css">
 {% endblock %}
 <!-- Full Height Modal Right -->
 <div
@@ -20,11 +21,15 @@
 			<div class="modal-body">
 				<div id="discussion_list"></div>
 				<div id="discussion_add"></div>
-
+				<div class="spinner-border" id="spinner" role="status"></div>
 			</div>
 			<div class="modal-footer justify-content-center messagerieButton">
-				<button</i onclick="callAjaxMasterDetail('{{ path('discussion_index')}}','#discussion_list','#discussion_add')" <i class="fas fa-bars"></button>
-				<button</i onclick="callAjaxMasterDetail('{{ path('discussion_new')}}','#discussion_add','#discussion_list')" <i class="fas fa-plus-circle"></button>
+				<button onclick="callAjaxMasterDetail('{{ path('discussion_index')}}','#discussion_list','#discussion_add')">
+					<i class="fas fa-bars"></i>
+				</button>
+				<button onclick="callAjaxMasterDetail('{{ path('discussion_new')}}','#discussion_add','#discussion_list')">
+					<i class="fas fa-plus-circle"></i>
+				</button>
 			</div>
 		</div>
 	</div>

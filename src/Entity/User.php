@@ -71,9 +71,15 @@ class User implements UserInterface
      */
     private $categories;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Space", mappedBy="id_owner", orphanRemoval=true)
+     */
+    private $spaces;
+
     public function __construct()
     {
         $this->categories = new ArrayCollection();
+        $this->spaces = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -239,6 +245,37 @@ class User implements UserInterface
             // set the owning side to null (unless already changed)
             if ($category->getIdOwner() === $this) {
                 $category->setIdOwner(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Space[]
+     */
+    public function getSpaces(): Collection
+    {
+        return $this->spaces;
+    }
+
+    public function addSpace(Space $space): self
+    {
+        if (!$this->spaces->contains($space)) {
+            $this->spaces[] = $space;
+            $space->setIdOwner($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSpace(Space $space): self
+    {
+        if ($this->spaces->contains($space)) {
+            $this->spaces->removeElement($space);
+            // set the owning side to null (unless already changed)
+            if ($space->getIdOwner() === $this) {
+                $space->setIdOwner(null);
             }
         }
 
