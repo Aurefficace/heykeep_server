@@ -24,6 +24,7 @@ function afterCallAjaxMasterDetail() {
           success: function (data) {
             $discussionAdd.fadeOut();
             $discussionList.html(data).fadeIn();
+            initForm($discussionList.find("form"));
           },
         });
       } else if (datas.error) {

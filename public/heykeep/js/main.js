@@ -61,3 +61,26 @@ function hideSpinner($zone) {
   }
   $spinner.hide();
 }
+
+
+function initForm($form) {
+    //region Initialisation du validator
+    // $form.validate({
+    //     errorPlacement: function errorPlacement(error, element) {
+    //         element.before(error);
+    //     },
+    //     rules: {
+    //         nom_de_champs: {
+    //             regle: detail,
+    //         },
+    //     },
+    // });
+    //endregion Initialisation du validator
+
+    //region initialisation des composants
+    //Chosen
+    $("select", $form).each(function(){
+          $(this).chosen({width: "100%", search_contains:true});
+    });
+    //endregion initialisation des composants
+}
