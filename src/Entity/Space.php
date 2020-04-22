@@ -39,14 +39,7 @@ class Space
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\User", inversedBy="spacesMember")
-     * @ORM\JoinTable(name="space_user",
-     *   joinColumns={
-     *     @ORM\JoinColumn(name="space_id", referencedColumnName="space_id")
-     *   },
-     *   inverseJoinColumns={
-     *     @ORM\JoinColumn(name="user_id", referencedColumnName="user_id")
-     *   }
-     * )
+     * @ORM\JoinTable(name="space_user")
      */
     private $id_member;
 

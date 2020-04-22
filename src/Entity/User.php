@@ -78,14 +78,7 @@ class User implements UserInterface
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Space", inversedBy="id_member")
-     * @ORM\JoinTable(name="space_user",
-     *   joinColumns={
-     *     @ORM\JoinColumn(name="user_id", referencedColumnName="user_id")
-     *   },
-     *   inverseJoinColumns={
-     *     @ORM\JoinColumn(name="space_id", referencedColumnName="space_id")
-     *   }
-     * )
+     * @ORM\JoinTable(name="space_user")
      */
     private $spacesMember;
 
