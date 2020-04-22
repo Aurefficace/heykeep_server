@@ -47,4 +47,13 @@ class DiscussionRepository extends ServiceEntityRepository
         ;
     }
     */
+    public function findByUserId($userId)
+    {
+        return $this->createQueryBuilder('d')
+            ->leftJoin('d.id_user', 'iduser')
+            ->where('iduser = :val')
+            ->setParameter('val', $userId)
+            ->getQuery()
+            ->getResult();
+    }
 }

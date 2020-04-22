@@ -20,7 +20,7 @@ class DiscussionController_old extends BaseController
      */
     public function index(DiscussionRepository $discussionRepository): Response
     {
-
+        
         return new Response(['discussion' => $discussionRepository->findAll()]);
     }
 

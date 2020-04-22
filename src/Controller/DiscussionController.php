@@ -20,9 +20,16 @@ class DiscussionController extends AbstractController
      */
     public function index(DiscussionRepository $discussionRepository): Response
     {
+        $userId = $this->getUser()->getId();
+
         return $this->render('discussion/index.html.twig', [
-            'discussions' => $discussionRepository->findAll(),
+            'discussions' =>$discussionRepository->findByUserId($userId),
         ]);
+           
+         
+        // return $this->render('discussion/index.html.twig', [
+        //     'discussions' => $discussionRepository->findAll(),
+        // ]);
     }
 
     /**
