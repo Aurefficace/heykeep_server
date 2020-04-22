@@ -10,10 +10,11 @@ $(document).ready(function () {
     },
   });
 });
-function afterCallAjaxMasterDetail() {
+function discussionFormCallback() {
+  console.log("coucou fonction discussionFormCallback");
   const formDiscussion = $(".formDiscussion");
   const $discussionList = $("#discussion_list");
-  const $discussionAdd = $('#discussion_add');
+  const $discussionAdd = $("#discussion_add");
   formDiscussion.ajaxForm({
     success: function (datas) {
       if (datas.success) {
@@ -32,4 +33,23 @@ function afterCallAjaxMasterDetail() {
     },
     error: function (xhr, status, error) {},
   });
+  $("#discussion_id_space")
+    .chosen()
+    .change(function () {
+      const id_space = $(this).chosen().val();
+      $.ajax({
+        method: "POST",
+        url: "/space/usersBySpace",
+        data: { id: id_space },
+        success: function (data) {
+          if (data.success) {
+            console.log(data);
+            showModal(data.success, "success", "Success");
+          }
+          if (data.error) {
+            showModal(datas.error, "error", "Erreur");
+          }
+        },
+      });
+    });
 }

@@ -9,7 +9,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
-
+use App\Helpers\Utilities;
 /**
  * @Route("user")
  */
@@ -52,4 +52,26 @@ class UserController extends AbstractController
         }
         return new JsonResponse( ['success' => "Votre mot de passe à été réinitialisé"]);
     }
+
+    /**
+     * @Route("/resetAvat", name="app_User_reset_avatar", methods={"POST"})
+     */
+    public function resetAvatar(Request $request){
+
+    $user = $this->getUser();
+    $file = $request->files->get('avatar'); // Récupération du fichier pour l'avatar
+    $user->setAvatar("avatar.".$file->guessExtension()); // Affectation d'un nom standard au fichier d'avatar
+
+    $entityManager = $this->getDoctrine()->getManager();
+    $entityManager->persist($user);
+    $entityManager->flush();
+
+    $filePath = $this->getParameter('kernel.project_dir').'/public/user/profile/'.$user->getId();
+    Utilities::uploadFile($filePath, $file, "avatar.");
+    
+    
+    return new JsonResponse( ['success' => "Votre avatar est changé"]);
 }
+}
+
+

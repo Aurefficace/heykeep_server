@@ -7,6 +7,7 @@ use App\Form\SpaceType;
 use App\Helpers\Utilities;
 use App\Repository\SpaceRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -42,17 +43,20 @@ class SpaceController extends BaseController
             $space->setActif(true);
             $space->setLevel(0);
             $space->setIdOwner($this->getUser());
-            $file = $form['imagefile']->getData(); // Récupération du fichier pour l'image de l'espace
-            $space->setImage("spaceimage.".$file->guessExtension()); // Affectation d'un nom standard au fichier d'image de l'espace
+            if ($form['imagefile']->getData()) {
+                $file = $form['imagefile']->getData(); // Récupération du fichier pour l'image de l'espace
+                $space->setImage("spaceimage." . $file->guessExtension()); // Affectation d'un nom standard au fichier d'image de l'espace
+            }
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($space);
             $entityManager->flush();
 
-            Utilities::uploadFile($this->getParameter('kernel.project_dir') . '/public/space/' . $space->getId(), $file);
+            if ($form['imagefile']->getData()) {
+                Utilities::uploadFile($this->getParameter('kernel.project_dir') . '/public/space/' . $space->getId(), $file,"spaceimage.");
+            }
 
             return $this->redirectToRoute('space_index');
-        }
-        elseif ($form->isSubmitted() && !$form->isValid()) {
+        } elseif ($form->isSubmitted() && !$form->isValid()) {
             return $this->neweditSubmittedGlobal($form);
         }
 
@@ -81,10 +85,14 @@ class SpaceController extends BaseController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $file = $form['imagefile']->getData();
-            $space->setImage("spaceimage.".$file->guessExtension());
+            if ($form['imagefile']->getData()) {
+                $file = $form['imagefile']->getData(); // Récupération du fichier pour l'image de l'espace
+                $space->setImage("spaceimage." . $file->guessExtension()); // Affectation d'un nom standard au fichier d'image de l'espace
+            }
             $this->getDoctrine()->getManager()->flush();
-            Utilities::uploadFile($this->getParameter('kernel.project_dir') . '/public/space/' . $space->getId(), $file);
+            if ($form['imagefile']->getData()) {
+                Utilities::uploadFile($this->getParameter('kernel.project_dir') . '/public/space/' . $space->getId(), $file,"spaceimage.");
+            }
 
             return $this->redirectToRoute('space_index');
         }
@@ -100,12 +108,29 @@ class SpaceController extends BaseController
      */
     public function delete(Request $request, Space $space): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$space->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $space->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($space);
             $entityManager->flush();
         }
 
         return $this->redirectToRoute('space_index');
+    }
+
+    /**
+     * @Route("/usersBySpace", name="users_by_space")
+     */
+    public function getUsersBySpace(Request $request, SpaceRepository $spaceRepository): Response
+    {
+        $id_space =  $request->get('id');
+        $space = $spaceRepository->find($id_space);
+        if ($space == null) {
+            return new JsonResponse(['error' => "aucun espace trouvé"]);;
+        }
+        $users = [];
+        foreach ($space->getIdMember() as $member) {
+            $users[$member->getId()] = $member->getName();
+        }
+        return new JsonResponse(['success' => $users]);
     }
 }
