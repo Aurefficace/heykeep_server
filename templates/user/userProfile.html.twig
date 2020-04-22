@@ -5,13 +5,14 @@
 {% block title %}Dashboard{% endblock %}
 {% block body %}
     {% if app.user %}
-        <div class="container">
+	<div class="container-fluid">
             <div class="row">
-                <div class="col-sm">
-                     Bienvenue sur ton profil 
+                <div class="col-md-3 mt-5 mx-3">
+                <h1 class="blue_text">Bienvenue sur ton profil:{{app.user.username}}</h1>
                 </div>
-              <div class="col-sm">
-              <P>Modifier mes infos:</br>{{app.user.username}}</p>
+            
+               <div class="col-md-3 bg-beige p-3 m-2 card-dash">
+               <h3 class="blue_text mx-3 my-3">Modifier mes infos:</h3>
               <button id="buttonChangePassword">Change ton  mot de passe</button>
               <form id="formResetPassword" class="login100-form hidden" method="post" action="{{ path('app_user_reset_password') }}">
 					<div class="wrap-input100 validate-input" data-validate="Password is required">
@@ -36,6 +37,9 @@
 						</button>
 					</div>  
 				</form>
+				</div>
+				<div class="col-md-3 bg-beige p-3 m-2 card-dash">
+				<h3 class="blue_text mx-3 my-3">Change ton avatar:</h3>
 				<button id="buttonChangeAvatar">Change ton avatar</button>
 			   <form id="formChangeAvatar" class="login100-form hidden" method="post" action="{{ path('app_User_reset_avatar') }}">
 					<div class="wrap-input100 validate-input" data-validate="Password is required">
@@ -43,9 +47,18 @@
 					<label for="avatar">Changer mon avatar:</label>
 				<input type="file" id="avatar" onchange ="myFunction" name="avatar" accept="image/png, image/jpeg">
 				</form>
-			   
-              <P>Catégories:</p>
-              <p>Gérer mes favoris:</p>
+			   </div>
+			   <div class="container">
+			   <div class="row">
+			   <div class="col col-example bg-beige p-3 m-2 card-dash">
+				<h3 class="blue_text mx-3 my-3">Mes catégories:</h3>
+              </div>
+             <div class="col col-example bg-beige p-3 m-2 card-dash">
+				<h3 class="blue_text mx-3 my-3">Gérer mes favoris:</h3>
+              </div>
+			  </div>
+			  </div>
+			  </div>
                 </div>
               </div>
         </div>      
