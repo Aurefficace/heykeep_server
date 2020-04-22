@@ -35,8 +35,12 @@
                             <td>{{ space.description }}</td>
                             <td>{{ space.createdDate ? space.createdDate|date('d-m-Y') : '' }}</td>
                             <td>{{ space.actif ? 'Oui' : 'Non' }}</td>
-                            <td>{{ space.image }}
-                                <img src="{{ asset('space/'~ space.id~ '/' ~ space.image) }}" class="rounded-circle z-depth-0" alt="avatar image" >
+                            <td>
+                                {% if space.image == '' %}
+                                    <img src="{{ asset('space/default.jpg') }}" class="rounded-circle z-depth-0" alt="avatar image" >
+                                {% else %}
+                                    <img src="{{ asset('space/'~ space.id~ '/' ~ space.image) }}" class="rounded-circle z-depth-0" alt="avatar image" >
+                                {% endif %}
                             </td>
                             <td>
                                 <a href="{{ path('space_show', {'id': space.id}) }}">
