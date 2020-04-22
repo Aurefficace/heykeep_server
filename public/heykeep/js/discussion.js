@@ -14,7 +14,7 @@ function discussionFormCallback() {
   console.log("coucou fonction discussionFormCallback");
   const formDiscussion = $(".formDiscussion");
   const $discussionList = $("#discussion_list");
-  const $discussionAdd = $('#discussion_add');
+  const $discussionAdd = $("#discussion_add");
   formDiscussion.ajaxForm({
     success: function (datas) {
       if (datas.success) {
@@ -33,4 +33,23 @@ function discussionFormCallback() {
     },
     error: function (xhr, status, error) {},
   });
+  $("#discussion_id_space")
+    .chosen()
+    .change(function () {
+      const id_space = $(this).chosen().val();
+      $.ajax({
+        method: "POST",
+        url: "/space/usersBySpace",
+        data: { id: id_space },
+        success: function (data) {
+          if (data.success) {
+            showModal(data.success, "success", "Success");
+            console.log(data);
+          }
+          if (data.error) {
+            showModal(datas.error, "error", "Erreur");
+          }
+        },
+      });
+    });
 }

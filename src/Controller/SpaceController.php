@@ -7,6 +7,7 @@ use App\Form\SpaceType;
 use App\Helpers\Utilities;
 use App\Repository\SpaceRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -115,5 +116,20 @@ class SpaceController extends BaseController
         }
 
         return $this->redirectToRoute('space_index');
+    }
+
+    /**
+     * @Route("/usersBySpace", name="users_by_space")
+     */
+    public function getUsersBySpace(Request $request, SpaceRepository $spaceRepository): Response
+    {
+      $id_space =  $request->get('id');
+       $space = $spaceRepository->find($id_space);
+       if ($space == null) {
+        return new JsonResponse(['error' => "aucun espace trouvé"]);;
+    }
+       dump($space->getIdMember());
+       exit();
+        return new JsonResponse(["1" => 'toto']);
     }
 }

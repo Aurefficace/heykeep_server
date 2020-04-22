@@ -12,7 +12,7 @@ function callAjaxMasterDetail(path, target, parent) {
       }
       hideSpinner($(parent).parent());
       console.log("$dataForm.data('callback')", $dataForm.data('callback'));
-      if (typeof $dataForm.data('callback') !== null) {
+      if (typeof $dataForm.data('callback') !== 'undefined') {
           runFunctionByName($dataForm.data('callback'));
       }
     },
