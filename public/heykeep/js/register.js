@@ -3,14 +3,26 @@ $(document).ready(function() {
     form.validate({
         errorPlacement: function errorPlacement(error, element) { element.before(error); },
         rules: {
-            'registration_form[plainPassword]': {
+            'registration_form[password][first]': {
                 minlength: 6
             },
-            confirm: {
-                equalTo: "#registration_form_plainPassword"
+            'registration_form[password][second]': {
+                equalTo: "#registration_form_password_first"
             }
         }
     });
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function(e) {
+                $('#previewavatar').attr('src', e.target.result);
+            };
+
+            reader.readAsDataURL(input.files[0]); // convert to base64 string
+        }
+    }
+
     form.children("div").steps({
         headerTag: "h3",
         bodyTag: "section",
@@ -50,5 +62,9 @@ $(document).ready(function() {
         {
             return form.submit();
         }
+    });
+
+    $("#registration_form_avatar").on("change", function() {
+        readURL(this);
     });
 });

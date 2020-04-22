@@ -587,6 +587,7 @@ button:hover {
     border-radius: 40px;
     width: 100%;
     height: 40px;
+    padding-left: 20px;
 
 }
 
@@ -789,4 +790,7 @@ button:hover {
 .wizard a{
     outline: 0;
     font-size: 0.8rem !important;
+}
+#registration_form_avatar{
+    border: none !important;
 }

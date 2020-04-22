@@ -29,7 +29,7 @@ class RegistrationController extends BaseController
             $user->setPassword(
                 $passwordEncoder->encodePassword(
                     $user,
-                    $form->get('plainPassword')->getData()
+                    $form->get('password')->getData()
                 )
             );
             $role = [];

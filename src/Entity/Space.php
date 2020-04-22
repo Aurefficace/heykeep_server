@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use phpDocumentor\Reflection\Types\Integer;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\SpaceRepository")
@@ -40,7 +41,7 @@ class Space
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Space", inversedBy="space_children")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $parent_space;
 
@@ -123,74 +124,7 @@ class Space
         return $this;
     }
 
-    /**
-     * @return Collection|User[]
-     */
-    public function getIdOwner(): Collection
-    {
-        return $this->id_member;
-    }
 
-    public function addIdOwner(User $idOwner): self
-    {
-        if (!$this->id_member->contains($idOwner)) {
-            $this->id_member[] = $idOwner;
-        }
-
-        return $this;
-    }
-
-    public function removeIdOwner(User $idOwner): self
-    {
-        if ($this->id_member->contains($idOwner)) {
-            $this->id_member->removeElement($idOwner);
-        }
-
-        return $this;
-    }
-
-    public function getLevel(): ?self
-    {
-        return $this->parent_space;
-    }
-
-    public function setLevel(?self $parent_space): self
-    {
-        $this->parent_space = $parent_space;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|self[]
-     */
-    public function getIdParentSpace(): Collection
-    {
-        return $this->space_children;
-    }
-
-    public function addIdParentSpace(self $idParentSpace): self
-    {
-        if (!$this->space_children->contains($idParentSpace)) {
-            $this->space_children[] = $idParentSpace;
-            $idParentSpace->setLevel($this);
-        }
-
-        return $this;
-    }
-
-    public function removeIdParentSpace(self $idParentSpace): self
-    {
-        if ($this->space_children->contains($idParentSpace)) {
-            $this->space_children->removeElement($idParentSpace);
-            // set the owning side to null (unless already changed)
-            if ($idParentSpace->getLevel() === $this) {
-                $idParentSpace->setLevel(null);
-            }
-        }
-
-        return $this;
-    }
 
     public function getActif(): ?bool
     {
@@ -247,10 +181,97 @@ class Space
         return $this;
     }
 
+    public function getLevel(): ?int
+    {
+        return $this->level;
+    }
+
+    public function setLevel(int $level): self
+    {
+        $this->level = $level;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|User[]
+     */
+    public function getIdMember(): Collection
+    {
+        return $this->id_member;
+    }
+
+    public function addIdMember(User $idMember): self
+    {
+        if (!$this->id_member->contains($idMember)) {
+            $this->id_member[] = $idMember;
+        }
+
+        return $this;
+    }
+
+    public function removeIdMember(User $idMember): self
+    {
+        if ($this->id_member->contains($idMember)) {
+            $this->id_member->removeElement($idMember);
+        }
+
+        return $this;
+    }
+
+    public function getParentSpace(): ?self
+    {
+        return $this->parent_space;
+    }
+
+    public function setParentSpace(?self $parent_space): self
+    {
+        $this->parent_space = $parent_space;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Space[]
+     */
+    public function getSpaceChildren(): Collection
+    {
+        return $this->space_children;
+    }
+
+    public function addSpaceChild(Space $spaceChild): self
+    {
+        if (!$this->space_children->contains($spaceChild)) {
+            $this->space_children[] = $spaceChild;
+            $spaceChild->setParentSpace($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSpaceChild(Space $spaceChild): self
+    {
+        if ($this->space_children->contains($spaceChild)) {
+            $this->space_children->removeElement($spaceChild);
+            // set the owning side to null (unless already changed)
+            if ($spaceChild->getParentSpace() === $this) {
+                $spaceChild->setParentSpace(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getIdOwner(): ?user
+    {
+        return $this->id_owner;
+    }
+
     public function setIdOwner(?user $id_owner): self
     {
         $this->id_owner = $id_owner;
 
         return $this;
     }
+
 }
