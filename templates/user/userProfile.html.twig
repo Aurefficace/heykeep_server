@@ -12,7 +12,7 @@
                 </div>
               <div class="col-sm">
               <P>Modifier mes infos:</br>{{app.user.username}}</p>
-              <button id="b1">Change ton  mot de passe</button>
+              <button id="buttonChangePassword">Change ton  mot de passe</button>
               <form id="formResetPassword" class="login100-form hidden" method="post" action="{{ path('app_user_reset_password') }}">
 					<div class="wrap-input100 validate-input" data-validate="Password is required">
 						<label for="password">Nouveau mot de passe *</label>
@@ -31,12 +31,12 @@
 						</span>
 					</div>
 					<div class="container-login100-form-btn">
-						<button id="b2" class="login100-form-btn" type="submit">
+						<button id="buttonResetPassword" class="login100-form-btn" type="submit">
 							Réinitialiser Mot de Passe
 						</button>
 					</div>  
 				</form>
-				<button id="b3">Change ton avatar</button>
+				<button id="buttonChangeAvatar">Change ton avatar</button>
 			   <form id="formChangeAvatar" class="login100-form hidden" method="post" action="{{ path('app_User_reset_avatar') }}">
 					<div class="wrap-input100 validate-input" data-validate="Password is required">
 					</div>  
@@ -53,5 +53,5 @@
     
 {% endblock %}
 {% block javascripts %}
-	<script src="{{ asset('heykeep/js/modifPassword.js') }}"></script>
+	<script src="{{ asset('heykeep/js/editProfil.js') }}"></script>
 {% endblock %}

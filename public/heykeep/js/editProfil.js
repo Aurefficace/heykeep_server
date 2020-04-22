@@ -1,11 +1,11 @@
 $(document).ready(function(){     
-    $("#b1").click(function(){
+    $("#buttonChangePassword").click(function(){
         $("#formResetPassword").show();
-        $("#b1").hide();
+        $("#buttonChangePassword").hide();
     });
-    $("#b2").click(function(){
+    $("#buttonResetPassword").click(function(){
         $("#formResetPassword").hide();
-        $("#b1").show();
+        $("#buttonChangePassword").show();
     });
     const form = $("#formResetPassword");
     form.validate({
@@ -32,12 +32,12 @@ $(document).ready(function(){
   
        },
     });
-    $("#b3").click(function(){
-      $("#formChangeAvatar").show();
+    $("#buttonChangeAvatar").click(function(){
       const formAvatar =$("#formChangeAvatar");
-      $("#avatar").on('change', function(){
-        formAvatar.submit();
-        $("#avatar").hide();
+      formAvatar.show();   
+      formAvatar.on('change', function(){
+      formAvatar.submit();
+      formAvatar.hide();
       });
       
       formAvatar.ajaxForm({
