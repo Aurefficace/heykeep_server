@@ -6,6 +6,9 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use phpDocumentor\Reflection\Types\Integer;
+use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\SpaceRepository")
@@ -75,6 +78,14 @@ class Space
      * @ORM\Column(type="integer")
      */
     private $level;
+
+    /**
+     * @var UploadedFile|null
+     * @Assert\File(
+     *     maxSize="6000000"
+     * )
+     */
+    private $imagefile;
 
     public function __construct()
     {
@@ -272,6 +283,25 @@ class Space
         $this->id_owner = $id_owner;
 
         return $this;
+    }
+
+    /**
+     * Sets file.
+     *
+     * @param UploadedFile $imagefile
+     */
+    public function setImagefile(UploadedFile $imagefile = null)
+    {
+        $this->imagefile = $imagefile;
+    }
+
+    /**
+     * Get file.
+     *
+     */
+    public function getImagefile(): ?UploadedFile
+    {
+        return $this->imagefile;
     }
 
 }
