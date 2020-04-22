@@ -6,6 +6,9 @@ function callAjaxMasterDetail(path, target, parent) {
     success: function (data) {
       $(parent).fadeOut();
       $(target).html(data).fadeIn();
+      if($(target).find("form").length > 0) {
+        initForm($(target).find("form"));
+      }
       hideSpinner($(parent).parent());
       if (
         typeof afterCallAjaxMasterDetail != null &&
