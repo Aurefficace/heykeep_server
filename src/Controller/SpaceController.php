@@ -42,13 +42,17 @@ class SpaceController extends BaseController
             $space->setActif(true);
             $space->setLevel(0);
             $space->setIdOwner($this->getUser());
-            $file = $form['imagefile']->getData(); // Récupération du fichier pour l'image de l'espace
-            $space->setImage("spaceimage.".$file->guessExtension()); // Affectation d'un nom standard au fichier d'image de l'espace
+            if ($form['imagefile']->getData()) {
+                $file = $form['imagefile']->getData(); // Récupération du fichier pour l'image de l'espace
+                $space->setImage("spaceimage.".$file->guessExtension()); // Affectation d'un nom standard au fichier d'image de l'espace
+            }
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($space);
             $entityManager->flush();
 
-            Utilities::uploadFile($this->getParameter('kernel.project_dir') . '/public/space/' . $space->getId(), $file);
+            if ($form['imagefile']->getData()) {
+                Utilities::uploadFile($this->getParameter('kernel.project_dir') . '/public/space/' . $space->getId(), $file);
+            }
 
             return $this->redirectToRoute('space_index');
         }
@@ -81,10 +85,14 @@ class SpaceController extends BaseController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $file = $form['imagefile']->getData();
-            $space->setImage("spaceimage.".$file->guessExtension());
+            if ($form['imagefile']->getData()) {
+                $file = $form['imagefile']->getData(); // Récupération du fichier pour l'image de l'espace
+                $space->setImage("spaceimage.".$file->guessExtension()); // Affectation d'un nom standard au fichier d'image de l'espace
+            }
             $this->getDoctrine()->getManager()->flush();
-            Utilities::uploadFile($this->getParameter('kernel.project_dir') . '/public/space/' . $space->getId(), $file);
+            if ($form['imagefile']->getData()) {
+                Utilities::uploadFile($this->getParameter('kernel.project_dir') . '/public/space/' . $space->getId(), $file);
+            }
 
             return $this->redirectToRoute('space_index');
         }

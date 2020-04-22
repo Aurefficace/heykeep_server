@@ -1,13 +1,13 @@
 $(document).ready(function(){     
     $("#b1").click(function(){
-        $("#form1").show();
+        $("#formResetPassword").show();
         $("#b1").hide();
     });
     $("#b2").click(function(){
-        $("#form1").hide();
+        $("#formResetPassword").hide();
         $("#b1").show();
     });
-    const form = $("#form1");
+    const form = $("#formResetPassword");
     form.validate({
       errorPlacement: function errorPlacement(error, element) {
         element.before(error);
@@ -18,4 +18,43 @@ $(document).ready(function(){
         },
       },
     });
+    form.ajaxForm({
+      success: function (datas) {
+        if (datas.success) {
+          showModal(datas.success, 'success', 'Success');
+          
+        }
+        else if (datas.error) {
+          showModal(datas.success, 'error', 'Erreur');
+        }
+      },
+      error: function (xhr, status, error) {
+  
+       },
+    });
+    $("#b3").click(function(){
+      $("#formChangeAvatar").show();
+      const formAvatar =$("#formChangeAvatar");
+      $("#avatar").on('change', function(){
+        formAvatar.submit();
+        $("#avatar").hide();
+      });
+      
+      formAvatar.ajaxForm({
+        success: function (datas) {
+          if (datas.success) {
+            showModal(datas.success, 'success', 'Success');
+            
+          }
+          else if (datas.error) {
+            showModal(datas.success, 'error', 'Erreur');
+          }
+        },
+        error: function (xhr, status, error) {
+    
+         },
+      });
+
+});
+
 });

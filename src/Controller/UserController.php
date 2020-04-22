@@ -52,4 +52,26 @@ class UserController extends AbstractController
         }
         return new JsonResponse( ['success' => "Votre mot de passe à été réinitialisé"]);
     }
+    /**
+     * @Route("/resetAvat", name="app_User_reset_avatar", methods={"POST"})
+     */
+    public function resetAvatar(Request $request){
+
+    $user = $this->getUser();
+    $file = $request->get('avatar'); // Récupération du fichier pour l'avatar
+    $user->setAvatar("avatar.".$file->guessExtension()); // Affectation d'un nom standard au fichier d'avatar
+
+    $entityManager = $this->getDoctrine()->getManager();
+    $entityManager->persist($user);
+    $entityManager->flush();
+
+    $targetDirectory = $this->getParameter('kernel.project_dir').'/public/user/profile/'.$user->getId(); // Création du chemin vers le futur lieu de stockage de l'avatar
+    if(!is_dir($targetDirectory)) { // On test si le dossier existe déjà (ici c'est impossible car on utilise l'id du nouvel utilisateur)
+        mkdir($targetDirectory); // On créé le dossier
+        chmod($targetDirectory, 0777); //On met des droits en lecture, modification et exécution pour tous le monde => pas bien !!!
+    }
+   $file->move($targetDirectory, "avatar.".$file->guessExtension()); // On envoie le fichier sur le serveur
+    // Tindin !
+
+}
 }
