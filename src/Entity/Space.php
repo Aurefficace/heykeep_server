@@ -39,15 +39,15 @@ class Space
     private $id_member;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Space", inversedBy="id_parent_space")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Space", inversedBy="space_children")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $level;
+    private $parent_space;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Space", mappedBy="level", orphanRemoval=false)
+     * @ORM\OneToMany(targetEntity="App\Entity\Space", mappedBy="parent_space", orphanRemoval=false)
      */
-    private $id_parent_space;
+    private $space_children;
 
     /**
      * @ORM\Column(type="boolean")
@@ -70,10 +70,15 @@ class Space
      */
     private $id_owner;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $level;
+
     public function __construct()
     {
         $this->id_member = new ArrayCollection();
-        $this->id_parent_space = new ArrayCollection();
+        $this->space_children = new ArrayCollection();
         $this->categorie = new ArrayCollection();
     }
 
@@ -146,12 +151,12 @@ class Space
 
     public function getLevel(): ?self
     {
-        return $this->level;
+        return $this->parent_space;
     }
 
-    public function setLevel(?self $level): self
+    public function setLevel(?self $parent_space): self
     {
-        $this->level = $level;
+        $this->parent_space = $parent_space;
 
         return $this;
     }
@@ -161,13 +166,13 @@ class Space
      */
     public function getIdParentSpace(): Collection
     {
-        return $this->id_parent_space;
+        return $this->space_children;
     }
 
     public function addIdParentSpace(self $idParentSpace): self
     {
-        if (!$this->id_parent_space->contains($idParentSpace)) {
-            $this->id_parent_space[] = $idParentSpace;
+        if (!$this->space_children->contains($idParentSpace)) {
+            $this->space_children[] = $idParentSpace;
             $idParentSpace->setLevel($this);
         }
 
@@ -176,8 +181,8 @@ class Space
 
     public function removeIdParentSpace(self $idParentSpace): self
     {
-        if ($this->id_parent_space->contains($idParentSpace)) {
-            $this->id_parent_space->removeElement($idParentSpace);
+        if ($this->space_children->contains($idParentSpace)) {
+            $this->space_children->removeElement($idParentSpace);
             // set the owning side to null (unless already changed)
             if ($idParentSpace->getLevel() === $this) {
                 $idParentSpace->setLevel(null);
