@@ -31,7 +31,8 @@ class DiscussionType extends AbstractType
                         ->orderBy('sp.name', 'ASC');
                 },
                 'choice_label' => 'name',
-            ]);
+            ])
+            ;
     }
 
     public function configureOptions(OptionsResolver $resolver)
