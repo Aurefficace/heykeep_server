@@ -36,7 +36,7 @@ class Space
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\User")
      */
-    private $id_owner;
+    private $id_member;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Space", inversedBy="id_parent_space")
@@ -64,9 +64,15 @@ class Space
      */
     private $categorie;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\user", inversedBy="spaces")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $id_owner;
+
     public function __construct()
     {
-        $this->id_owner = new ArrayCollection();
+        $this->id_member = new ArrayCollection();
         $this->id_parent_space = new ArrayCollection();
         $this->categorie = new ArrayCollection();
     }
@@ -117,13 +123,13 @@ class Space
      */
     public function getIdOwner(): Collection
     {
-        return $this->id_owner;
+        return $this->id_member;
     }
 
     public function addIdOwner(User $idOwner): self
     {
-        if (!$this->id_owner->contains($idOwner)) {
-            $this->id_owner[] = $idOwner;
+        if (!$this->id_member->contains($idOwner)) {
+            $this->id_member[] = $idOwner;
         }
 
         return $this;
@@ -131,8 +137,8 @@ class Space
 
     public function removeIdOwner(User $idOwner): self
     {
-        if ($this->id_owner->contains($idOwner)) {
-            $this->id_owner->removeElement($idOwner);
+        if ($this->id_member->contains($idOwner)) {
+            $this->id_member->removeElement($idOwner);
         }
 
         return $this;
@@ -232,6 +238,13 @@ class Space
                 $categorie->setIdSpace(null);
             }
         }
+
+        return $this;
+    }
+
+    public function setIdOwner(?user $id_owner): self
+    {
+        $this->id_owner = $id_owner;
 
         return $this;
     }

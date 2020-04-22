@@ -39,7 +39,7 @@ class DiscussionController extends AbstractController
     {
         $userId = $this->getUser()->getId();
         $discussion = new Discussion();
-        $form = $this->createForm(DiscussionType::class, $discussion, ['idUser' => $userId]);
+        $form = $this->createForm(DiscussionType::class, $discussion, ['attr' => ['idUser' => $userId]]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

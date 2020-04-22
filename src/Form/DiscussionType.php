@@ -17,8 +17,7 @@ class DiscussionType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
       
-        dump($options);
-        exit();
+      
         $builder
             ->add('name')
             ->add('ispublic')
@@ -28,7 +27,7 @@ class DiscussionType extends AbstractType
                     return $er->createQueryBuilder('sp')
                         ->leftJoin('sp.id_owner' , 'id')
                         ->where('id = :val')
-                        ->setParameter('val',$options['idUser'])
+                        ->setParameter('val',$options['attr']['idUser'])
                         ->orderBy('sp.name', 'ASC');
                 },
                 'choice_label' => 'name',
