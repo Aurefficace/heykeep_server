@@ -45,7 +45,7 @@ class DiscussionController extends AbstractController
             $entityManager->persist($discussion);
             $entityManager->flush();
 
-            return new JsonResponse(['success' => $form]);
+            return new JsonResponse(['success' => 'Votre conversation à bien été ajouté']);
         }
 
         return $this->render('discussion/new.html.twig', [

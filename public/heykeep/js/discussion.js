@@ -11,10 +11,10 @@ $(document).ready(function () {
   });
 });
 function afterCallAjaxMasterDetail() {
-  const form = $(".form");
+  const formDiscussion = $(".formDiscussion");
   const $discussionList = $("#discussion_list");
   const $discussionAdd = $('#discussion_add');
-  form.ajaxForm({
+  formDiscussion.ajaxForm({
     success: function (datas) {
       if (datas.success) {
         showModal(datas.success, "success", "Success");
@@ -24,7 +24,6 @@ function afterCallAjaxMasterDetail() {
           success: function (data) {
             $discussionAdd.fadeOut();
             $discussionList.html(data).fadeIn();
-            initForm($discussionList.find("form"));
           },
         });
       } else if (datas.error) {
