@@ -1,12 +1,12 @@
 function callAjaxMasterDetail(path, target, parent) {
-  showSpinner(parent);
+  showSpinner($(parent).parent());
   $.ajax({
     method: "GET",
     url: path,
     success: function (data) {
       $(parent).fadeOut();
       $(target).html(data).fadeIn();
-      hideSpinner();
+      hideSpinner($(parent).parent());
       if (
         typeof afterCallAjaxMasterDetail != null &&
         $.isFunction(afterCallAjaxMasterDetail)
@@ -49,12 +49,15 @@ function showModal(message, type, titre) {
 
 function showSpinner($zone) {
   let $spinner = $(".spinner-border", $zone);
-  if ($spinner!= null) {
+  if (typeof ($zone) === "undefined" || $spinner.length === 0) {
     $spinner = $("#spinner-master");
-  } 
+  }
   $spinner.show();
 }
-function hideSpinner() {
-  const $spinner = $("#spinner");
-  $spinner.hide();
+function hideSpinner($zone) {
+  let $spinner = $(".spinner-border", $zone);
+  if (typeof ($zone) === "undefined" || $spinner.length === 0) {
+      $spinner = $("#spinner-master");
+  }
+$spinner.hide();
 }
