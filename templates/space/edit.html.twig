@@ -6,6 +6,11 @@
 
     <div class="container my-5 py-5 z-depth-1">
         <!--Section: Content-->
+        {% if space.image == '' %}
+            <img src="{{ asset('space/default.jpg') }}" class="rounded-circle z-depth-0" alt="avatar image" style="max-height: 120px;max-width: 120px;">
+        {% else %}
+            <img src="{{ asset('space/'~ space.id~ '/' ~ space.image) }}" class="rounded-circle z-depth-0" alt="avatar image" style="max-height: 120px;max-width: 120px;" >
+        {% endif %}
         <section class="px-md-5 mx-md-5 text-center text-lg-left dark-grey-text">
             <h1>Editer l'espace</h1>
             {{ include('space/_delete_form.html.twig') }}

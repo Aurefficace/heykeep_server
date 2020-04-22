@@ -19,6 +19,7 @@ class SpaceType extends AbstractType
 //            ->add('categorie', TextType::class, ['label' => 'Catégorie'])
             ->add('imagefile', FileType::class, [
                 'label'  => 'Choisissez votre image d\'espace',
+                'required' => false,
             ]);
         ;
     }
