@@ -38,7 +38,8 @@ class Space
     private $created_date;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\User")
+     * @ORM\ManyToMany(targetEntity="App\Entity\User", inversedBy="spacesMember")
+     * @ORM\JoinTable(name="space_user")
      */
     private $id_member;
 

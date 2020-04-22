@@ -128,7 +128,9 @@ class SpaceController extends BaseController
        if ($space == null) {
         return new JsonResponse(['error' => "aucun espace trouvé"]);;
     }
-       dump($space->getIdMember());
+       foreach($space->getIdMember() as $member) {
+           dump($member);
+       }
        exit();
         return new JsonResponse(["1" => 'toto']);
     }

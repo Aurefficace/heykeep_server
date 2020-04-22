@@ -76,6 +76,12 @@ class User implements UserInterface
      */
     private $spaces;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Space", inversedBy="id_member")
+     * @ORM\JoinTable(name="space_user")
+     */
+    private $spacesMember;
+
     public function __construct()
     {
         $this->categories = new ArrayCollection();
@@ -281,4 +287,22 @@ class User implements UserInterface
 
         return $this;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getSpacesMember()
+    {
+        return $this->spacesMember;
+    }
+
+    /**
+     * @param mixed $spacesMember
+     */
+    public function setSpacesMember($spacesMember)
+    {
+        $this->spacesMember = $spacesMember;
+    }
+
+
 }
