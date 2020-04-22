@@ -11,6 +11,21 @@ $(document).ready(function() {
             }
         }
     });
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function(e) {
+                $('#previewavatar').attr('src', e.target.result);
+            }
+
+            reader.readAsDataURL(input.files[0]); // convert to base64 string
+        }
+    }
+
+    $("#avatar").change(function() {
+        readURL(this);
+    });
     form.children("div").steps({
         headerTag: "h3",
         bodyTag: "section",
