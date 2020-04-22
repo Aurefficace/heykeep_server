@@ -10,6 +10,7 @@ $(document).ready(function () {
     },
   });
 });
+
 function afterCallAjaxMasterDetail() {
   const formDiscussion = $(".formDiscussion");
   const $discussionList = $("#discussion_list");
@@ -33,3 +34,5 @@ function afterCallAjaxMasterDetail() {
     error: function (xhr, status, error) {},
   });
 }
+
+
