@@ -40,7 +40,7 @@ class Space
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Space", inversedBy="space_children")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $parent_space;
 
