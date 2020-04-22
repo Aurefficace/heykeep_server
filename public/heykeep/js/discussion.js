@@ -10,11 +10,12 @@ $(document).ready(function () {
     },
   });
 });
-function afterCallAjaxMasterDetail() {
-  const form = $(".form");
+function discussionFormCallback() {
+  console.log("coucou fonction discussionFormCallback");
+  const formDiscussion = $(".formDiscussion");
   const $discussionList = $("#discussion_list");
   const $discussionAdd = $('#discussion_add');
-  form.ajaxForm({
+  formDiscussion.ajaxForm({
     success: function (datas) {
       if (datas.success) {
         showModal(datas.success, "success", "Success");

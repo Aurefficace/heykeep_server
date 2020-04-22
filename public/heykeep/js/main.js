@@ -6,12 +6,14 @@ function callAjaxMasterDetail(path, target, parent) {
     success: function (data) {
       $(parent).fadeOut();
       $(target).html(data).fadeIn();
+      const $dataForm = $(target).find("form");
+      if($dataForm.length > 0) {
+        initForm($dataForm);
+      }
       hideSpinner($(parent).parent());
-      if (
-        typeof afterCallAjaxMasterDetail != null &&
-        $.isFunction(afterCallAjaxMasterDetail)
-      ) {
-        afterCallAjaxMasterDetail();
+      console.log("$dataForm.data('callback')", $dataForm.data('callback'));
+      if (typeof $dataForm.data('callback') !== null) {
+          runFunctionByName($dataForm.data('callback'));
       }
     },
   });
@@ -60,4 +62,40 @@ function hideSpinner($zone) {
     $spinner = $("#spinner-master");
   }
   $spinner.hide();
+}
+
+
+function initForm($form) {
+    //region Initialisation du validator
+    // $form.validate({
+    //     errorPlacement: function errorPlacement(error, element) {
+    //         element.before(error);
+    //     },
+    //     rules: {
+    //         nom_de_champs: {
+    //             regle: detail,
+    //         },
+    //     },
+    // });
+    //endregion Initialisation du validator
+
+    //region initialisation des composants
+    //Chosen
+    $("select", $form).each(function(){
+          $(this).chosen({width: "100%", search_contains:true});
+    });
+    //endregion initialisation des composants
+}
+
+
+/**
+ * Send callback function
+ * @param name string function name
+ * @param arguments array arguments
+ */
+function runFunctionByName(name, arguments) {
+    var fn = window[name];
+    if(typeof fn !== 'function')
+        return;
+    return fn.apply(window, arguments);
 }
