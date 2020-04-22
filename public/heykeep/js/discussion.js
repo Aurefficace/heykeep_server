@@ -10,7 +10,8 @@ $(document).ready(function () {
     },
   });
 });
-function afterCallAjaxMasterDetail() {
+function discussionFormCallback() {
+  console.log("coucou fonction discussionFormCallback");
   const formDiscussion = $(".formDiscussion");
   const $discussionList = $("#discussion_list");
   const $discussionAdd = $('#discussion_add');
