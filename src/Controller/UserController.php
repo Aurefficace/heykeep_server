@@ -52,13 +52,14 @@ class UserController extends AbstractController
         }
         return new JsonResponse( ['success' => "Votre mot de passe à été réinitialisé"]);
     }
+
     /**
      * @Route("/resetAvat", name="app_User_reset_avatar", methods={"POST"})
      */
     public function resetAvatar(Request $request){
 
     $user = $this->getUser();
-    $file = $request->get('avatar'); // Récupération du fichier pour l'avatar
+    $file = $request->files->get('avatar'); // Récupération du fichier pour l'avatar
     $user->setAvatar("avatar.".$file->guessExtension()); // Affectation d'un nom standard au fichier d'avatar
 
     $entityManager = $this->getDoctrine()->getManager();
@@ -72,6 +73,8 @@ class UserController extends AbstractController
     }
    $file->move($targetDirectory, "avatar.".$file->guessExtension()); // On envoie le fichier sur le serveur
     // Tindin !
+    return new JsonResponse( ['success' => "Votre avatar est changé"]);
+}
+}
 
-}
-}
+
