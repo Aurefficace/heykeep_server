@@ -17,15 +17,12 @@ $(document).ready(function() {
 
             reader.onload = function(e) {
                 $('#previewavatar').attr('src', e.target.result);
-            }
+            };
 
             reader.readAsDataURL(input.files[0]); // convert to base64 string
         }
     }
 
-    $("#avatar").change(function() {
-        readURL(this);
-    });
     form.children("div").steps({
         headerTag: "h3",
         bodyTag: "section",
@@ -65,5 +62,9 @@ $(document).ready(function() {
         {
             return form.submit();
         }
+    });
+
+    $("#registration_form_avatar").on("change", function() {
+        readURL(this);
     });
 });
