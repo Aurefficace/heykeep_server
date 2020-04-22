@@ -17,7 +17,10 @@ header {
 .avatar img {
     max-height: 4rem;
 }
-
+.navbar .nav-item .nav-link {
+    display: block;
+    color: #323441;
+}
 /*footer*/
 footer {
     background-color: #EEEEEE ;
@@ -28,6 +31,30 @@ footer {
 .badge {
     background-color: #D74850;
     position: absolute;
-    top: 11px;
+    top: 33px;
     z-index: 1;
+}
+footer a{
+    color: #323441;
+}
+footer a:hover{
+    color: #d74850;
+}
+footer .navbar .nav-flex-icons {
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    position: fixed;
+    right: 0px;
+    bottom: 45px;
+    align-items: baseline;
+}
+footer .navbar .nav-item .nav-link .fas{
+    font-size: 2.5rem;
+    padding-right: 1rem;
+    padding-left: 1rem;
+}
+.fa-cloud-upload-alt{
+    font-size: 4.5rem !important;
 }

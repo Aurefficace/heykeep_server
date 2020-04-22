@@ -2,7 +2,46 @@
     font-family: Quicksand;
     font-style: normal;
     font-weight: bold;
-    font-size: 70px;
-    line-height: 87px;
-    text-align: center;
+    font-size: 1em;
+    text-align: left;
+    color: #323441;
+}
+h2{
+    font-size: 1.6em;
+}
+h3{
+    font-family: 'Chillow';
+}
+.dashboard-pic img{
+    max-width: 100%;
+}
+.bg-beige{
+    background-color: rgba(228, 221, 211, 0.6);
+}
+img{
+    max-width: 100%;
+}
+.space-description .list-inline-item img{
+    max-width: 30px;
+    max-height: 30px;
+}
+.card-dash{
+    border-radius: 40px;
+}
+.nav-tabs .nav-link.active {
+    color: #fff;
+    background-color: #D74850;
+    border: none !important;
+    border-radius: 40px;
+
+}
+.nav-link {
+    color: #323441;
+    padding: .5rem .5rem;
+}
+.nav-link:hover{
+    color: #d74850;
+}
+.nav-tabs {
+    border-bottom: transparent;
 }
