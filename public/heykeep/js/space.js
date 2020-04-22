@@ -14,3 +14,9 @@ function displayFadeIn(target, parentone, parenttwo) {
     $(parentone).fadeOut();
     $(parenttwo).fadeOut();
 }
+
+$(document).ready(function () {
+    $("#space_imagefile").on("change", function () {
+        updateImagePreview(this, $('#imagePreview'));
+    });
+});
