@@ -37,7 +37,14 @@ h2 {
 
 
 /*===========[ spinner ]=========================*/
-#spinner {
+#spinner-master {
+  display: none;
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  left: 50%;
+}
+.spinner-border {
   display: none;
   position: absolute;
   width: 40px;

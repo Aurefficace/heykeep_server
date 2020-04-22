@@ -4,6 +4,5 @@
 {% block body %}
     <h1>Create new Discussion</h1>
 
-    {{ include('discussion/_form.html.twig') }}
-
+    {{ include('discussion/_form.html.twig', {'action' : path('discussion_new')}) }}
 {% endblock %}

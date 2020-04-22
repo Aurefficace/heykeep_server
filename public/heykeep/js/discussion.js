@@ -1,27 +1,12 @@
-
-showSpinner()
-$.ajax({
-    method: "GET",
-    url: 'discussion',
-    success: function(data) {
-        $('#discussion_list').html(data);
-        hideSpinner();
-    }
-})
-function callAjaxMasterDetail(path, target, parent){
-    showSpinner();
+$(document).ready(function() {
+    let $discussionList = $('#discussion_list');
+    showSpinner($discussionList.parent());
     $.ajax({
         method: "GET",
-        url: path,
-        success: function(data){
-           $(parent).fadeOut();
-           $(target).html(data).fadeIn();
-           hideSpinner();
+        url: 'discussion',
+        success: function(data) {
+            $discussionList.html(data);
+            hideSpinner($discussionList.parent());
         }
     });
-}
-
-function displayFadeIn(target) {
-    console.log(target)
-    $(target).fadeToggle();
-}
+});

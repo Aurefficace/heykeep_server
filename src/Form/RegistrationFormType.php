@@ -59,6 +59,7 @@ class RegistrationFormType extends AbstractType
             ))
             ->add('avatar', FileType::class, [
                 'label'  => 'Choisissez votre Avatar*',
+                'required' => true
             ]);
     }
 
