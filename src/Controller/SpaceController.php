@@ -45,7 +45,7 @@ class SpaceController extends BaseController
             $space->setIdOwner($this->getUser());
             if ($form['imagefile']->getData()) {
                 $file = $form['imagefile']->getData(); // Récupération du fichier pour l'image de l'espace
-                $space->setImage("spaceimage.".$file->guessExtension()); // Affectation d'un nom standard au fichier d'image de l'espace
+                $space->setImage("spaceimage." . $file->guessExtension()); // Affectation d'un nom standard au fichier d'image de l'espace
             }
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($space);
@@ -56,8 +56,7 @@ class SpaceController extends BaseController
             }
 
             return $this->redirectToRoute('space_index');
-        }
-        elseif ($form->isSubmitted() && !$form->isValid()) {
+        } elseif ($form->isSubmitted() && !$form->isValid()) {
             return $this->neweditSubmittedGlobal($form);
         }
 
@@ -88,7 +87,7 @@ class SpaceController extends BaseController
         if ($form->isSubmitted() && $form->isValid()) {
             if ($form['imagefile']->getData()) {
                 $file = $form['imagefile']->getData(); // Récupération du fichier pour l'image de l'espace
-                $space->setImage("spaceimage.".$file->guessExtension()); // Affectation d'un nom standard au fichier d'image de l'espace
+                $space->setImage("spaceimage." . $file->guessExtension()); // Affectation d'un nom standard au fichier d'image de l'espace
             }
             $this->getDoctrine()->getManager()->flush();
             if ($form['imagefile']->getData()) {
@@ -109,7 +108,7 @@ class SpaceController extends BaseController
      */
     public function delete(Request $request, Space $space): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$space->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $space->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($space);
             $entityManager->flush();
@@ -123,15 +122,15 @@ class SpaceController extends BaseController
      */
     public function getUsersBySpace(Request $request, SpaceRepository $spaceRepository): Response
     {
-      $id_space =  $request->get('id');
-       $space = $spaceRepository->find($id_space);
-       if ($space == null) {
-        return new JsonResponse(['error' => "aucun espace trouvé"]);;
-    }
-       foreach($space->getIdMember() as $member) {
-           dump($member);
-       }
-       exit();
-        return new JsonResponse(["1" => 'toto']);
+        $id_space =  $request->get('id');
+        $space = $spaceRepository->find($id_space);
+        if ($space == null) {
+            return new JsonResponse(['error' => "aucun espace trouvé"]);;
+        }
+        $users = [];
+        foreach ($space->getIdMember() as $member) {
+            $users[$member->getId()] = $member->getName();
+        }
+        return new JsonResponse(['success' => $users]);
     }
 }

@@ -43,8 +43,8 @@ function discussionFormCallback() {
         data: { id: id_space },
         success: function (data) {
           if (data.success) {
-            showModal(data.success, "success", "Success");
             console.log(data);
+            showModal(data.success, "success", "Success");
           }
           if (data.error) {
             showModal(datas.error, "error", "Erreur");
