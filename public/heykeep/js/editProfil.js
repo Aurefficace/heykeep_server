@@ -1,11 +1,11 @@
-$(document).ready(function(){     
+  $(document).ready(function(){     
     $("#buttonChangePassword").click(function(){
-        $("#formResetPassword").show();
-        $("#buttonChangePassword").hide();
+      $("#formResetPassword").show();
+      $("#buttonChangePassword").hide();
     });
     $("#buttonResetPassword").click(function(){
-        $("#formResetPassword").hide();
-        $("#buttonChangePassword").show();
+      $("#formResetPassword").hide();
+      $("#buttonChangePassword").show();
     });
     const form = $("#formResetPassword");
     form.validate({
@@ -29,15 +29,15 @@ $(document).ready(function(){
         }
       },
       error: function (xhr, status, error) {
-  
-       },
+        
+      },
     });
-    $("#buttonChangeAvatar").click(function(){
+      $("#buttonChangeAvatar").click(function(){
       const formAvatar =$("#formChangeAvatar");
       formAvatar.show();   
       formAvatar.on('change', function(){
-      formAvatar.submit();
-      formAvatar.hide();
+        formAvatar.submit();
+        formAvatar.hide();
       });
       
       formAvatar.ajaxForm({
@@ -51,10 +51,10 @@ $(document).ready(function(){
           }
         },
         error: function (xhr, status, error) {
-    
-         },
+          
+        },
       });
-
-});
-
-});
+      
+    });
+    
+  });

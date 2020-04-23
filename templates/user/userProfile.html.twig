@@ -1,75 +1,76 @@
-{% extends 'base.html.twig' %}
-{% block stylesheets %} <link href="{{ asset('heykeep/css/heykeep.css') }}" rel="stylesheet" type="text/css">
-    <link href="{{ asset('heykeep/css/dashboard.css') }}" rel="stylesheet" type="text/css">
-{% endblock %}
-{% block title %}Dashboard{% endblock %}
-{% block body %}
-    {% if app.user %}
-	<div class="container mt-5 rounded-pill bg-beige text-center">
-            <div class="row">
-                <div class="col mt-5 mx-3">
-                <h1 class="blue_text">Bienvenue sur ton profil : {{app.user.username}}</h1>
-                </div>
-				</div>
-				</div>
-             <div class="container mt-3">
-			   <div class="row">
-               <div class="col col-example bg-beige p-3 m-2 card-dash">
-               <h3 class="blue_text mx-3 my-3 text-center">Modifier mes infos:</h3>
-              <button id="buttonChangePassword">Change ton  mot de passe</button>
-              <form id="formResetPassword" class="login100-form hidden" method="post" action="{{ path('app_user_reset_password') }}">
-					<div class="wrap-input100 validate-input" data-validate="Password is required">
-						<label for="password">Nouveau mot de passe *</label>
-						<input type="password" name="password" id="inputPassword" class="input100" required> 
+	{% extends 'base.html.twig' %}
+	{% block stylesheets %} <link href="{{ asset('heykeep/css/heykeep.css') }}" rel="stylesheet" type="text/css">
+		<link href="{{ asset('heykeep/css/dashboard.css') }}" rel="stylesheet" type="text/css">
+	{% endblock %}
+	{% block title %}Dashboard{% endblock %}
+	{% block body %}
+		{% if app.user %}
+		<div class="container mt-5 rounded-pill bg-beige shadow p-3 mb-5  text-center ">
+				<div class="row">
+					<div class="col mt-5 mx-3">
+					<h1 class="blue_text">Bienvenue sur ton profil : {{app.user.username}}</h1>
+					</div>
+					</div>
+					</div>
+				<div class="container mt-3">
+				<div class="row">
+				<div class="col col-example bg-beige  p-3 m-2 card-dash">
+				<h3 class="blue_text mx-3 my-3 text-center">Modifier mes infos:</h3>
+				<button id="buttonChangePassword" class="btn btn-primary px-3" >Change ton mot de passe</button>
+				<form id="formResetPassword" class="login100-form hidden" method="post" action="{{ path('app_user_reset_password') }}">
+						<div class="wrap-input100 validate-input" data-validate="Password is required">
+							<label for="password">Nouveau mot de passe *</label>
+							<input type="password" name="password" id="inputPassword" class="input100" required> 
 
-						<span class="symbol-input100-reset">
-							<i class="fa fa-lock" aria-hidden="true"></i>
-						</span>
+							<span class="symbol-input100-reset">
+								<i class="fa fa-lock" aria-hidden="true"></i>
+							</span>
+						</div>
+						<div class="wrap-input100 validate-input" data-validate="Password is required">
+							<label for="passwordConfirmation">Confirmation Nouveau Mot de passe *</label>
+							<input type="password" name="passwordConfirmation" id="inputPasswordConfirmation" class="input100" required >
+								<div id="divcomp"></div>
+							<span class="symbol-input100-reset">
+								<i class="fa fa-lock" aria-hidden="true"></i>
+							</span>
+						</div>
+						<div class="container-login100-form-btn">
+							<button id="buttonResetPassword" class="login100-form-btn btn btn-primary px-3" type="submit">
+								Réinitialiser Mot de Passe
+							</button>
+						</div>  
+					</form>
 					</div>
-					<div class="wrap-input100 validate-input" data-validate="Password is required">
-						<label for="passwordConfirmation">Confirmation Nouveau Mot de passe *</label>
-						<input type="password" name="passwordConfirmation" id="inputPasswordConfirmation" class="input100" required >
-							<div id="divcomp"></div>
-						<span class="symbol-input100-reset">
-							<i class="fa fa-lock" aria-hidden="true"></i>
-						</span>
-					</div>
-					<div class="container-login100-form-btn">
-						<button id="buttonResetPassword" class="login100-form-btn" type="submit">
-							Réinitialiser Mot de Passe
-						</button>
-					</div>  
-				</form>
+					<div class="col col-example bg-beige p-3 m-2 card-dash">
+					<h3 class="blue_text mx-3 my-3 text-center">Change ton avatar:</h3>
+					<button id="buttonChangeAvatar" class="btn btn-primary px-3">Change ton avatar</button>
+				<form id="formChangeAvatar" class="login100-form hidden" method="post" action="{{ path('app_User_reset_avatar') }}">
+						<div class="wrap-input100 validate-input" data-validate="Password is required">
+						</div>  
+						<label for="avatar">Changer mon avatar:</label>
+					<input type="file" id="avatar" onchange ="myFunction" name="avatar" accept="image/png, image/jpeg">
+					</form>
+				</div>
+				</div>
+				</div>
+				<div class="container mt-3">
+				<div class="row">
+				<div class="col col-example bg-beige p-3 m-2 card-dash">
+					<h3 class="blue_text mx-3 my-3 text-center">Mes catégories:</h3>
 				</div>
 				<div class="col col-example bg-beige p-3 m-2 card-dash">
-				<h3 class="blue_text mx-3 my-3 text-center">Change ton avatar:</h3>
-				<button id="buttonChangeAvatar">Change ton avatar</button>
-			   <form id="formChangeAvatar" class="login100-form hidden" method="post" action="{{ path('app_User_reset_avatar') }}">
-					<div class="wrap-input100 validate-input" data-validate="Password is required">
-					</div>  
-					<label for="avatar">Changer mon avatar:</label>
-				<input type="file" id="avatar" onchange ="myFunction" name="avatar" accept="image/png, image/jpeg">
-				</form>
-			   </div>
-			   </div>
-			   </div>
-			   <div class="container mt-3">
-			   <div class="row">
-			   <div class="col col-example bg-beige p-3 m-2 card-dash">
-				<h3 class="blue_text mx-3 my-3 text-center">Mes catégories:</h3>
-              </div>
-             <div class="col col-example bg-beige p-3 m-2 card-dash">
-				<h3 class="blue_text mx-3 my-3 text-center">Gérer mes favoris:</h3>
-              </div>
-			  </div>
-			  </div>
-			  </div>
-                </div>
-              </div>
-        </div>      
-    {% endif %}
-    
-{% endblock %}
-{% block javascripts %}
-	<script src="{{ asset('heykeep/js/editProfil.js') }}"></script>
-{% endblock %}
+					<h3 class="blue_text mx-3 my-3 text-center">Gérer mes favoris:</h3>
+				</div>
+				</div>
+				</div>
+				</div>
+					</div>
+				</div> 
+			</div>  
+			
+		{% endif %}
+		
+	{% endblock %}
+	{% block javascripts %}
+		<script src="{{ asset('heykeep/js/editProfil.js') }}"></script>
+	{% endblock %}
