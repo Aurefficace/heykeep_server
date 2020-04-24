@@ -47,6 +47,7 @@
       formAvatar.on('change', function(){
         formAvatar.submit();
         formAvatar.hide();
+        location.reload(true);
       });
       
       formAvatar.ajaxForm({
