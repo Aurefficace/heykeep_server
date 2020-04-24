@@ -7,6 +7,15 @@
       $("#formResetPassword").hide();
       $("#buttonChangePassword").show();
     });
+    $('#buttonResetPassword').click(function(event){
+      if($('#inputPassword' ||'#inputPasswordConfirmation').val()==''){
+        alert('Veuillez remplir les champs vides') 
+      return false
+      }
+        });
+        $("#buttonResetPassword").bind("click", function() {
+          $("input[type=password]").val("");
+        });
     const form = $("#formResetPassword");
     form.validate({
       errorPlacement: function errorPlacement(error, element) {
@@ -58,3 +67,4 @@
     });
     
   });
+  

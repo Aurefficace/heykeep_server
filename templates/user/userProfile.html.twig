@@ -17,22 +17,17 @@
 				<div class="col col-example bg-beige  p-3 m-2 card-dash">
 				<h3 class="blue_text mx-3 my-3 text-center">Modifier mes infos:</h3>
 				<button id="buttonChangePassword" class="btn btn-primary px-3 rounded-pill" >Change ton mot de passe</button>
-				<form id="formResetPassword" class="login100-form hidden" method="post" action="{{ path('app_user_reset_password') }}">
+				<form id="formResetPassword" name="myForm" class="login100-form hidden" method="post" action="{{ path('app_user_reset_password') }}">
 						<div class="wrap-input100 validate-input" data-validate="Password is required">
 							<label for="password">Nouveau mot de passe *</label>
 							<input type="password" name="password" id="inputPassword" class="input100" required> 
-
-							<span class="symbol-input100-reset">
-								<i class="fa fa-lock" aria-hidden="true"></i>
-							</span>
+							<span class="symbol-input100-reset"><i class="fa fa-lock" aria-hidden="true"></i></span>
 						</div>
 						<div class="wrap-input100 validate-input" data-validate="Password is required">
 							<label for="passwordConfirmation">Confirmation Nouveau Mot de passe *</label>
 							<input type="password" name="passwordConfirmation" id="inputPasswordConfirmation" class="input100" required >
-								<div id="divcomp"></div>
-							<span class="symbol-input100-reset">
-								<i class="fa fa-lock" aria-hidden="true"></i>
-							</span>
+							<span class="symbol-input100-reset"><i class="fa fa-lock" aria-hidden="true"></i></span>
+							<div id="divcomp"></div>
 						</div>
 						<div class="container-login100-form-btn">
 							<button id="buttonResetPassword" class="login100-form-btn btn btn-primary px-3 rounded-pill" type="submit">
