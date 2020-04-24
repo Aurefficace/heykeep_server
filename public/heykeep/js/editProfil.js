@@ -7,7 +7,7 @@
       $("#formResetPassword").hide();
       $("#buttonChangePassword").show();
     });
-    $('#buttonResetPassword').click(function(event){
+    $('#buttonResetPassword').click(function(){
       if($('#inputPassword' ||'#inputPasswordConfirmation').val()==''){
         alert('Veuillez remplir les champs vides') 
       return false
