@@ -11,7 +11,6 @@ $(document).ready(function () {
   });
 });
 function discussionFormCallback() {
-  console.log("coucou fonction discussionFormCallback");
   const formDiscussion = $(".formDiscussion");
   const $discussionList = $("#discussion_list");
   const $discussionAdd = $("#discussion_add");
@@ -43,7 +42,15 @@ function discussionFormCallback() {
         data: { id: id_space },
         success: function (data) {
           if (data.success) {
-            console.log(data);
+            const myNewvalue = data.success;
+            $("#discussion_id_user").empty();
+            for (let data in myNewvalue) {
+              $("#discussion_id_user").append(
+                $("<option></option>").attr("value", data).text(myNewvalue[data])
+              );
+            }
+            $("#discussion_id_user").trigger("chosen:updated");
+
             showModal(data.success, "success", "Success");
           }
           if (data.error) {

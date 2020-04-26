@@ -17,8 +17,7 @@ class DiscussionType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-      
-      
+
         $builder
             ->add('name')
             ->add('ispublic')
@@ -32,6 +31,9 @@ class DiscussionType extends AbstractType
                         ->orderBy('sp.name', 'ASC');
                 },
                 'choice_label' => 'name',
+            ])
+            ->add('id_user', ChoiceType::class, [
+                'choices' => []
             ])
             ;
     }
