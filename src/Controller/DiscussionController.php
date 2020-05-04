@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Discussion;
 use App\Form\DiscussionType;
+use App\Form\MessageType;
 use App\Repository\DiscussionRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -51,7 +52,7 @@ class DiscussionController extends BaseController
         elseif($form->isSubmitted() ){
             return $this->neweditSubmittedGlobal($form);
         }
-
+        
         return $this->render('discussion/new.html.twig', [
             'discussion' => $discussion,
             'form' => $form->createView(),
@@ -59,12 +60,12 @@ class DiscussionController extends BaseController
     }
 
     /**
-     * @Route("/{id}", name="discussion_show", methods={"GET"})
+     * @Route("/{id}", name="discussion_show")
      */
-    public function show(Discussion $discussion): Response
+    public function show(Discussion $discussion, Request $request): Response
     {
          $messages = $discussion->getMessages();
-        
+       
         return $this->render('discussion/show.html.twig', [
             'discussion' => $discussion,
             'messages' => $messages

@@ -39,7 +39,7 @@ class Message
 
     /**
      * @ORM\OneToOne(targetEntity="App\Entity\Message", cascade={"persist", "remove"})
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $id_message_parent;
 

@@ -11,7 +11,6 @@ function callAjaxMasterDetail(path, target, parent) {
         initForm($dataForm);
       }
       hideSpinner($(parent).parent());
-      console.log("$dataForm.data('callback')", $dataForm.data('callback'));
       if (typeof $dataForm.data('callback') !== 'undefined') {
           runFunctionByName($dataForm.data('callback'));
       }

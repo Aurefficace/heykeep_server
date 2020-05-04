@@ -47,7 +47,9 @@ function discussionFormCallback() {
             $("#discussion_id_user").empty();
             for (let data in myNewvalue) {
               $("#discussion_id_user").append(
-                $("<option></option>").attr("value", data).text(myNewvalue[data])
+                $("<option></option>")
+                  .attr("value", data)
+                  .text(myNewvalue[data])
               );
             }
             $("#discussion_id_user").trigger("chosen:updated");
@@ -60,4 +62,22 @@ function discussionFormCallback() {
         },
       });
     });
+}
+
+function addNewMessage() {
+  const $form = $("#new_message");
+  $form.ajaxForm({
+    success: function (datas) {
+      if (datas.success) {
+        showModal(datas.success, "success", "Success");
+        const $newMessage = $('#message-template').contents().clone();
+        console.log(datas.success);
+        $newMessage.find('.message-content').html(datas.success);
+        $("#messageList").append($newMessage);
+      } else if (datas.error) {
+        showModal(datas.success, "error", "Erreur");
+      }
+    },
+    error: function (xhr, status, error) {},
+  });
 }
