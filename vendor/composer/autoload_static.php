@@ -111,6 +111,7 @@ class ComposerStaticInit26c90bc8d1c9979598ddd2fe5e733aa8
             'Psr\\Cache\\' => 10,
             'PhpParser\\' => 10,
             'PackageVersions\\' => 16,
+            'PUGX\\AutocompleterBundle\\' => 25,
         ),
         'N' => 
         array (
@@ -454,6 +455,10 @@ class ComposerStaticInit26c90bc8d1c9979598ddd2fe5e733aa8
         'PackageVersions\\' => 
         array (
             0 => __DIR__ . '/..' . '/ocramius/package-versions/src/PackageVersions',
+        ),
+        'PUGX\\AutocompleterBundle\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/pugx/autocompleter-bundle/src',
         ),
         'Nelmio\\CorsBundle\\' => 
         array (

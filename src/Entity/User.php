@@ -15,6 +15,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
  */
 class User implements UserInterface
 {
+    #region Attributs
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -79,10 +80,11 @@ class User implements UserInterface
     /**
      * @var ArrayCollection
      *
-     * @ORM\ManyToMany(targetEntity="App\Entity\Space", inversedBy="id_member")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Space", inversedBy="idMember")
      * @ORM\JoinTable(name="space_user")
      */
     private $spacesMember;
+    #endregion Attributs
 
     public function __construct()
     {
@@ -90,6 +92,7 @@ class User implements UserInterface
         $this->spaces = new ArrayCollection();
     }
 
+    #region Getters and Setters
     public function getId(): ?int
     {
         return $this->id;
@@ -305,6 +308,9 @@ class User implements UserInterface
     {
         $this->spacesMember = $spacesMember;
     }
+    #endregion Getters and Setters
 
-
+    public function __toString() {
+        return $this->name;
+    }
 }
