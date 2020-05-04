@@ -18,7 +18,7 @@ class DashboardController extends AbstractController
     public function dashboardAction()
     {
         $em = $this->getDoctrine()->getManager();
-        $lastsActivities = $em->getRepository(User::class)->getLastsActivities($this->getUser());
+//        $lastsActivities = $em->getRepository(User::class)->getLastsActivities($this->getUser());
 
         return $this->render('dashboard.html.twig',
             [
