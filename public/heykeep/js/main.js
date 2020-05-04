@@ -1,3 +1,8 @@
+$(document).ready(function() {
+    $usefullTargets = $("#usefull-targets");
+});
+
+
 function callAjaxMasterDetail(path, target, parent) {
   showSpinner($(parent).parent());
   $.ajax({
@@ -11,11 +16,12 @@ function callAjaxMasterDetail(path, target, parent) {
         initForm($dataForm);
       }
       hideSpinner($(parent).parent());
-      console.log("$dataForm.data('callback')", $dataForm.data('callback'));
-      if (typeof $dataForm.data('callback') !== 'undefined') {
-          runFunctionByName($dataForm.data('callback'));
-      }
-    },
+      $dataForm.each(function() {
+          if (typeof $(this).data('callback') !== 'undefined') {
+              runFunctionByName($(this).data('callback'));
+          }
+      })
+    }
   });
 }
 

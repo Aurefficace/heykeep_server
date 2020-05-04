@@ -15,6 +15,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Space
 {
+    #region Attributs
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -43,7 +44,7 @@ class Space
      * @ORM\ManyToMany(targetEntity="App\Entity\User", inversedBy="spacesMember")
      * @ORM\JoinTable(name="space_user")
      */
-    private $id_member;
+    private $idMember;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Space", inversedBy="space_children")
@@ -89,14 +90,22 @@ class Space
      * )
      */
     private $imagefile;
+    #endregion Attributs
+
+    /**
+     * @var ?User
+     */
+    private $tmpUser;
+
 
     public function __construct()
     {
-        $this->id_member = new ArrayCollection();
+        $this->idMember = new ArrayCollection();
         $this->space_children = new ArrayCollection();
         $this->categorie = new ArrayCollection();
     }
 
+    #region Getters and Setters
     public function getId(): ?int
     {
         return $this->id;
@@ -212,13 +221,13 @@ class Space
      */
     public function getIdMember(): Collection
     {
-        return $this->id_member;
+        return $this->idMember;
     }
 
     public function addIdMember(User $idMember): self
     {
-        if (!$this->id_member->contains($idMember)) {
-            $this->id_member[] = $idMember;
+        if (!$this->idMember->contains($idMember)) {
+            $this->idMember[] = $idMember;
         }
 
         return $this;
@@ -226,8 +235,8 @@ class Space
 
     public function removeIdMember(User $idMember): self
     {
-        if ($this->id_member->contains($idMember)) {
-            $this->id_member->removeElement($idMember);
+        if ($this->idMember->contains($idMember)) {
+            $this->idMember->removeElement($idMember);
         }
 
         return $this;
@@ -307,4 +316,15 @@ class Space
         return $this->imagefile;
     }
 
+    public function getTmpUser()
+    {
+        return $this->tmpUser;
+    }
+
+    public function setTmpUser(?User $tmpUser): Space
+    {
+        $this->tmpUser = $tmpUser;
+        return $this;
+    }
+    #endregion Getters and Setters
 }

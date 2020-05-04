@@ -64,4 +64,14 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         ;
     }
 
+    public function findLikeName($name): ?User
+    {
+        return $this->createQueryBuilder('u')
+            ->andWhere('u.name = :val') // TODO Mat : like à la place
+            ->setParameter('val', $name)
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+    }
+
 }
