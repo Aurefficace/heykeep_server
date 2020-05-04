@@ -63,8 +63,11 @@ class DiscussionController extends BaseController
      */
     public function show(Discussion $discussion): Response
     {
+         $messages = $discussion->getMessages();
+        
         return $this->render('discussion/show.html.twig', [
             'discussion' => $discussion,
+            'messages' => $messages
         ]);
     }
 
