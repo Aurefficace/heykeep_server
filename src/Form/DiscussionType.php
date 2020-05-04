@@ -6,10 +6,12 @@ use App\Entity\Discussion;
 use App\Entity\Space;
 use App\Entity\User;
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -17,7 +19,7 @@ class DiscussionType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-
+        $discussion = $builder->getData();
         $builder
             ->add('name')
             ->add('ispublic')
@@ -32,8 +34,11 @@ class DiscussionType extends AbstractType
                 },
                 'choice_label' => 'name',
             ])
-            ->add('id_user', ChoiceType::class, [
-                'choices' => []
+            ->add('id_user', EntityType::class, [
+                'class' => User::class,
+                'choice_label' => 'name',
+                'choices' =>  $discussion->getIdUser(),
+                'multiple' => true
             ])
             ;
     }

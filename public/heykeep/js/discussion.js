@@ -38,7 +38,7 @@ function discussionFormCallback() {
       const id_space = $(this).chosen().val();
       $.ajax({
         method: "POST",
-        url: "/space/usersBySpace",
+        url: $("#discussion-targets").data("target-users-by-space"),
         data: { id: id_space },
         success: function (data) {
           if (data.success) {
