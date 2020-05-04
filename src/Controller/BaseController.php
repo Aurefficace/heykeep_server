@@ -4,9 +4,13 @@
 namespace App\Controller;
 
 
+use App\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
 
 class BaseController extends AbstractController
 {
@@ -52,5 +56,26 @@ class BaseController extends AbstractController
                 'error' => json_encode($errors)
             )
         );
+    }
+
+    /**
+     * @Route("/search-user-autocomplete", name="search_user_autocomplete")
+     */
+    public function searchUserAutocomplete(Request $request): Response
+    {
+        $q = $request->query->get('q'); // use "term" instead of "q" for jquery-ui // TODO mat : récupérer le bon paramètre du jQuery
+        $results = $this->getDoctrine()->getRepository(User::class)->findLikeName($q);
+
+        return $this->render('tools/user-list.json.twig', ['results' => $results]);
+    }
+
+    /**
+     * @Route("/get-user-autocomplete", name="get_user_autocomplete")
+     */
+    public function getUserAutocomplete($id = null): Response
+    {
+        $user = $this->getDoctrine()->getRepository(User::class)->find($id);
+
+        return $this->json($user->getName());
     }
 }

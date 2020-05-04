@@ -1,4 +1,10 @@
-function callAjaxMasterDetail(path, target, parent) {
+$(document).ready(function() {
+    $usefullTargets = $("#usefull-targets");
+});
+
+
+function callAjaxMasterDetail(path, target, parent, externalBackButton) {
+  const $externalBackButton = $(externalBackButton);
   showSpinner($(parent).parent());
   $.ajax({
     method: "GET",
@@ -6,20 +12,24 @@ function callAjaxMasterDetail(path, target, parent) {
     success: function (data) {
       $(parent).fadeOut();
       $(target).html(data).fadeIn();
+      if($externalBackButton.length > 0) {
+        $externalBackButton.fadeIn();
+      }
       const $dataForm = $(target).find("form");
       if($dataForm.length > 0) {
         initForm($dataForm);
       }
       hideSpinner($(parent).parent());
-      if (typeof $dataForm.data('callback') !== 'undefined') {
-          runFunctionByName($dataForm.data('callback'));
-      }
-    },
+      $dataForm.each(function() {
+          if (typeof $(this).data('callback') !== 'undefined') {
+              runFunctionByName($(this).data('callback'));
+          }
+      })
+    }
   });
 }
 
-function displayFadeIn(target) {
-  console.log(target);
+function displayFadeToggle(target) {
   $(target).fadeToggle();
 }
 /*===========[ notification ]=========================*/
