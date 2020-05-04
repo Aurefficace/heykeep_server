@@ -7,6 +7,8 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class BaseController extends AbstractController
 {
@@ -52,5 +54,20 @@ class BaseController extends AbstractController
                 'error' => json_encode($errors)
             )
         );
+    }
+
+    public function searchUser(Request $request): Response
+    {
+        $q = $request->query->get('q'); // use "term" instead of "q" for jquery-ui
+        $results = $this->getDoctrine()->getRepository('App:Author')->findLikeName($q);
+
+        return $this->render('your_template.json.twig', ['results' => $results]);
+    }
+
+    public function getAuthor($id = null): Response
+    {
+        $author = $this->getDoctrine()->getRepository('App:Author')->find($id);
+
+        return $this->json($author->getName());
     }
 }
