@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\Space;
 use App\Entity\User;
 use PUGX\AutocompleterBundle\Form\Type\AutocompleteType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
@@ -20,10 +21,18 @@ class SpaceType extends AbstractType
             ->add('name', TextType::class, ['label' => 'Nom'])
             ->add('description', TextType::class, ['label' => 'Description'])
 //            ->add('categorie', TextType::class, ['label' => 'Catégorie'])
-            ->add('tmpUser', AutocompleteType::class, ['class' => User::class])
-            ->add('idMember', CollectionType::class, [
-                'entry_type' => TextType::class,
+
+            // Essai d'autocompletion, non fonctionnelle pour l'instant
+//            ->add('tmpUser', AutocompleteType::class, ['class' => User::class])
+
+            ->add('idMember', EntityType::class, [
+                'class' => User::class,
+                'choice_label' => 'name',
+                'multiple' => true,
+//                'placeholder' => 'Sélectionnez des participants',
+                'label' => 'Participants',
                 'required' => false,
+
             ])
             ->add('imagefile', FileType::class, [
                 'label'  => 'Choisissez votre image d\'espace',
