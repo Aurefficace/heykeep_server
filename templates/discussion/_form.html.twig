@@ -1,4 +1,5 @@
 {{ form_start(form, {'attr': {'class': 'formDiscussion','action': action, 'data-callback': "discussionFormCallback"}}) }}
+    <span id="discussion-targets" data-target-users-by-space="{{ path('users_by_space') }}"></span>
     {{ form_widget(form) }}
     <button class="btn">{{ button_label|default('Save') }}</button>
 {{ form_end(form) }}
