@@ -1,39 +1,36 @@
   $(document).ready(function () {
-    $("#buttonChangePassword").click(function () {
+    const form = $("#formResetPassword");
+      $("#buttonChangePassword").click(function () {
       $("#formResetPassword").show();
       $("#buttonChangePassword").hide();
-    });
-    $("#buttonResetPassword").click(function () {
-      $("#formResetPassword").hide();
-      $("#buttonChangePassword").show();
+      form.validate({
+      errorPlacement: function errorPlacement(error, element) {
+          element.before(error);
+        },
+        rules: {
+          passwordConfirmation: {
+            equalTo: "#inputPassword",
+          },
+        },
+      });
     });
     //contrôle les champs vides
-    $('#buttonResetPassword').click(function () {
+   /* $('#buttonResetPassword').click(function () {
       if ($('#inputPassword' || '#inputPasswordConfirmation').val() == '') {
         alert('Veuillez remplir les champs vides')
         return false
       }
-    });
-    //vide les champs au click
-    $("#buttonResetPassword").bind("click", function () {
-      $("input[type=password]").val("");
-    });
-    const form = $("#formResetPassword");
-    form.validate({
-      errorPlacement: function errorPlacement(error, element) {
-        element.before(error);
-      },
-      rules: {
-        passwordConfirmation: {
-          equalTo: "#inputPassword",
-        },
-      },
-    });
+    });*/
+    
+   
     form.ajaxForm({
       success: function (datas) {
         if (datas.success) {
           showModal(datas.success, 'success', 'Success');
-
+          $('#inputPassword' || '#inputPasswordConfirmation').val() == ''
+            $("input[type=password]").val("");
+            $("#formResetPassword").hide();
+            $("#buttonChangePassword").show();
         } else if (datas.error) {
           showModal(datas.success, 'error', 'Erreur');
         }
@@ -48,13 +45,12 @@
       formAvatar.on('change', function () {
         formAvatar.submit();
         formAvatar.hide();
-        location.reload(true); //rafraichir la page
       });
-
       formAvatar.ajaxForm({
         success: function (datas) {
           if (datas.success) {
             showModal(datas.success, 'success', 'Success');
+            location.reload(true);
 
           } else if (datas.error) {
             showModal(datas.success, 'error', 'Erreur');

@@ -9,20 +9,21 @@
 //     });
 // }
 
-// function displayFadeIn(target, parentone, parenttwo) {
-//     $(target).fadeIn();
-//     $(parentone).fadeOut();
-//     $(parenttwo).fadeOut();
-// }
+function displayFadeIn(target, parentone, parenttwo) {
+    $(target).fadeIn();
+    $(parentone).fadeOut();
+    $(parenttwo).fadeOut();
+}
 
-function readURL(input) {
+//prévisualisation image espace
+function readURL(input) { // TODO mat à mutualiser car c'est utilisé ailleurs
     if (input.files && input.files[0]) {
         var reader = new FileReader();
-
+    
         reader.onload = function (e) {
             $('#imagePreview').attr('src', e.target.result);
         }
-
+    
         reader.readAsDataURL(input.files[0]);
     }
 }
