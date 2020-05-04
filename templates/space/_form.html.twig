@@ -1,6 +1,7 @@
-{{ form_start(form, {'attr': {'class': 'text-center', 'action': action, 'data-callback': "spaceFormCallback"}})}}) }}
+{{ form_start(form, {'attr': {'class': 'text-center', 'action': action, 'data-callback': "spaceFormCallback"}})}}
 {{ form_row(form.name, {'attr': {'class': 'form-control mb-4' }}) }}
 {{ form_row(form.description, {'attr': {'class': 'form-control mb-4', 'placeholder': 'Description' }}) }}
 {#  {{ form_row(form.categorie, {'attr': {'class': 'form-control mb-4' }}) }}#}
 {{ form_row(form.imagefile, {'attr': {'onchange':'readURL(this)','class': '', ' aria-describedby': '' }}) }}
-<img  id="imagePreview" alt="image preview" />
+<img  id="imagePreview" src="" />
+{{ form_row(form.idMember, {'attr': {'class': '', ' aria-describedby': '' }}) }}

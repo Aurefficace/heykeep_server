@@ -15,6 +15,11 @@ h3{
 .dashboard-pic img{
     max-width: 100%;
 }
+@media (max-width: 992px) {
+    .dashboard-pic img{
+         display: none;
+    }
+}
 .bg-beige{
     background-color: rgba(228, 221, 211, 0.6);
 }
@@ -44,4 +49,7 @@ img{
 }
 .nav-tabs {
     border-bottom: transparent;
+}
+.mb-150{
+    margin-bottom: 150px;
 }
