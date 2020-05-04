@@ -15,8 +15,14 @@ function displayFadeIn(target, parentone, parenttwo) {
     $(parenttwo).fadeOut();
 }
 
-$(document).ready(function () {
-    $("#space_imagefile").on("change", function () {
-        updateImagePreview(this, $('#imagePreview'));
-    });
-});
+function readURL(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+    
+        reader.onload = function (e) {
+            $('#imagePreview').attr('src', e.target.result);
+        }
+    
+        reader.readAsDataURL(input.files[0]);
+    }
+    }
