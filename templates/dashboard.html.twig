@@ -6,14 +6,14 @@
 {% block title %}Dashboard{% endblock %}
 {% block body %}
     {% if app.user %}
-        <div class="container-fluid">
+        <div class="container-fluid mb-150">
             <div class="row">
-                <div class="col-md-3 mt-5 mx-3">
+                <div class="col-lg-3 mt-5 mx-3">
                 <h1 class="blue_text">tableau de bord</h1>
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-3">
+                <div class="col-lg-3">
                     <div class="mb-3 welcome mx-3">
                         Bienvenue : {{ app.user.username }}
                     </div>
@@ -22,57 +22,79 @@
                         <img src="{{ asset('heykeep/img/illustration.png') }}" alt="illustration">
                     </div>
                 </div>
-                <div class="col-md-3 bg-beige p-3 m-2 card-dash">
+                <div class="col-lg-3 bg-beige p-3 m-2 card-dash">
                     <div>
                         <h3 class="blue_text mx-3 my-3">fil d'actualités</h3>
                     </div>
                     <div class="container">
                         <div class="row">
-                            <div class="col-md-12">
+                            <div class="col-lg-12">
 
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-3 bg-beige p-3 m-2 card-dash">
-                    <div>
+                <div class="col-lg-3 bg-beige p-3 m-2 card-dash">
                         <h3 class="blue_text mx-3 my-3">mes espaces</h3>
-                    </div>
+
                     <div class="container">
-                        <div class="row">
-                            <div class="col-md-4">
-                                <img src="{{ asset('space/18/spaceimage.jpeg')}}" class="rounded img-fluid z-depth-0" alt="avatar image" >
+
+                        <!-- Card -->
+                        {% for space in spaces %}
+                        <div class="card mb-5 z-depth-0">
+
+
+                            <!-- Card image -->
+                            <div class="view overlay">
+
+                                {% if space.image == '' %}
+                                    <img src="{{ asset('space/default.jpg') }}" class="card-img-top" alt="espace image">
+                                {% else %}
+                                    <img src="{{ asset('space/'~ space.id~ '/' ~ space.image) }}" class="card-img-top" alt="espace image">
+                                {% endif %}
+                                <a href="#!">
+                                    <div class="mask rgba-white-slight"></div>
+                                </a>
                             </div>
-                            <div class="col-md-8 space-description">
-                                <h4 class="font-weight-bold red_text">Nom de l'espace </h4>
-                                <p class="mb-0 font-weight-bold blue_text">Membres :</p>
-                                <ul class="list-inline">
-                                    <li class="list-inline-item">
-                                        <a href="#">
-                                            <img src="{{ asset('user/profile/13/avatar.jpg') }}" class="rounded-circle z-depth-0" alt="avatar image" >
-                                        </a>
-                                    </li>
-                                    <li class="list-inline-item">
-                                        <a href="#">
-                                            <img src="{{ asset('user/profile/13/avatar.jpg') }}" class="rounded-circle z-depth-0" alt="avatar image" >
-                                        </a>
-                                    </li><li class="list-inline-item">
-                                        <a href="#">
-                                            <img src="{{ asset('user/profile/13/avatar.jpg') }}" class="rounded-circle z-depth-0" alt="avatar image" >
-                                        </a>
-                                    </li>
-                                </ul>
+
+                            <!-- Card content -->
+                            <div class="card-body">
+
+                                <!-- Title -->
+                                <h4 class="card-title font-weight-bold red_text">{{ space.name }}</h4>
+                                <!-- Text -->
+                                <p>{{ space.description }}</p>
+                                <p>Crée le : {{ space.createdDate ? space.createdDate|date('d-m-Y') : '' }}</p>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <p style="font-weight: bold">{{ space.idMember|length }} Membres</p>
+                                    </div>
+                                    <div class="col-6">
+                                        {% for member in space.idMember %}
+                                            {{member.name}} <br>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+
+
+                                <!-- Button -->
+                                <a href="{{ path('space_show', {'id': space.id}) }}" class="btn bg-red rounded-pill font-weight-bold white-text">Visiter</a>
+
                             </div>
+
                         </div>
-                    </div>
+                        {% endfor %}
+                        <!-- Card -->
+
+                        </div>
                 </div>
-                <div class="col-md-2 bg-beige p-3 m-2 card-dash">
+                <div class="col-lg-2 bg-beige p-3 m-2 card-dash">
                     <div>
                         <h3 class="blue_text mx-3 my-3">mes favoris</h3>
                     </div>
                     <div class="container">
                         <div class="row">
-                            <div class="col-md-12">
+                            <div class="col-lg-12">
                                 <ul class="nav nav-tabs mb-2" id="myTab" role="tablist">
                                     <li class="nav-item">
                                         <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home"
@@ -81,10 +103,6 @@
                                     <li class="nav-item">
                                         <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile"
                                            aria-selected="false">Posts</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact"
-                                           aria-selected="false">Membres</a>
                                     </li>
                                 </ul>
                                 <div class="tab-content" id="myTabContent">
