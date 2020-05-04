@@ -23,8 +23,10 @@
 			<li class="message-content">{{ message.content }}</li>
 		{% endfor %}
 	</div>
-	<div id="message-template" hidden>
-		<li class="message-content"></li>
+	<div id="message-template">
+		<div hidden>
+			<li class="message-content"></li>
+		</div>
 	</div>
 
 	<form class="login100-form validate-form" method="post" id="new_message" action="{{ path('message_new')}}" data-callback="addNewMessage">

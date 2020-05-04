@@ -71,9 +71,9 @@ function addNewMessage() {
       if (datas.success) {
         showModal(datas.success, "success", "Success");
         const $newMessage = $('#message-template').contents().clone();
-        console.log(datas.success);
-        $newMessage.find('.message-content').html(datas.success);
         $("#messageList").append($newMessage);
+        $newMessage.find('.message-content').html(datas.success);
+        $newMessage.removeAttr("hidden");
       } else if (datas.error) {
         showModal(datas.success, "error", "Erreur");
       }
