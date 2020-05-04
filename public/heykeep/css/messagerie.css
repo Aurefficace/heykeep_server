@@ -5,3 +5,7 @@
     font-size: 25px;
 }
 
+#messageList {
+    overflow: auto;
+    height: 400px;
+}

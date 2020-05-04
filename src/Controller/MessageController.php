@@ -48,11 +48,14 @@ class MessageController extends AbstractController
             $entityManager->persist($message);
             $entityManager->flush();
         } catch (\Exception $e) {
-            
+
             return new JsonResponse(['error' => $e->getMessage()]);
         }
 
-        return new JsonResponse(['success' => $message->getContent()]);
+        return new JsonResponse(['success' => [
+            'message' => $message->getContent(),
+            'date' => $message->getCreatedDate(),
+            ]]);
     }
 
     /**
@@ -90,7 +93,7 @@ class MessageController extends AbstractController
      */
     public function delete(Request $request, Message $message): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$message->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $message->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($message);
             $entityManager->flush();

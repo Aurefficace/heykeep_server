@@ -1,30 +1,39 @@
+{% block stylesheets %}
+	<link href="{{ asset('heykeep/css/messagerie.css') }}" rel="stylesheet" type="text/css">
+{% endblock %}
 {% block body %}
 	<h1>Discussion
 		{{discussion.name}}</h1>
 	{# 
-									    <table class="table">
-									        <tbody>
-									            <tr>
-									                <th>Id</th>
-									                <td>{{ discussion.id }}</td>
-									            </tr>
-									            <tr>
-									                <th>Name</th>
-									                <td>{{ discussion.name }}</td>
-									            </tr>
-									            <tr>
-									                <th>Ispublic</th>
-									                <td>{{ discussion.ispublic ? 'Yes' : 'No' }}</td>
-									            </tr>
-									        </tbody>
-									    </table> #}
+													    <table class="table">
+													        <tbody>
+													            <tr>
+													                <th>Id</th>
+													                <td>{{ discussion.id }}</td>
+													            </tr>
+													            <tr>
+													                <th>Name</th>
+													                <td>{{ discussion.name }}</td>
+													            </tr>
+													            <tr>
+													                <th>Ispublic</th>
+													                <td>{{ discussion.ispublic ? 'Yes' : 'No' }}</td>
+													            </tr>
+													        </tbody>
+													    </table> #}
 	<div id="messageList">
 		{% for message in messages %}
-			<li class="message-content">{{ message.content }}</li>
+			<span class="nameUser_message">{{message.getIdUser()}}</span>
+			<span class="date_message">{{message.getCreatedDate()|date('d-m-Y')}}</span>
+			<li class="message-content  active ">{{ message.content }}
+			</li>
+
 		{% endfor %}
 	</div>
 	<div id="message-template">
 		<div hidden>
+        <span class="nameUser_message"></span>
+			<span class="date_message"></span>
 			<li class="message-content"></li>
 		</div>
 	</div>

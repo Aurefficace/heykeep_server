@@ -9,12 +9,15 @@ $(document).ready(function () {
       hideSpinner($discussionList.parent());
     },
   });
+
+  
 });
 
 function discussionFormCallback() {
   const formDiscussion = $(".formDiscussion");
   const $discussionList = $("#discussion_list");
   const $discussionAdd = $("#discussion_add");
+  
   formDiscussion.ajaxForm({
     success: function (datas) {
       if (datas.success) {
@@ -72,7 +75,8 @@ function addNewMessage() {
         showModal(datas.success, "success", "Success");
         const $newMessage = $('#message-template').contents().clone();
         $("#messageList").append($newMessage);
-        $newMessage.find('.message-content').html(datas.success);
+        $newMessage.find('.message-content').html(datas.success.message);
+        $newMessage.find('.date_message').html(datas.success.date.date);
         $newMessage.removeAttr("hidden");
       } else if (datas.error) {
         showModal(datas.success, "error", "Erreur");

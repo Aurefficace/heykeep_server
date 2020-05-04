@@ -65,10 +65,11 @@ class DiscussionController extends BaseController
     public function show(Discussion $discussion, Request $request): Response
     {
          $messages = $discussion->getMessages();
-       
+         $userId =$this->getUser()->getId();
         return $this->render('discussion/show.html.twig', [
             'discussion' => $discussion,
-            'messages' => $messages
+            'messages' => $messages,
+            'userId' => $userId
         ]);
     }
 
