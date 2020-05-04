@@ -3,7 +3,8 @@ $(document).ready(function() {
 });
 
 
-function callAjaxMasterDetail(path, target, parent) {
+function callAjaxMasterDetail(path, target, parent, externalBackButton) {
+  const $externalBackButton = $(externalBackButton);
   showSpinner($(parent).parent());
   $.ajax({
     method: "GET",
@@ -11,6 +12,9 @@ function callAjaxMasterDetail(path, target, parent) {
     success: function (data) {
       $(parent).fadeOut();
       $(target).html(data).fadeIn();
+      if($externalBackButton.length > 0) {
+        $externalBackButton.fadeIn();
+      }
       const $dataForm = $(target).find("form");
       if($dataForm.length > 0) {
         initForm($dataForm);
@@ -25,8 +29,7 @@ function callAjaxMasterDetail(path, target, parent) {
   });
 }
 
-function displayFadeIn(target) {
-  console.log(target);
+function displayFadeToggle(target) {
   $(target).fadeToggle();
 }
 /*===========[ notification ]=========================*/

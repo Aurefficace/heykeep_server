@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Entity\Space;
+use App\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -13,11 +15,14 @@ class DashboardController extends AbstractController
     /**
      * @Route("/", name="dashboard")
      */
-    public function dashboardAction(SpaceRepository $spaceRepository) : Response
+    public function dashboardAction()
     {
+        $em = $this->getDoctrine()->getManager();
+        $lastsActivities = $em->getRepository(User::class)->getLastsActivities($this->getUser());
+
         return $this->render('dashboard.html.twig',
             [
-                'spaces' => $spaceRepository->findAll(),
+                'spaces' => $em->getRepository(Space::class)->findAll(),
 
             ]);
     }
