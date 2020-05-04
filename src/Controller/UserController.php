@@ -58,20 +58,20 @@ class UserController extends AbstractController
      */
     public function resetAvatar(Request $request){
 
-    $user = $this->getUser();
-    $file = $request->files->get('avatar'); // Récupération du fichier pour l'avatar
-    $user->setAvatar("avatar.".$file->guessExtension()); // Affectation d'un nom standard au fichier d'avatar
+         $user = $this->getUser();
+         $file = $request->files->get('avatar'); // Récupération du fichier pour l'avatar
+         $user->setAvatar("avatar.".$file->guessExtension()); // Affectation d'un nom standard au fichier d'avatar
 
-    $entityManager = $this->getDoctrine()->getManager();
-    $entityManager->persist($user);
-    $entityManager->flush();
+         $entityManager = $this->getDoctrine()->getManager();
+         $entityManager->persist($user);
+         $entityManager->flush();
 
-    $filePath = $this->getParameter('kernel.project_dir').'/public/user/profile/'.$user->getId();
-    Utilities::uploadFile($filePath, $file, "avatar.");
+        $filePath = $this->getParameter('kernel.project_dir').'/public/user/profile/'.$user->getId();
+        Utilities::uploadFile($filePath, $file, "avatar.");
     
     
-    return new JsonResponse( ['success' => "Votre avatar est changé"]);
-}
+         return new JsonResponse( ['success' => "Votre avatar est changé"]);
+    }
 }
 
 
