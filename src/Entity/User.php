@@ -77,6 +77,8 @@ class User implements UserInterface
     private $spaces;
 
     /**
+     * @var ArrayCollection
+     *
      * @ORM\ManyToMany(targetEntity="App\Entity\Space", inversedBy="id_member")
      * @ORM\JoinTable(name="space_user")
      */
