@@ -11,10 +11,11 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+
 /**
  * @Route("/discussion")
  */
-class DiscussionController extends AbstractController
+class DiscussionController extends BaseController
 {
     /**
      * @Route("/", name="discussion_index", methods={"GET"})
@@ -46,6 +47,9 @@ class DiscussionController extends AbstractController
             $entityManager->flush();
 
             return new JsonResponse(['success' => 'Votre conversation à bien été ajouté']);
+        }
+        elseif($form->isSubmitted() ){
+            return $this->neweditSubmittedGlobal($form); 
         }
 
         return $this->render('discussion/new.html.twig', [
