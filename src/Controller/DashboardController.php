@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -14,6 +15,9 @@ class DashboardController extends AbstractController
      */
     public function dashboardAction()
     {
+        $em = $this->getDoctrine()->getManager();
+        $lastsActivities = $em->getRepository(User::class)->getLastsActivities($this->getUser());
+
         return $this->render('dashboard.html.twig');
     }
 }
