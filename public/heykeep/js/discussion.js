@@ -10,6 +10,7 @@ $(document).ready(function () {
     },
   });
 });
+
 function discussionFormCallback() {
   const formDiscussion = $(".formDiscussion");
   const $discussionList = $("#discussion_list");

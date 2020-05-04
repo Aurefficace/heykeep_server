@@ -39,9 +39,15 @@ class Discussion
      */
     private $id_user;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Message", mappedBy="id_discussion")
+     */
+    private $messages;
+
     public function __construct()
     {
         $this->id_user = new ArrayCollection();
+        $this->messages = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -85,6 +91,37 @@ class Discussion
         return $this;
     }
 
+
+    /**
+     * @return Collection|Message[]
+     */
+    public function getMessages(): Collection
+    {
+        return $this->messages;
+    }
+
+    public function addMessages(self $message): self
+    {
+        if (!$this->messages->contains($message)) {
+            $this->messages[] = $message;
+        }
+
+        return $this;
+    }
+
+    public function removeMessage(self $message): self
+    {
+        if ($this->messages->contains($message)) {
+            $this->messages->removeElement($message);
+            // set the owning side to null (unless already changed)
+            // if ($message->getCategorie() === $this) {
+            //     $message->setCategorie(null);
+            // }
+        }
+
+        return $this;
+    }
+
     /**
      * @return Collection|User[]
      */
@@ -110,5 +147,4 @@ class Discussion
 
         return $this;
     }
-
 }
