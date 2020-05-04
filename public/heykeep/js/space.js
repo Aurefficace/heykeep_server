@@ -1,20 +1,3 @@
-// function callAjaxMasterDetail(path, target, parent){
-//     $.ajax({
-//         method: "GET",
-//         url: path,
-//         success: function(data){
-//            $(parent).fadeOut();
-//            $(target).html(data).fadeIn();
-//         }
-//     });
-// }
-
-function displayFadeIn(target, parentone, parenttwo) {
-    $(target).fadeIn();
-    $(parentone).fadeOut();
-    $(parenttwo).fadeOut();
-}
-
 //prévisualisation image espace
 function readURL(input) { // TODO mat à mutualiser car c'est utilisé ailleurs
     if (input.files && input.files[0]) {
@@ -29,7 +12,6 @@ function readURL(input) { // TODO mat à mutualiser car c'est utilisé ailleurs
 }
 
 // Essai d'autocompletion, non fonctionnelle pour l'instant
-
 // function spaceFormCallback(){
 //     console.log("spaceFormCallback");
 //
