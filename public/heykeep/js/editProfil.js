@@ -1,21 +1,23 @@
-  $(document).ready(function(){     
-    $("#buttonChangePassword").click(function(){
+  $(document).ready(function () {
+    $("#buttonChangePassword").click(function () {
       $("#formResetPassword").show();
       $("#buttonChangePassword").hide();
     });
-    $("#buttonResetPassword").click(function(){
+    $("#buttonResetPassword").click(function () {
       $("#formResetPassword").hide();
       $("#buttonChangePassword").show();
     });
-    $('#buttonResetPassword').click(function(){
-      if($('#inputPassword' ||'#inputPasswordConfirmation').val()==''){
-        alert('Veuillez remplir les champs vides') 
-      return false
+    //contrôle les champs vides
+    $('#buttonResetPassword').click(function () {
+      if ($('#inputPassword' || '#inputPasswordConfirmation').val() == '') {
+        alert('Veuillez remplir les champs vides')
+        return false
       }
-        });
-        $("#buttonResetPassword").bind("click", function() {
-          $("input[type=password]").val("");
-        });
+    });
+    //vide les champs au click
+    $("#buttonResetPassword").bind("click", function () {
+      $("input[type=password]").val("");
+    });
     const form = $("#formResetPassword");
     form.validate({
       errorPlacement: function errorPlacement(error, element) {
@@ -31,41 +33,38 @@
       success: function (datas) {
         if (datas.success) {
           showModal(datas.success, 'success', 'Success');
-          
-        }
-        else if (datas.error) {
+
+        } else if (datas.error) {
           showModal(datas.success, 'error', 'Erreur');
         }
       },
       error: function (xhr, status, error) {
-        
+
       },
     });
-      $("#buttonChangeAvatar").click(function(){
-      const formAvatar =$("#formChangeAvatar");
-      formAvatar.show();   
-      formAvatar.on('change', function(){
+    $("#buttonChangeAvatar").click(function () {
+      const formAvatar = $("#formChangeAvatar");
+      formAvatar.show();
+      formAvatar.on('change', function () {
         formAvatar.submit();
         formAvatar.hide();
-        location.reload(true);
+        location.reload(true); //rafraichir la page
       });
-      
+
       formAvatar.ajaxForm({
         success: function (datas) {
           if (datas.success) {
             showModal(datas.success, 'success', 'Success');
-            
-          }
-          else if (datas.error) {
+
+          } else if (datas.error) {
             showModal(datas.success, 'error', 'Erreur');
           }
         },
         error: function (xhr, status, error) {
-          
+
         },
       });
-      
+
     });
-    
+
   });
-  
