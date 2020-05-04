@@ -49,7 +49,7 @@ class DiscussionController extends BaseController
             return new JsonResponse(['success' => 'Votre conversation à bien été ajouté']);
         }
         elseif($form->isSubmitted() ){
-            return $this->neweditSubmittedGlobal($form); 
+            return $this->neweditSubmittedGlobal($form);
         }
 
         return $this->render('discussion/new.html.twig', [
