@@ -55,6 +55,7 @@ class MessageController extends AbstractController
         return new JsonResponse(['success' => [
             'message' => $message->getContent(),
             'date' => $message->getCreatedDate(),
+            'user' => ['id' => $user->getId(), 'avatar' => $user->getAvatar(), 'name' => $user->getName()]
             ]]);
     }
 
