@@ -47,7 +47,4 @@
      <button id="buttonChangeAvatar" class="btn btn-primary px-3 rounded-pill">Ajouter un membre</button>
     <a href="{{ path('space_index') }}"><button type="btn" class="btn btn-light btn-sm">Liste des espaces</button></a>
 
-    <a href="{{ path('space_edit', {'id': space.id}) }}">edit</a>
-
-    {{ include('space/_delete_form.html.twig') }}
 {% endblock %}
