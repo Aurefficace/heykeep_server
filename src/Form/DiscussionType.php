@@ -27,13 +27,7 @@ class DiscussionType extends AbstractType
             ->add('ispublic')
             ->add('id_space', EntityType::class, [
                 'class' => Space::class,
-                'query_builder' => function(EntityRepository $er)use ($options) {
-                    return $er->createQueryBuilder('sp')
-                        ->leftJoin('sp.id_owner' , 'id')
-                        ->where('id = :val')
-                        ->setParameter('val',$options['attr']['idUser'])
-                        ->orderBy('sp.name', 'ASC');
-                },
+                'choices' => $options['attr']["user"]->getSpacesMember(),
                 'choice_label' => 'name',
                 'placeholder' => 'Sélectionnez un espace',
                 'required' => true
