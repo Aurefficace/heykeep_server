@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Message;
+use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
 
@@ -19,32 +20,46 @@ class MessageRepository extends ServiceEntityRepository
         parent::__construct($registry, Message::class);
     }
 
-    // /**
-    //  * @return Message[] Returns an array of Message objects
-    //  */
-    /*
-    public function findByExampleField($value)
-    {
-        return $this->createQueryBuilder('m')
-            ->andWhere('m.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('m.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
+    public function getLastsActivities(User $user) {
+//        $em = $this->getEntityManager();
+//
+//        $conn = $em->getConnection();
+//        $sql = "
+//                SELECT * FROM message
+//                WHERE message.id IN (
+//                    SELECT MAX(m.id) from message m
+//                        INNER JOIN discussion d ON d.id = m.id_discussion_id
+//                        INNER JOIN discussion_user du ON du.discussion_id = d.id AND du.user_id = ?
+//                        group by m.id_discussion_id
+//                    )
+//                ORDER BY message.created_date DESC
+//                LIMIT 5
+//                ;"
+//        ;
+//        $stmt = $conn->prepare($sql);
+//        $stmt->bindValue(1, $user->getId());
+//        $stmt->execute();
+//
+//        dump($stmt->fetchAll());
+//        exit();
 
-    /*
-    public function findOneBySomeField($value): ?Message
-    {
-        return $this->createQueryBuilder('m')
-            ->andWhere('m.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
+        $queryBuilderDiscussion = $this->createQueryBuilder('m');
+        $queryBuilderDiscussion
+            ->andWhere($queryBuilderDiscussion->expr()->in('m.id',
+                $this->getEntityManager()->getRepository(Message::class)->createQueryBuilder('m2')
+                    ->select('MAX(m2.id)')
+                    ->join('m2.id_discussion', 'd')
+                    ->join('d.id_user', 'u')
+                    ->where($queryBuilderDiscussion->expr()->eq('u.id',  $user->getId()))
+                    ->addGroupBy('m2.id_discussion')
+                    ->getDQL()
+            ))
+            ->setMaxResults(5)
+            ->addOrderBy('m.created_date', 'DESC')
         ;
+
+//        dump($queryBuilderDiscussion->getQuery()->getResult());
+//        exit();
+        return $queryBuilderDiscussion->getQuery()->getResult();
     }
-    */
 }
