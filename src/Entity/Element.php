@@ -30,6 +30,12 @@ class Element
      */
     private $type;
 
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Bloc", inversedBy="element", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $bloc;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -55,6 +61,18 @@ class Element
     public function setType(string $type): self
     {
         $this->type = $type;
+
+        return $this;
+    }
+
+    public function getBloc(): ?Bloc
+    {
+        return $this->bloc;
+    }
+
+    public function setBloc(Bloc $bloc): self
+    {
+        $this->bloc = $bloc;
 
         return $this;
     }

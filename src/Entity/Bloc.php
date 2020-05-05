@@ -56,21 +56,9 @@ class Bloc
     private $ispublic;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Element", cascade={"persist", "remove"})
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\OneToOne(targetEntity="App\Entity\Element", mappedBy="bloc", cascade={"persist", "remove"})
      */
-    private $id_element;
-
-    /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Message", cascade={"persist", "remove"})
-     */
-    private $id_message;
-
-    /**
-     * @Assert\Type(type="App\Entity\Element")
-     * @Assert\Valid
-     */
-    protected $element;
+    private $element;
 
     public function getId(): ?int
     {
@@ -161,38 +149,20 @@ class Bloc
         return $this;
     }
 
-    public function getIdElement(): ?Element
-    {
-        return $this->id_element;
-    }
-
-    public function setIdElement(Element $id_element): self
-    {
-        $this->id_element = $id_element;
-
-        return $this;
-    }
-
-    public function getIdMessage(): ?Message
-    {
-        return $this->id_message;
-    }
-
-    public function setIdMessage(?Message $id_message): self
-    {
-        $this->id_message = $id_message;
-
-        return $this;
-    }
-
-    public function getElement()
+    public function getElement(): ?Element
     {
         return $this->element;
     }
 
-    public function setElement(Element $element = null)
+    public function setElement(Element $element): self
     {
         $this->element = $element;
-    }
 
+        // set the owning side of the relation if necessary
+        if ($element->getBloc() !== $this) {
+            $element->setBloc($this);
+        }
+
+        return $this;
+    }
 }

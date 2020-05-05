@@ -41,7 +41,7 @@ class Space
     /**
      * @var ArrayCollection
      *
-     * @ORM\ManyToMany(targetEntity="App\Entity\User", inversedBy="spacesMember")
+     * @ORM\ManyToMany(targetEntity="App\Entity\User", mappedBy="spacesMember")
      * @ORM\JoinTable(name="space_user")
      */
     private $idMember;
