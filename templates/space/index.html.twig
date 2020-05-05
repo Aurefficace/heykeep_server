@@ -29,8 +29,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    {% for space in spacesMember %}
-                        {% if app.user.name != space.idOwner %}
+                    {% for space in spacesMember|filter(space => space.idOwner != app.user.name) %}
                             <tr>
                                 <td>{{ space.idOwner }}</td>
                                 <td>{{ space.name }}</td>
@@ -59,7 +58,6 @@
                                     {% endif %}
                                 </td>
                             </tr>
-                        {% endif %}
                     {% else %}
                         <tr>
                             <td colspan="7">Vous n'avez encore aucun espace.</td>
