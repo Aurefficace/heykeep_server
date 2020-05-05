@@ -14,11 +14,11 @@
             <div id="listmaster" class="row justify-content-center">
 
                 <h1>Liste des espaces</h1>
-                <h2>En tant que participant</h2>
+                <h2>En tant que Membre</h2>
                 <table class="table">
                     <thead>
                     <tr>
-                        <th>Id</th>
+                        <th>Admin</th>
                         <th>Nom</th>
                         <th>Description</th>
                         <th>Date de création</th>
@@ -29,8 +29,8 @@
                     </tr>
                     </thead>
                     <tbody>
-                    {% for space in spaces %}
-                        {% if app.user.name == space.idOwner %}
+                    {% for space in spacesMember %}
+                        {% if app.user.name != space.idOwner %}
                             <tr>
                                 <td>{{ space.idOwner }}</td>
                                 <td>{{ space.name }}</td>
@@ -54,9 +54,11 @@
                                     <a href="{{ path('space_show', {'id': space.id}) }}">
                                         <button type="button" class="btn btn-primary px-3"><i class="far fa-eye" aria-hidden="true"></i> Afficher</button>
                                     </a>
+                                    {% if app.user.name == space.idOwner %}
+                                    <button type="button" class="btn btn-primary px-3" onclick="callAjaxMasterDetail('{{ path('space_edit', {'id': space.id}) }}','#editcurrent','#listmaster'); displayFadeIn('#editcurrent','#createnew','#listmaster')"><i class="fas fa-plus" aria-hidden="true"></i> Editer</button>
+                                    {% endif %}
                                 </td>
                             </tr>
-
                         {% endif %}
                     {% else %}
                         <tr>
@@ -66,11 +68,10 @@
                     </tbody>
                 </table>
                 <h2>En tant que administrateur</h2>
-                <p>{{ app.user.name }}</p>
                 <table class="table">
                     <thead>
                     <tr>
-                        <th>Id</th>
+                        <th>Admin</th>
                         <th>Nom</th>
                         <th>Description</th>
                         <th>Date de création</th>
@@ -81,8 +82,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    {% for space in spaces %}
-                    {% if app.user.name == space.idOwner %}
+                    {% for space in spacesOwner %}
                         <tr>
                             <td>{{ space.idOwner }}</td>
                             <td>{{ space.name }}</td>
@@ -107,57 +107,6 @@
                                     <button type="button" class="btn btn-primary px-3"><i class="far fa-eye" aria-hidden="true"></i> Afficher</button>
                                 </a>
                                 <button type="button" class="btn btn-primary px-3" onclick="callAjaxMasterDetail('{{ path('space_edit', {'id': space.id}) }}','#editcurrent','#listmaster'); displayFadeIn('#editcurrent','#createnew','#listmaster')"><i class="fas fa-plus" aria-hidden="true"></i> Editer</button>
-                            </td>
-                        </tr>
-
-                    {% endif %}
-                    {% else %}
-                        <tr>
-                            <td colspan="7">Vous n'avez encore aucun espace.</td>
-                        </tr>
-                    {% endfor %}
-                    </tbody>
-                </table>
-                <h2>Tous les espaces</h2>
-                <table class="table">
-                    <thead>
-                    <tr>
-                        <th>Id</th>
-                        <th>Nom</th>
-                        <th>Description</th>
-                        <th>Date de création</th>
-                        <th>Actif</th>
-                        <th>Image</th>
-                        <th>Membres</th>
-                        <th>actions</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {% for space in spaces %}
-                        <tr>
-                            <td>{{ space.id }}</td>
-                            <td>{{ space.name }}</td>
-                            <td>{{ space.description }}</td>
-                            <td>{{ space.createdDate ? space.createdDate|date('d-m-Y') : '' }}</td>
-                            <td>{{ space.actif ? 'Oui' : 'Non' }}</td>
-                            <td>
-                                {% if space.image == '' %}
-                                    <img src="{{ asset('space/default.jpg') }}" class="rounded-circle z-depth-0" alt="espace image" style="max-height: 120px;max-width: 120px;">
-                                {% else %}
-                                    <img src="{{ asset('space/'~ space.id~ '/' ~ space.image) }}" class="rounded-circle z-depth-0" alt="espace image" style="max-height: 120px;max-width: 120px;" >
-                                {% endif %}
-                            </td>
-                            <td>
-                                <p style="font-weight: bold">{{ space.idMember|length }} mbrs :</p>
-                                {% for member in space.idMember %}
-                                    {{member.name}} <br>
-                                {% endfor %}
-                            </td>
-                            <td>
-                                <a href="{{ path('space_show', {'id': space.id}) }}">
-                                    <button type="button" class="btn btn-primary px-3"><i class="far fa-eye" aria-hidden="true"></i> Afficher</button>
-                                </a>
-                                <button type="button" class="btn btn-primary px-3" onclick="callAjaxMasterDetail('{{ path('space_edit', {'id': space.id}) }}','#master-detail','#listmaster', '#back-to-list-space');"><i class="fas fa-plus" aria-hidden="true"></i> Editer</button>
                             </td>
                         </tr>
                     {% else %}

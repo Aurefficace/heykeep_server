@@ -47,5 +47,23 @@ class SpaceRepository extends ServiceEntityRepository
         ;
     }
     */
+    public function findSpaceByIdOwner($userId)
+    {
+        return $this->createQueryBuilder('d')
+//            ->leftJoin('d.id_user', 'iduser')
+            ->where('d.id_owner = :val')
+            ->setParameter('val', $userId)
+            ->getQuery()
+            ->getResult();
+    }
 
+    public function findSpaceByIdMember($userId)
+    {
+        return $this->createQueryBuilder('d')
+//            ->leftJoin('d.id_user', 'iduser')
+            ->where('d.id_owner = :val')
+            ->setParameter('val', $userId)
+            ->getQuery()
+            ->getResult();
+    }
 }
