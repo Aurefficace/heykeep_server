@@ -35,58 +35,15 @@
                     </div>
                 </div>
                 <div class="col-lg-3 bg-beige p-3 m-2 card-dash">
-                        <h3 class="blue_text mx-3 my-3">mes espaces</h3>
-
+                    <h3 class="blue_text mx-3 my-3">mes espaces</h3>
                     <div class="container">
-
-                        <!-- Card -->
-                        {% for space in spaces %}
-                        <div class="card mb-5 z-depth-0">
-
-
-                            <!-- Card image -->
-                            <div class="view overlay">
-
-                                {% if space.image == '' %}
-                                    <img src="{{ asset('space/default.jpg') }}" class="card-img-top" alt="espace image">
-                                {% else %}
-                                    <img src="{{ asset('space/'~ space.id~ '/' ~ space.image) }}" class="card-img-top" alt="espace image">
-                                {% endif %}
-                                <a href="#!">
-                                    <div class="mask rgba-white-slight"></div>
-                                </a>
-                            </div>
-
-                            <!-- Card content -->
-                            <div class="card-body">
-
-                                <!-- Title -->
-                                <h4 class="card-title font-weight-bold red_text">{{ space.name }}</h4>
-                                <!-- Text -->
-                                <p>{{ space.description }}</p>
-                                <p>Crée le : {{ space.createdDate ? space.createdDate|date('d-m-Y') : '' }}</p>
-                                <div class="row">
-                                    <div class="col-6">
-                                        <p style="font-weight: bold">{{ space.idMember|length }} Membres</p>
-                                    </div>
-                                    <div class="col-6">
-                                        {% for member in space.idMember %}
-                                            {{member.name}} <br>
-                                        {% endfor %}
-                                    </div>
-                                </div>
-
-
-                                <!-- Button -->
-                                <a href="{{ path('space_show', {'id': space.id}) }}" class="btn bg-red rounded-pill font-weight-bold white-text">Visiter</a>
-
-                            </div>
-
-                        </div>
+                        {% for spaceOwned in spacesOwned %}
+                            {% include 'space/space_short_display.twig' with {"space" : spaceOwned} %}
                         {% endfor %}
-                        <!-- Card -->
-
-                        </div>
+                        {% for spaceMember in spacesMember %}
+                            {% include 'space/space_short_display.twig' with {"space" : spaceMember} %}
+                        {% endfor %}
+                    </div>
                 </div>
                 <div class="col-lg-2 bg-beige p-3 m-2 card-dash">
                     <div>
