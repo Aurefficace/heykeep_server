@@ -23,10 +23,7 @@ class DashboardController extends AbstractController
         return $this->render('dashboard.html.twig',
             [
                 'spacesOwned' => $em->getRepository(Space::class)->findBy(array("id_owner" => $user)),
-                'spacesMember' => $user->getSpacesMember()->filter(function(Space $space) use ($user) {
-                    return $space->getIdOwner() != $user;
-                })
-
+                'spacesMember' => $user->getSpacesMemberNotOwner()
             ]);
     }
 }

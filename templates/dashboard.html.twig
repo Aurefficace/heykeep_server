@@ -35,10 +35,15 @@
                     </div>
                 </div>
                 <div class="col-lg-3 bg-beige p-3 m-2 card-dash">
-                        <h3 class="blue_text mx-3 my-3">mes espaces</h3>
-
-                    {% include 'spaceShortDisplay.twig' %}
-
+                    <h3 class="blue_text mx-3 my-3">mes espaces</h3>
+                    <div class="container">
+                        {% for spaceOwned in spacesOwned %}
+                            {% include 'space/space_short_display.twig' with {"space" : spaceOwned} %}
+                        {% endfor %}
+                        {% for spaceMember in spacesMember %}
+                            {% include 'space/space_short_display.twig' with {"space" : spaceMember} %}
+                        {% endfor %}
+                    </div>
                 </div>
                 <div class="col-lg-2 bg-beige p-3 m-2 card-dash">
                     <div>
