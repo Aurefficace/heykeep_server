@@ -14,6 +14,7 @@ h2 {
 }
 /*===========[ notification ]=========================*/
 .toast {
+  z-index: 2000;
   position: absolute;
   top: 0;
   right: 0;

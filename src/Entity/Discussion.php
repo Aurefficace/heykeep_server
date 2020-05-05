@@ -97,6 +97,7 @@ class Discussion
      */
     public function getMessages(): Collection
     {
+        
         return $this->messages;
     }
 

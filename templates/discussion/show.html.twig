@@ -1,36 +1,61 @@
-{% extends 'base.html.twig' %}
-
-{% block title %}Discussion
+{% block stylesheets %}
+	<link href="{{ asset('heykeep/css/messagerie.css') }}" rel="stylesheet" type="text/css">
 {% endblock %}
-
 {% block body %}
 	<h1>Discussion
 		{{discussion.name}}</h1>
 	{# 
-	    <table class="table">
-	        <tbody>
-	            <tr>
-	                <th>Id</th>
-	                <td>{{ discussion.id }}</td>
-	            </tr>
-	            <tr>
-	                <th>Name</th>
-	                <td>{{ discussion.name }}</td>
-	            </tr>
-	            <tr>
-	                <th>Ispublic</th>
-	                <td>{{ discussion.ispublic ? 'Yes' : 'No' }}</td>
-	            </tr>
-	        </tbody>
-	    </table> #}
-	{% for message in messages %}
-		<li>{{ message.content }}</li>
-	{% endfor %}
+			<table class="table">
+				<tbody>
+					<tr>
+						<th>Id</th>
+						<td>{{ discussion.id }}</td>
+					</tr>
+					<tr>
+						<th>Name</th>
+						<td>{{ discussion.name }}</td>
+					</tr>
+					<tr>
+						<th>Ispublic</th>
+						<td>{{ discussion.ispublic ? 'Yes' : 'No' }}</td>
+					</tr>
+				</tbody>
+			</table> #}
+	<div id="messageList" onload="scrollToBottom()">
+		{% for message in messages %}
+			<div class="info-message">
+				<img src="{{ asset('user/profile/'~ app.user.id~ '/' ~ app.user.avatar) }}" class="rounded-circle z-depth-0 img-message" alt="avatar image">
+				<span class="nameUser-message">{{message.getIdUser()}}</span>
+				<span class="date-message">{{message.getCreatedDate()|date('d-m-Y')}}</span>
+			</div>
+			<p class="message-content  active ">{{ message.content }}
+			</p>
 
-	<a href="{{ path('discussion_index') }}">back to list</a>
+		{% endfor %}
+	</div>
+	<div id="message-template">
+		<div hidden>
+			<div class="info-message">
+				<img  class="rounded-circle z-depth-0 img-message" alt="avatar image">
+				<span class="nameUser-message"></span>
+				<span class="date-message"></span>
+			</div>
+			<p class="message-content"></p>
+		</div>
+	</div>
 
-	<a href="{{ path('discussion_edit', {'id': discussion.id}) }}">edit</a>
+	<form class="login100-form validate-form" method="post" id="new_message" action="{{ path('message_new')}}" data-callback="addNewMessage">
+		<div class="wrap-input100 validate-input">
+			<input type="text" name="message" id="inputMessage" class="input100" required autofocus>
+			<span class="focus-input100"></span>
+		</div>
+		<input type="text" name="discussion" value="{{discussion.id}}" hidden>
+		<div class="container-login100-form-btn">
+			<button class="login100-form-btn" type="submit">
+				send message
+			</button>
+		</div>
 
-
-	{{ include('discussion/_delete_form.html.twig') }}
-{% endblock %}
+	</form>
+</br></br><button onclick="callAjaxMasterDetail('{{ path('discussion_index')}}','#discussion_list','#discussion')">
+<i class="fas fa-long-arrow-alt-left"></i></button>{# <a href="{{ path('discussion_index') }}">back to list</a> #}{# <a href="{{ path('discussion_edit', {'id': discussion.id}) }}">edit</a> #}{{ include('discussion/_delete_form.html.twig') }}{% endblock %}

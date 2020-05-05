@@ -3,8 +3,10 @@
 namespace App\Repository;
 
 use App\Entity\Space;
+use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
+use function Doctrine\ORM\QueryBuilder;
 
 /**
  * @method Space|null find($id, $lockMode = null, $lockVersion = null)
@@ -47,5 +49,26 @@ class SpaceRepository extends ServiceEntityRepository
         ;
     }
     */
+    public function findSpaceByIdOwner($userId)
+    {
+        return $this->createQueryBuilder('d')
+//            ->leftJoin('d.id_user', 'iduser')
+            ->where('d.id_owner = :val')
+            ->setParameter('val', $userId)
+            ->getQuery()
+            ->getResult();
+    }
 
+    public function getMemberNotOwner($user)
+    {
+        $queryBuilder = $this->createQueryBuilder('s');
+        $queryBuilder
+            ->Join('s.idMember', 'u')
+            ->where($queryBuilder->expr()->neq('s.id_owner', $user->getId()))
+            ->andWhere($queryBuilder->expr()->eq('u.id', $user->getId()))
+        ;
+        return $queryBuilder ->getQuery()
+            ->getResult()
+            ;
+    }
 }
