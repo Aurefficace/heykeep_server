@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Bloc;
+use App\Entity\Element;
 use App\Form\BlocType;
 use App\Repository\BlocRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -30,11 +31,16 @@ class BlocController extends AbstractController
      */
     public function new(Request $request): Response
     {
+        $user = $this->getUser();
         $bloc = new Bloc();
-        $form = $this->createForm(BlocType::class, $bloc);
+        $form = $this->createForm(BlocType::class, $bloc, ['attr' => ['user' => $user]]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $bloc->setCreatedDate(new \DateTime('today'));
+            $bloc->setIsarchiv(0);
+            $bloc->setIdOwner($this->getUser());
+
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($bloc);
             $entityManager->flush();
