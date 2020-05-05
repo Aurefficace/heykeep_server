@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\BlocRepository")
@@ -63,6 +65,12 @@ class Bloc
      * @ORM\OneToOne(targetEntity="App\Entity\Message", cascade={"persist", "remove"})
      */
     private $id_message;
+
+    /**
+     * @Assert\Type(type="App\Entity\Element")
+     * @Assert\Valid
+     */
+    protected $element;
 
     public function getId(): ?int
     {
@@ -176,4 +184,15 @@ class Bloc
 
         return $this;
     }
+
+    public function getElement()
+    {
+        return $this->element;
+    }
+
+    public function setElement(Element $element = null)
+    {
+        $this->element = $element;
+    }
+
 }
