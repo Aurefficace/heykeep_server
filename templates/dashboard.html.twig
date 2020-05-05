@@ -13,7 +13,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-lg-3">
+                <div class="col-lg-2">
                     <div class="mb-3 welcome mx-3">
                         Bienvenue : {{ app.user.username }}
                     </div>
@@ -26,17 +26,46 @@
                     <div>
                         <h3 class="blue_text mx-3 my-3">fil d'actualités</h3>
                     </div>
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-lg-12">
+                    <div class="container row">
+                        <!-- Grid row -->
+                        <div class="row align-items-center">
+
+                            <!-- Grid column -->
+                            <div class="col-lg-5 col-xl-4">
+
+                                <!-- Featured image -->
+                                <div class="view overlay rounded z-depth-1-half mb-lg-0 mb-4">
+                                    <img class="img-fluid" src="https://mdbootstrap.com/img/Photos/Others/images/49.jpg" alt="Sample image">
+                                    <a>
+                                        <div class="mask rgba-white-slight"></div>
+                                    </a>
+                                </div>
 
                             </div>
+                            <!-- Grid column -->
+
+                            <!-- Grid column -->
+                            <div class="col-lg-7 col-xl-8">
+
+                                <!-- Post title -->
+                                <h5 class="font-weight-bold mb-0"><strong>Titre</strong></h5>
+                                <!-- Excerpt -->
+                                <p class="blue_text mb-0">Lorem Ipsum is my passion, il love it "dolor sit amet"</p>
+                                <!-- Post data -->
+                                <p>par <a class="font-weight-bold">Jean Phill</a>, 19/04/2018</p>
+                                <!-- Read more button -->
+                                <a class="btn bg-blue btn-md mx-0 rounded-pill">Voir</a>
+
+                            </div>
+                            <!-- Grid column -->
+
                         </div>
+                        <!-- Grid row -->
                     </div>
                 </div>
-                <div class="col-lg-3 bg-beige p-3 m-2 card-dash">
+                <div class="col-lg-4 bg-beige p-3 m-2 card-dash">
                     <h3 class="blue_text mx-3 my-3">mes espaces</h3>
-                    <div class="container">
+                    <div class="container row">
                         {% for spaceOwned in spacesOwned %}
                             {% include 'space/space_short_display.twig' with {"space" : spaceOwned} %}
                         {% endfor %}
@@ -60,6 +89,10 @@
                                     <li class="nav-item">
                                         <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile"
                                            aria-selected="false">Posts</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile"
+                                           aria-selected="false">Discussions</a>
                                     </li>
                                 </ul>
                                 <div class="tab-content" id="myTabContent">

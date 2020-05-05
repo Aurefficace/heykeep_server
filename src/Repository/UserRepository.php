@@ -79,11 +79,16 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
 
     public function getLastsActivities($user) {
         $queryBuilderSpace = $this->getEntityManager()->getRepository(Space::class)->createQueryBuilder('s');
-        // Requête pour récupérer les 5 derniers espaces créés   (puis vous améliorerez en récupérant les 5 derniers créés ou modifiés)
+        $queryBuilderSpace
+            ->join('s.idMember', 'u')
+            ->where($queryBuilderSpace->expr()->eq('u.id',  $user->getId()))
+            ->setMaxResults(5)
+            ->addOrderBy('s.created_date', 'ASC')
+        ;
         // Penser au orderBy
         // Penser aussi à filtrer les espaces en fonction de ceux que l'utilisateur a le droit de voir
 
-        dump($queryBuilderSpace->getQuery()->getResult());
+        //dump($queryBuilderSpace->getQuery()->getResult());
 
 
         $queryBuilderDiscussion = $this->getEntityManager()->getRepository(Discussion::class)->createQueryBuilder('d');
@@ -91,8 +96,8 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         // Penser aux mêmes contraintes que pour space mais ajouter en plus de remonter les discusion où des messages ont été ajoutés
 
 
-        dump($queryBuilderDiscussion->getQuery()->getResult());
-        exit();
+       // dump($queryBuilderDiscussion->getQuery()->getResult());
+       // exit();
 
         // Lien utile : https://www.doctrine-project.org/projects/doctrine-orm/en/2.7/reference/query-builder.html#working-with-querybuilder
 

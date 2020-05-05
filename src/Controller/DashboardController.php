@@ -18,12 +18,13 @@ class DashboardController extends AbstractController
     public function dashboardAction()
     {
         $em = $this->getDoctrine()->getManager();
-        //$lastsActivities = $em->getRepository(User::class)->getLastsActivities($this->getUser());
+        $lastsActivities = $em->getRepository(User::class)->getLastsActivities($this->getUser());
         $user=$this->getUser();
         return $this->render('dashboard.html.twig',
             [
                 'spacesOwned' => $em->getRepository(Space::class)->findBy(array("id_owner" => $user)),
-                'spacesMember' => $user->getSpacesMemberNotOwner()
+                'spacesMember' => $user->getSpacesMemberNotOwner(),
+                'lastActivity'=>$lastsActivities,
             ]);
     }
 }
