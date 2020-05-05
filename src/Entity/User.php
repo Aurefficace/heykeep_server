@@ -313,4 +313,10 @@ class User implements UserInterface
     public function __toString() {
         return $this->name;
     }
+
+    public function getSpacesMemberNotOwner() {
+        return $this->spacesMember->filter(function(Space $space) {
+            return $space->getIdOwner() !== $this;
+        });
+    }
 }
