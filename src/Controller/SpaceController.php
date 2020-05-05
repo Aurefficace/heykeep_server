@@ -22,9 +22,11 @@ class SpaceController extends BaseController
      */
     public function index(SpaceRepository $spaceRepository): Response
     {
+        $user = $this->getUser();
 
         return $this->render('space/index.html.twig', [
-            'spaces' => $spaceRepository->findAll(),
+            'spacesOwner' => $spaceRepository->findSpaceByIdOwner($user->getId()),
+            'spacesMember' => $user->getSpacesMember(),
 
         ]);
     }
@@ -43,6 +45,7 @@ class SpaceController extends BaseController
             $space->setActif(true);
             $space->setLevel(0);
             $space->setIdOwner($this->getUser());
+            $space->addIdMember($this->getUser());
             if ($form['imagefile']->getData()) {
                 $file = $form['imagefile']->getData(); // Récupération du fichier pour l'image de l'espace
                 $space->setImage("spaceimage." . $file->guessExtension()); // Affectation d'un nom standard au fichier d'image de l'espace
