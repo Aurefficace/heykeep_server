@@ -26,7 +26,9 @@ class SpaceController extends BaseController
 
         return $this->render('space/index.html.twig', [
             'spacesOwner' => $spaceRepository->findSpaceByIdOwner($user->getId()),
-            'spacesMember' => $user->getSpacesMember(),
+            'spacesMember' => $user->getSpacesMember()->filter(function(Space $space) use ($user) {
+                return $space->getIdOwner() != $user;
+            })
 
         ]);
     }

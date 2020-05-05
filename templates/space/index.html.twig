@@ -29,7 +29,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    {% for space in spacesMember|filter(space => space.idOwner != app.user.name) %}
+                    {% for space in spacesMember%}
                             <tr>
                                 <td>{{ space.idOwner }}</td>
                                 <td>{{ space.name }}</td>
