@@ -24,7 +24,7 @@
 	<div id="messageList" onload="scrollToBottom()">
 		{% for message in messages %}
 			<div class="info-message">
-				<img src="{{ asset('user/profile/'~ app.user.id~ '/' ~ app.user.avatar) }}" class="rounded-circle z-depth-0 img-message" alt="avatar image">
+				<img src="{{ asset('user/profile/'~ message.getIdUser().getId()~ '/' ~ message.getIdUser().getAvatar()) }}" class="rounded-circle z-depth-0 img-message" alt="avatar image">
 				<span class="nameUser-message">{{message.getIdUser()}}</span>
 				<span class="date-message">{{message.getCreatedDate()|date('d-m-Y')}}</span>
 			</div>
