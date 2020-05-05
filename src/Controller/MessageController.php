@@ -11,6 +11,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -31,7 +32,7 @@ class MessageController extends AbstractController
     /**
      * @Route("/new", name="message_new", methods={"POST"})
      */
-    public function new(Request $request): Response
+    public function new(Request $request, MessageBusInterface $messageBus): Response
     {
         $entityManager = $this->getDoctrine()->getManager();
         $now = new DateTime();
@@ -49,6 +50,12 @@ class MessageController extends AbstractController
             $entityManager->flush();
         } catch (\Exception $e) {
 
+            return new JsonResponse(['error' => $e->getMessage()]);
+        }
+        try {
+            $messageBus->dispatch($message);
+    
+        } catch (\Exception $e) {
             return new JsonResponse(['error' => $e->getMessage()]);
         }
 

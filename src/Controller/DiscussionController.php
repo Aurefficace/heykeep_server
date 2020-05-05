@@ -36,9 +36,8 @@ class DiscussionController extends BaseController
     public function new(Request $request): Response
     {
         $user = $this->getUser();
-        $userId = $user->getId();
         $discussion = new Discussion();
-        $form = $this->createForm(DiscussionType::class, $discussion, ['attr' => ['idUser' => $userId]]);
+        $form = $this->createForm(DiscussionType::class, $discussion, ['attr' => ['user' => $user]]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
