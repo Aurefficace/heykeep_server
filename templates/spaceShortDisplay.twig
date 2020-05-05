@@ -1,0 +1,103 @@
+<div class="container">
+
+    <!-- Card -->
+    {% for spacesOwned in spacesOwned %}
+        {#{% for spacesMember in spacesMember %}#}
+        <div class="card mb-5 z-depth-0">
+
+
+            <!-- Card image -->
+            <div class="view overlay">
+
+                {% if spacesOwned.image == '' %}
+                    <img src="{{ asset('space/default.jpg') }}" class="card-img-top" alt="espace image">
+                {% else %}
+                    <img src="{{ asset('space/'~ spacesOwned.id~ '/' ~ spacesOwned.image) }}" class="card-img-top" alt="espace image">
+                {% endif %}
+                <a href="#!">
+                    <div class="mask rgba-white-slight"></div>
+                </a>
+            </div>
+
+            <!-- Card content -->
+            <div class="card-body">
+
+                <!-- Title -->
+                <h4 class="card-title font-weight-bold red_text">{{ spacesOwned.name }}</h4>
+                <!-- Text -->
+                <p>{{ spacesOwned.description }}</p>
+                <p>Crée le : {{ spacesOwned.createdDate ? spacesOwned.createdDate|date('d-m-Y') : '' }}</p>
+                <div class="row">
+                    <div class="col-6">
+                        <p style="font-weight: bold">{{ spacesOwned.idMember|length }} Membres</p>
+                    </div>
+                    <div class="col-6">
+                        {% for member in spacesOwned.idMember %}
+                            {{member.name}} <br>
+                        {% endfor %}
+                    </div>
+                </div>
+
+
+                <!-- Button -->
+                <a href="{{ path('space_show', {'id': spacesOwned.id}) }}" class="btn bg-red rounded-pill font-weight-bold white-text">Visiter</a>
+
+            </div>
+
+        </div>
+    {% endfor %}
+    <!-- Card -->
+
+</div>
+
+<div class="container">
+
+    <!-- Card -->
+    {% for spacesOwned in spacesOwned %}
+        {#{% for spacesMember in spacesMember %}#}
+        <div class="card mb-5 z-depth-0">
+
+
+            <!-- Card image -->
+            <div class="view overlay">
+
+                {% if spacesOwned.image == '' %}
+                    <img src="{{ asset('space/default.jpg') }}" class="card-img-top" alt="espace image">
+                {% else %}
+                    <img src="{{ asset('space/'~ spacesOwned.id~ '/' ~ spacesOwned.image) }}" class="card-img-top" alt="espace image">
+                {% endif %}
+                <a href="#!">
+                    <div class="mask rgba-white-slight"></div>
+                </a>
+            </div>
+
+            <!-- Card content -->
+            <div class="card-body">
+
+                <!-- Title -->
+                <h4 class="card-title font-weight-bold red_text">{{ spacesOwned.name }}</h4>
+                <!-- Text -->
+                <p>{{ spacesOwned.description }}</p>
+                <p>Crée le : {{ spacesOwned.createdDate ? spacesOwned.createdDate|date('d-m-Y') : '' }}</p>
+                <div class="row">
+                    <div class="col-6">
+                        <p style="font-weight: bold">{{ spacesOwned.idMember|length }} Membres</p>
+                    </div>
+                    <div class="col-6">
+                        {% for member in spacesOwned.idMember %}
+                            {{member.name}} <br>
+                        {% endfor %}
+                    </div>
+                </div>
+
+
+                <!-- Button -->
+                <a href="{{ path('space_show', {'id': spacesOwned.id}) }}" class="btn bg-red rounded-pill font-weight-bold white-text">Visiter</a>
+
+            </div>
+
+        </div>
+    {% endfor %}
+    <!-- Card -->
+
+</div>
