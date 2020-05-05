@@ -1,4 +1,5 @@
 $(document).ready(function () {
+  
   const $discussionList = $("#discussion_list");
   showSpinner($discussionList.parent());
   $.ajax({
@@ -9,15 +10,13 @@ $(document).ready(function () {
       hideSpinner($discussionList.parent());
     },
   });
-
-  
 });
 
 function discussionFormCallback() {
   const formDiscussion = $(".formDiscussion");
   const $discussionList = $("#discussion_list");
   const $discussionAdd = $("#discussion_add");
-  
+
   formDiscussion.ajaxForm({
     success: function (datas) {
       if (datas.success) {
@@ -73,15 +72,32 @@ function addNewMessage() {
     success: function (datas) {
       if (datas.success) {
         showModal(datas.success, "success", "Success");
-        const $newMessage = $('#message-template').contents().clone();
+        const $newMessage = $("#message-template").contents().clone();
         $("#messageList").append($newMessage);
-        $newMessage.find('.message-content').html(datas.success.message);
-        $newMessage.find('.date_message').html(datas.success.date.date);
+        $newMessage.find(".message-content").html(datas.success.message);
+        console.log(datas.success.date);
+        $newMessage.find(".date-message").html(datas.success.date.date);
+        $newMessage.find(".nameUser-message").html(datas.success.user.name);
+        $newMessage
+          .find(".img-message")
+          .attr(
+            "src",
+            "user/profile/" +
+              datas.success.user.id +
+              "/" +
+              datas.success.user.avatar
+          );
         $newMessage.removeAttr("hidden");
+        scrollToBottom();
       } else if (datas.error) {
         showModal(datas.success, "error", "Erreur");
       }
     },
     error: function (xhr, status, error) {},
   });
+}
+
+function scrollToBottom() {
+  var objDiv = document.getElementById("messageList");
+  objDiv.scrollTop = 99999999;
 }
