@@ -54,7 +54,7 @@
                                         <button type="button" class="btn btn-primary px-3"><i class="far fa-eye" aria-hidden="true"></i> Afficher</button>
                                     </a>
                                     {% if app.user.name == space.idOwner %}
-                                    <button type="button" class="btn btn-primary px-3" onclick="callAjaxMasterDetail('{{ path('space_edit', {'id': space.id}) }}','#editcurrent','#listmaster'); displayFadeIn('#editcurrent','#createnew','#listmaster')"><i class="fas fa-plus" aria-hidden="true"></i> Editer</button>
+                                    <button type="button" class="btn btn-primary px-3" onclick="callAjaxMasterDetail('{{ path('space_edit', {'id': space.id}) }}','#master-detail','#listmaster'); displayFadeToggle('#master-detail'); displayFadeToggle('#listmaster')"><i class="fas fa-plus" aria-hidden="true"></i> Editer</button>
                                     {% endif %}
                                 </td>
                             </tr>
@@ -104,7 +104,7 @@
                                 <a href="{{ path('space_show', {'id': space.id}) }}">
                                     <button type="button" class="btn btn-primary px-3"><i class="far fa-eye" aria-hidden="true"></i> Afficher</button>
                                 </a>
-                                <button type="button" class="btn btn-primary px-3" onclick="callAjaxMasterDetail('{{ path('space_edit', {'id': space.id}) }}','#editcurrent','#listmaster'); displayFadeIn('#editcurrent','#createnew','#listmaster')"><i class="fas fa-plus" aria-hidden="true"></i> Editer</button>
+                                <button type="button" class="btn btn-primary px-3" onclick="callAjaxMasterDetail('{{ path('space_edit', {'id': space.id}) }}','#master-detail','#listmaster'); displayFadeToggle('#master-detail'); displayFadeToggle('#listmaster')"><i class="fas fa-plus" aria-hidden="true"></i> Editer</button>
                             </td>
                         </tr>
                     {% else %}
