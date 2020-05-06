@@ -22,8 +22,7 @@ class BlocController extends AbstractController
      */
     public function index(BlocRepository $blocRepository): Response
     {
-        $em = $this->getDoctrine()->getManager();
-        $user = $this->getUser();
+
         return $this->render('bloc/index.html.twig', [
             'blocs' => $blocRepository->findAll(),
         ]);
