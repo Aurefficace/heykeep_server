@@ -12,6 +12,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+
 /**
  * @Route("/space")
  */
@@ -73,6 +74,7 @@ class SpaceController extends BaseController
      */
     public function show(Space $space): Response
     {
+        $this->denyAccessUnlessGranted('view', $space);
         return $this->render('space/show.html.twig', [
             'space' => $space,
         ]);
@@ -85,6 +87,7 @@ class SpaceController extends BaseController
     {
         $form = $this->createForm(SpaceType::class, $space);
         $form->handleRequest($request);
+        $this->denyAccessUnlessGranted('edit', $space);
 
         if ($form->isSubmitted() && $form->isValid()) {
             if ($form['imagefile']->getData()) {
@@ -114,6 +117,7 @@ class SpaceController extends BaseController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($space);
             $entityManager->flush();
+            $this->denyAccessUnlessGranted('delete', $space);
         }
 
         return $this->redirectToRoute('space_index');
@@ -135,4 +139,6 @@ class SpaceController extends BaseController
         }
         return new JsonResponse(['success' => $users]);
     }
+
+    
 }
