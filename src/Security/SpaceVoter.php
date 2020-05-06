@@ -4,21 +4,16 @@ namespace App\Security;
 use App\Entity\Space;
 use App\Entity\User;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
-use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 
-class SpaceVoter extends Voter
+class SpaceVoter extends HeykeepVoter
 {
-    const VIEW = 'view';
-    const EDIT = 'edit';
-
     protected function supports($attribute, $subject)
     {
-        
-        if (!in_array($attribute, [self::VIEW, self::EDIT])) {
+        if (!in_array($attribute, [self::VIEW, self::EDIT, self::DELETE])) {
             return false;
         }
 
-        
+
         if (!$subject instanceof space) {
             return false;
         }
@@ -26,44 +21,37 @@ class SpaceVoter extends Voter
         return true;
     }
 
-    protected function voteOnAttribute($attribute, $subject, TokenInterface $token)
+    /**
+     * @param $space Space
+     * @param $user User
+     * @return bool
+     */
+    protected function canView($space, User $user)
     {
-        $user = $token->getUser();
-
-        if (!$user instanceof User) {
-           
-            return false;
-        }
-
-        
-        /** @var Space $space */
-        $space = $subject;
-
-        switch ($attribute) {
-            case self::VIEW:
-                return $this->canView($space, $user);
-            case self::EDIT:
-                return $this->canEdit($space, $user);
-        }
-
-        throw new \LogicException('This code should not be reached!');
-    }
-
-    private function canView(Space $space, User $user)
-    {
-        
         if ($this->canEdit($space, $user)) {
             return true;
         }
 
-       
         return $space->getIdMember()->contains($user);
-        
     }
 
-     private function canEdit(Space $space, User $user)
+    /**
+     * @param $space Space
+     * @param $user User
+     * @return bool
+     */
+    protected function canEdit($space, User $user)
     {
-        
         return $user === $space->getIdOwner();
+    }
+
+    /**
+     * @param $space Space
+     * @param $user User
+     * @return bool
+     */
+    protected function canDelete($space, User $user)
+    {
+        return $user === $space->getIdOwner();   
     }
 }

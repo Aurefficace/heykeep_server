@@ -3,9 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\Bloc;
-use App\Entity\Element;
 use App\Form\BlocType;
 use App\Repository\BlocRepository;
+use App\Entity\Element;
 use App\Repository\ElementRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
