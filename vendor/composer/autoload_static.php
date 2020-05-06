@@ -127,6 +127,7 @@ class ComposerStaticInit26c90bc8d1c9979598ddd2fe5e733aa8
         'L' => 
         array (
             'Lcobucci\\JWT\\' => 13,
+        ),
         'F' => 
         array (
             'Fresh\\DoctrineEnumBundle\\' => 25,
@@ -490,15 +491,13 @@ class ComposerStaticInit26c90bc8d1c9979598ddd2fe5e733aa8
         array (
             0 => __DIR__ . '/..' . '/monolog/monolog/src/Monolog',
         ),
-<<<<<<< HEAD
         'Lcobucci\\JWT\\' => 
         array (
             0 => __DIR__ . '/..' . '/lcobucci/jwt/src',
-=======
+        ),
         'Fresh\\DoctrineEnumBundle\\' => 
         array (
             0 => __DIR__ . '/..' . '/fresh/doctrine-enum-bundle',
->>>>>>> 884f771a2cf636f9f9987203b1b20fa68e6f1c28
         ),
         'Egulias\\EmailValidator\\' => 
         array (
