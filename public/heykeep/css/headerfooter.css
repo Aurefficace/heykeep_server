@@ -21,6 +21,9 @@ header {
     display: block;
     color: #323441;
 }
+.navbar{
+    box-shadow: none!important;
+}
 /*footer*/
 footer {
     background-color: #EEEEEE ;
