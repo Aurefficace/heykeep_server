@@ -20,12 +20,14 @@
             </div>
 
             <!--Grid row-->
-            <div id="listmaster" class="d-flex justify-content-center flex-column">
-                <h1 class="red_text mx-auto">Liste des espaces</h1>
-                <h2 class="blue_text mx-auto">En tant que Membre</h2>
-                        {%  include 'space/spaces.html.twig' with {'foo': spacesMember}  %}
-                <h2 class="blue_text mx-auto">En tant qu'administrateur</h2>
-                        {%  include 'space/spaces.html.twig' with {'foo': spacesOwner}  %}
+            <div id="listmaster">
+                <div class="d-flex justify-content-center flex-column">
+                    <h1 class="red_text mx-auto">Liste des espaces</h1>
+                    <h2 class="blue_text mx-auto">En tant que Membre</h2>
+                            {%  include 'space/spaces.html.twig' with {'foo': spacesMember}  %}
+                    <h2 class="blue_text mx-auto">En tant qu'administrateur</h2>
+                            {%  include 'space/spaces.html.twig' with {'foo': spacesOwner}  %}
+                </div>
             </div>
             <div id="master-detail"></div>
         </section>
