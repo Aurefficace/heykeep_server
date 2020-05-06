@@ -40,12 +40,12 @@ class SpaceController extends BaseController
         $user = $this->getUser();
         $space = new Space();
 
-        $tag1 = new Categorie();
-        $tag1->setName('tag1');
-        $space->getCategorie()->add($tag1);
-        $tag2 = new Categorie();
-        $tag2->setName('tag2');
-        $space->getCategorie()->add($tag2);
+//        $tag1 = new Categorie();
+//        $tag1->setName('tag1');
+//        $space->getCategorie()->add($tag1);
+//        $tag2 = new Categorie();
+//        $tag2->setName('tag2');
+//        $space->getCategorie()->add($tag2);
 
         $form = $this->createForm(SpaceType::class, $space, ['attr' => ['user' => $user]]);
         $form->handleRequest($request);
