@@ -1,9 +1,10 @@
   $(document).ready(function () {
-    const form = $("#formResetPassword");
-      $("#buttonChangePassword").click(function () {
-      $("#formResetPassword").show();
-      $("#buttonChangePassword").hide();
-      form.validate({
+    const $form = $("#formResetPassword");
+    const $formChangePassword = $("#buttonChangePassword");
+      $formChangePassword.click(function () {
+      $form.show();
+      $formChangePassword.hide();
+      $form.validate({
       errorPlacement: function errorPlacement(error, element) {
           element.before(error);
         },
@@ -14,23 +15,14 @@
         },
       });
     });
-    //contrôle les champs vides
-   /* $('#buttonResetPassword').click(function () {
-      if ($('#inputPassword' || '#inputPasswordConfirmation').val() == '') {
-        alert('Veuillez remplir les champs vides')
-        return false
-      }
-    });*/
-    
-   
-    form.ajaxForm({
+    $form.ajaxForm({
       success: function (datas) {
         if (datas.success) {
           showModal(datas.success, 'success', 'Success');
           $('#inputPassword' || '#inputPasswordConfirmation').val() == ''
             $("input[type=password]").val("");
-            $("#formResetPassword").hide();
-            $("#buttonChangePassword").show();
+            $form.hide();
+            $formChangePassword.show();
         } else if (datas.error) {
           showModal(datas.success, 'error', 'Erreur');
         }
@@ -40,13 +32,13 @@
       },
     });
     $("#buttonChangeAvatar").click(function () {
-      const formAvatar = $("#formChangeAvatar");
-      formAvatar.show();
-      formAvatar.on('change', function () {
-        formAvatar.submit();
-        formAvatar.hide();
+      const $formAvatar = $("#formChangeAvatar");
+      $formAvatar.show();
+      $formAvatar.on('change', function () {
+        $formAvatar.submit();
+        $formAvatar.hide();
       });
-      formAvatar.ajaxForm({
+      $formAvatar.ajaxForm({
         success: function (datas) {
           if (datas.success) {
             showModal(datas.success, 'success', 'Success');

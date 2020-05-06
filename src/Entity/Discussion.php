@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\OrderBy;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\DiscussionRepository")
@@ -41,6 +42,7 @@ class Discussion
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Message", mappedBy="id_discussion")
+     * @OrderBy({"created_date" = "DESC"})
      */
     private $messages;
 

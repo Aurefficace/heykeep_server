@@ -41,7 +41,7 @@ class Space
     /**
      * @var ArrayCollection
      *
-     * @ORM\ManyToMany(targetEntity="App\Entity\User", inversedBy="spacesMember")
+     * @ORM\ManyToMany(targetEntity="App\Entity\User", mappedBy="spacesMember")
      * @ORM\JoinTable(name="space_user")
      */
     private $idMember;
@@ -71,6 +71,11 @@ class Space
      * @ORM\OneToMany(targetEntity="App\Entity\Categorie", mappedBy="id_space")
      */
     private $categorie;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Bloc", mappedBy="id_space")
+     */
+    private $bloc;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\user", inversedBy="spaces")
@@ -198,6 +203,37 @@ class Space
             // set the owning side to null (unless already changed)
             if ($categorie->getIdSpace() === $this) {
                 $categorie->setIdSpace(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Bloc[]
+     */
+    public function getBloc(): Collection
+    {
+        return $this->bloc;
+    }
+
+    public function addBloc(Bloc $bloc): self
+    {
+        if (!$this->bloc->contains($bloc)) {
+            $this->bloc[] = $bloc;
+            $bloc->setIdSpace($this);
+        }
+
+        return $this;
+    }
+
+    public function removeBloc(Bloc $bloc): self
+    {
+        if ($this->bloc->contains($bloc)) {
+            $this->bloc->removeElement($bloc);
+            // set the owning side to null (unless already changed)
+            if ($bloc->getIdSpace() === $this) {
+                $bloc->setIdSpace(null);
             }
         }
 

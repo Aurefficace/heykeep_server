@@ -2,7 +2,10 @@
 
 namespace App\Entity;
 
+use App\DBAL\Types\ListeElementType;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Fresh\DoctrineEnumBundle\Validator\Constraints as DoctrineAssert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ElementRepository")
@@ -17,14 +20,23 @@ class Element
     private $id;
 
     /**
+     * @Assert\NotBlank
      * @ORM\Column(type="text")
      */
     private $content;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank
+     * @ORM\Column(name="type", type="ListeElementType", nullable=false)
+     * @DoctrineAssert\Enum(entity="App\DBAL\Types\ListeElementType")
      */
     private $type;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Bloc", inversedBy="element", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $bloc;
 
     public function getId(): ?int
     {
@@ -51,6 +63,18 @@ class Element
     public function setType(string $type): self
     {
         $this->type = $type;
+
+        return $this;
+    }
+
+    public function getBloc(): ?Bloc
+    {
+        return $this->bloc;
+    }
+
+    public function setBloc(Bloc $bloc): self
+    {
+        $this->bloc = $bloc;
 
         return $this;
     }

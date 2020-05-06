@@ -47,4 +47,15 @@ class BlocRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    public function findBlocByIdOwner($userId)
+    {
+        return $this->createQueryBuilder('b')
+            ->andWhere('b.id_owner = :val')
+            ->setParameter('val', $userId)
+            ->getQuery()
+            ->getResult();
+        ;
+    }
+
 }

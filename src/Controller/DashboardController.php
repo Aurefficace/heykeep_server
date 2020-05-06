@@ -2,8 +2,8 @@
 
 namespace App\Controller;
 
+use App\Entity\Message;
 use App\Entity\Space;
-use App\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -19,12 +19,16 @@ class DashboardController extends AbstractController
     public function dashboardAction(MercureJwtProvider $generator)
     {
         $em = $this->getDoctrine()->getManager();
-        //$lastsActivities = $em->getRepository(User::class)->getLastsActivities($this->getUser());
+        $lastsSpaceActivities = $em->getRepository(Space::class)->getLastsActivities($this->getUser());
+        $lastsChatActivities = $em->getRepository(Message::class)->getLastsActivities($this->getUser());
+
         $user=$this->getUser();
         $response = $this->render('dashboard.html.twig',
             [
                 'spacesOwned' => $em->getRepository(Space::class)->findBy(array("id_owner" => $user)),
-                'spacesMember' => $user->getSpacesMemberNotOwner()
+                'spacesMember' => $user->getSpacesMemberNotOwner(),
+                'lastsSpaceActivities' => $lastsSpaceActivities,
+                'lastsChatActivities' => $lastsChatActivities,
             ]);
             $response->headers->set('set-cookie', $generator->generate($this->getUser()));
             return $response;

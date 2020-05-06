@@ -33,7 +33,56 @@
             </tr>
         </tbody>
     </table>
-
+     <div class="container mt-3">
+		<div class="row">
+	<div class="col col-example bg-beige  p-3 m-2 card-dash">
+        <img src="{{ asset('space/'~ space.id~ '/' ~ space.image) }}" class="rounded-circle z-depth-0" alt="espace image" style="max-height: 120px;max-width: 120px;" >
+		<h3 class="blue_text mx-3 my-3 text-center">Liste des membres:</h3>
+         {% for member in space.idMember %}
+         {{member.name}} <br>
+         {% endfor %}
+         </div>
+         </div>
+         </div>
+     <button id="buttonChangeAvatar" class="btn btn-primary px-3 rounded-pill">Ajouter un membre</button>
     <a href="{{ path('space_index') }}"><button type="btn" class="btn btn-light btn-sm">Liste des espaces</button></a>
 
+    <h2>Liste des blocs de cet espace</h2>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Date de création</th>
+            <th>Titre</th>
+            <th>Description</th>
+            <th>Archivé</th>
+            <th>Public</th>
+            <th>Contenu</th>
+            <th>Type</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for bloc in space.bloc %}
+            <tr>
+                <td>{{ bloc.id }}</td>
+                <td>{{ bloc.createdDate ? bloc.createdDate|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ bloc.title }}</td>
+                <td>{{ bloc.description }}</td>
+                <td>{{ bloc.isarchiv ? 'Oui' : 'Non' }}</td>
+                <td>{{ bloc.ispublic ? 'Oui' : 'Non' }}</td>
+                <td>{{ bloc.element.content }}</td>
+                <td>{{ bloc.element.type|readable_enum }}</td>
+                <td>
+                    <a href="{{ path('bloc_show', {'id': bloc.id}) }}">Voir</a> -
+                    <a href="{{ path('bloc_edit', {'id': bloc.id}) }}">Editer</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">Aucun contenu</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 {% endblock %}

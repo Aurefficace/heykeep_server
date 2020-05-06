@@ -1,0 +1,10 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+        bind:
+            $registeredTypes: "%doctrine.dbal.connection_factory.types%"
+
+    Fresh\DoctrineEnumBundle\Twig\Extension\:
+        resource: '../../Twig/Extension/'

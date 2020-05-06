@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\BlocRepository")
@@ -38,7 +40,7 @@ class Bloc
     private $description;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Space")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Space", inversedBy="bloc")
      * @ORM\JoinColumn(nullable=false)
      */
     private $id_space;
@@ -54,15 +56,9 @@ class Bloc
     private $ispublic;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Element", cascade={"persist", "remove"})
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\OneToOne(targetEntity="App\Entity\Element", mappedBy="bloc", cascade={"persist", "remove"})
      */
-    private $id_element;
-
-    /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Message", cascade={"persist", "remove"})
-     */
-    private $id_message;
+    private $element;
 
     public function getId(): ?int
     {
@@ -153,26 +149,19 @@ class Bloc
         return $this;
     }
 
-    public function getIdElement(): ?Element
+    public function getElement(): ?Element
     {
-        return $this->id_element;
+        return $this->element;
     }
 
-    public function setIdElement(Element $id_element): self
+    public function setElement(Element $element): self
     {
-        $this->id_element = $id_element;
+        $this->element = $element;
 
-        return $this;
-    }
-
-    public function getIdMessage(): ?Message
-    {
-        return $this->id_message;
-    }
-
-    public function setIdMessage(?Message $id_message): self
-    {
-        $this->id_message = $id_message;
+        // set the owning side of the relation if necessary
+        if ($element->getBloc() !== $this) {
+            $element->setBloc($this);
+        }
 
         return $this;
     }

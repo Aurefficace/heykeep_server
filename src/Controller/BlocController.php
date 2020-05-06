@@ -5,6 +5,8 @@ namespace App\Controller;
 use App\Entity\Bloc;
 use App\Form\BlocType;
 use App\Repository\BlocRepository;
+use App\Entity\Element;
+use App\Repository\ElementRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -20,8 +22,10 @@ class BlocController extends AbstractController
      */
     public function index(BlocRepository $blocRepository): Response
     {
+        $user = $this->getUser();
+
         return $this->render('bloc/index.html.twig', [
-            'blocs' => $blocRepository->findAll(),
+            'blocs' => $blocRepository->findBlocByIdOwner($user->getId()),
         ]);
     }
 
@@ -30,11 +34,17 @@ class BlocController extends AbstractController
      */
     public function new(Request $request): Response
     {
+        $user = $this->getUser();
         $bloc = new Bloc();
-        $form = $this->createForm(BlocType::class, $bloc);
+        $form = $this->createForm(BlocType::class, $bloc, ['attr' => ['user' => $user]]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $bloc->setCreatedDate(new \DateTime('today'));
+            $bloc->setIsarchiv(0);
+            $bloc->setIdOwner($this->getUser());
+
+
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($bloc);
             $entityManager->flush();
@@ -63,7 +73,8 @@ class BlocController extends AbstractController
      */
     public function edit(Request $request, Bloc $bloc): Response
     {
-        $form = $this->createForm(BlocType::class, $bloc);
+        $user = $this->getUser();
+        $form = $this->createForm(BlocType::class, $bloc, ['attr' => ['user' => $user]]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
