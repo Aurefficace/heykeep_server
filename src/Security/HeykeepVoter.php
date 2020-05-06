@@ -6,26 +6,11 @@ use App\Entity\User;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 
-class HeykeepVoter extends Voter
+abstract class HeykeepVoter extends Voter
 {
     const VIEW = 'view';
     const EDIT = 'edit';
     const DELETE =  'delete';
-
-    protected function supports($attribute, $subject)
-    {
-        
-        if (!in_array($attribute, [self::VIEW, self::EDIT])) {
-            return false;
-        }
-
-        
-        if (!$subject instanceof space) {
-            return false;
-        }
-
-        return true;
-    }
 
     protected function voteOnAttribute($attribute, $subject, TokenInterface $token)
     {
@@ -47,4 +32,8 @@ class HeykeepVoter extends Voter
 
         throw new \LogicException('This code should not be reached!');
     }
+
+    abstract protected function canView($subject, User $user);
+    abstract protected function canEdit($subject, User $user);
+    abstract protected function canDelete($subject, User $user);
 }

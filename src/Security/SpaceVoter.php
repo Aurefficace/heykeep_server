@@ -7,7 +7,26 @@ use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 
 class SpaceVoter extends HeykeepVoter
 {
-    protected function canView(Space $space, User $user)
+    protected function supports($attribute, $subject)
+    {
+        if (!in_array($attribute, [self::VIEW, self::EDIT, self::DELETE])) {
+            return false;
+        }
+
+
+        if (!$subject instanceof space) {
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
+     * @param $space Space
+     * @param $user User
+     * @return bool
+     */
+    protected function canView($space, User $user)
     {
         if ($this->canEdit($space, $user)) {
             return true;
@@ -16,12 +35,22 @@ class SpaceVoter extends HeykeepVoter
         return $space->getIdMember()->contains($user);
     }
 
-    protected function canEdit(Space $space, User $user)
+    /**
+     * @param $space Space
+     * @param $user User
+     * @return bool
+     */
+    protected function canEdit($space, User $user)
     {
         return $user === $space->getIdOwner();
     }
 
-    protected function canDelete(Space $space, User $user)
+    /**
+     * @param $space Space
+     * @param $user User
+     * @return bool
+     */
+    protected function canDelete($space, User $user)
     {
         return $user === $space->getIdOwner();   
     }
