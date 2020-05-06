@@ -1283,6 +1283,92 @@
         ]
     },
     {
+        "name": "fresh/doctrine-enum-bundle",
+        "version": "v6.6.2",
+        "version_normalized": "6.6.2.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/fre5h/DoctrineEnumBundle.git",
+            "reference": "0ca57c8ba1f710a4823ed8535493049347a8d85a"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/fre5h/DoctrineEnumBundle/zipball/0ca57c8ba1f710a4823ed8535493049347a8d85a",
+            "reference": "0ca57c8ba1f710a4823ed8535493049347a8d85a",
+            "shasum": ""
+        },
+        "require": {
+            "doctrine/common": "~2.8",
+            "doctrine/doctrine-bundle": "~1.11 || ^2.0",
+            "doctrine/orm": "~2.6",
+            "php": ">=7.1.3",
+            "symfony/config": "^4.3",
+            "symfony/dependency-injection": "^4.3",
+            "symfony/doctrine-bridge": "^4.3",
+            "symfony/framework-bundle": "^4.3",
+            "symfony/http-kernel": "^4.3",
+            "symfony/validator": "^4.3",
+            "twig/twig": "~2.11 || ^3.0"
+        },
+        "require-dev": {
+            "escapestudios/symfony2-coding-standard": "^3.10",
+            "phpstan/phpstan": "^0.12",
+            "phpstan/phpstan-doctrine": "^0.12",
+            "phpstan/phpstan-phpunit": "^0.12",
+            "phpunit/phpunit": "^7.5",
+            "symfony/form": "^4.3",
+            "symfony/phpunit-bridge": "^4.3",
+            "symfony/yaml": "^4.3"
+        },
+        "time": "2019-12-04T10:38:28+00:00",
+        "type": "symfony-bundle",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "6.x-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Fresh\\DoctrineEnumBundle\\": ""
+            },
+            "exclude-from-classmap": [
+                "/Tests/"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Artem Henvald",
+                "email": "genvaldartem@gmail.com",
+                "role": "Creator"
+            },
+            {
+                "name": "Community",
+                "homepage": "https://github.com/fre5h/DoctrineEnumBundle/graphs/contributors",
+                "role": "Contributors"
+            }
+        ],
+        "description": "Provides support of ENUM type for Doctrine2 in Symfony applications.",
+        "homepage": "https://github.com/fre5h/DoctrineEnumBundle",
+        "keywords": [
+            "bundle",
+            "dbal",
+            "doctrine",
+            "entity",
+            "enum",
+            "mssql",
+            "mysql",
+            "postgresql",
+            "sqlite",
+            "symfony",
+            "type"
+        ]
+    },
+    {
         "name": "jdorn/sql-formatter",
         "version": "v1.2.17",
         "version_normalized": "1.2.17.0",
@@ -4292,6 +4378,138 @@
             "generator",
             "scaffold",
             "scaffolding"
+        ]
+    },
+    {
+        "name": "symfony/mercure",
+        "version": "v0.3.0",
+        "version_normalized": "0.3.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/symfony/mercure.git",
+            "reference": "999c125d3a8f96a2b6e9be3da40ff4c25844d1da"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/symfony/mercure/zipball/999c125d3a8f96a2b6e9be3da40ff4c25844d1da",
+            "reference": "999c125d3a8f96a2b6e9be3da40ff4c25844d1da",
+            "shasum": ""
+        },
+        "require": {
+            "php": "^7.1.3",
+            "symfony/http-client": "^4.3.5|^5.0"
+        },
+        "require-dev": {
+            "symfony/phpunit-bridge": "^4.2.4|^5.0",
+            "symfony/stopwatch": "^4.3|^5.0"
+        },
+        "suggest": {
+            "symfony/stopwatch": "Integration with the profiler performances"
+        },
+        "time": "2019-11-08T19:13:31+00:00",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "0.3.x-dev"
+            },
+            "thanks": {
+                "name": "dunglas/mercure",
+                "url": "https://github.com/dunglas/mercure"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Symfony\\Component\\Mercure\\": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Kévin Dunglas",
+                "email": "dunglas@gmail.com"
+            },
+            {
+                "name": "Symfony Community",
+                "homepage": "https://symfony.com/contributors"
+            }
+        ],
+        "description": "Symfony Mercure Component",
+        "homepage": "https://symfony.com",
+        "keywords": [
+            "mercure",
+            "push",
+            "sse",
+            "updates"
+        ]
+    },
+    {
+        "name": "symfony/mercure-bundle",
+        "version": "0.2.3",
+        "version_normalized": "0.2.3.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/symfony/mercure-bundle.git",
+            "reference": "9c5fe6e761816449d84d5f0429e74415cb0590f2"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/symfony/mercure-bundle/zipball/9c5fe6e761816449d84d5f0429e74415cb0590f2",
+            "reference": "9c5fe6e761816449d84d5f0429e74415cb0590f2",
+            "shasum": ""
+        },
+        "require": {
+            "php": "^7.1.3",
+            "symfony/config": "^4.3.7|^5.0",
+            "symfony/dependency-injection": "^4.3.7|^5.0",
+            "symfony/http-kernel": "^4.3.7|^5.0",
+            "symfony/mercure": "^0.3"
+        },
+        "require-dev": {
+            "symfony/phpunit-bridge": "^4.3.7|^5.0",
+            "symfony/stopwatch": "^4.3.7|^5.0",
+            "symfony/var-dumper": "^4.3.7|^5.0"
+        },
+        "suggest": {
+            "symfony/messenger": "To use the Messenger integration"
+        },
+        "time": "2019-11-24T10:29:29+00:00",
+        "type": "symfony-bundle",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "0.2.x-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Symfony\\Bundle\\MercureBundle\\": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Kévin Dunglas",
+                "email": "dunglas@gmail.com"
+            },
+            {
+                "name": "Symfony Community",
+                "homepage": "https://symfony.com/contributors"
+            }
+        ],
+        "description": "Symfony MercureBundle",
+        "homepage": "https://symfony.com",
+        "keywords": [
+            "mercure",
+            "push",
+            "sse",
+            "updates"
         ]
     },
     {

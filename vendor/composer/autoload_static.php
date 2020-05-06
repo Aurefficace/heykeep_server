@@ -67,6 +67,7 @@ class ComposerStaticInit26c90bc8d1c9979598ddd2fe5e733aa8
             'Symfony\\Component\\OptionsResolver\\' => 34,
             'Symfony\\Component\\Mime\\' => 23,
             'Symfony\\Component\\Messenger\\' => 28,
+            'Symfony\\Component\\Mercure\\' => 26,
             'Symfony\\Component\\Mailer\\' => 25,
             'Symfony\\Component\\Intl\\' => 23,
             'Symfony\\Component\\Inflector\\' => 28,
@@ -95,6 +96,7 @@ class ComposerStaticInit26c90bc8d1c9979598ddd2fe5e733aa8
             'Symfony\\Bundle\\SwiftmailerBundle\\' => 33,
             'Symfony\\Bundle\\SecurityBundle\\' => 30,
             'Symfony\\Bundle\\MonologBundle\\' => 29,
+            'Symfony\\Bundle\\MercureBundle\\' => 29,
             'Symfony\\Bundle\\MakerBundle\\' => 27,
             'Symfony\\Bundle\\FrameworkBundle\\' => 31,
             'Symfony\\Bundle\\DebugBundle\\' => 27,
@@ -121,6 +123,10 @@ class ComposerStaticInit26c90bc8d1c9979598ddd2fe5e733aa8
         'M' => 
         array (
             'Monolog\\' => 8,
+        ),
+        'F' => 
+        array (
+            'Fresh\\DoctrineEnumBundle\\' => 25,
         ),
         'E' => 
         array (
@@ -293,6 +299,10 @@ class ComposerStaticInit26c90bc8d1c9979598ddd2fe5e733aa8
         array (
             0 => __DIR__ . '/..' . '/symfony/messenger',
         ),
+        'Symfony\\Component\\Mercure\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/mercure/src',
+        ),
         'Symfony\\Component\\Mailer\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/mailer',
@@ -405,6 +415,10 @@ class ComposerStaticInit26c90bc8d1c9979598ddd2fe5e733aa8
         array (
             0 => __DIR__ . '/..' . '/symfony/monolog-bundle',
         ),
+        'Symfony\\Bundle\\MercureBundle\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/mercure-bundle/src',
+        ),
         'Symfony\\Bundle\\MakerBundle\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/maker-bundle/src',
@@ -472,6 +486,10 @@ class ComposerStaticInit26c90bc8d1c9979598ddd2fe5e733aa8
         'Monolog\\' => 
         array (
             0 => __DIR__ . '/..' . '/monolog/monolog/src/Monolog',
+        ),
+        'Fresh\\DoctrineEnumBundle\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/fresh/doctrine-enum-bundle',
         ),
         'Egulias\\EmailValidator\\' => 
         array (
