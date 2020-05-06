@@ -40,7 +40,7 @@ class Bloc
     private $description;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Space")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Space", inversedBy="bloc")
      * @ORM\JoinColumn(nullable=false)
      */
     private $id_space;
