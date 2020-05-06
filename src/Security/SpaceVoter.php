@@ -14,7 +14,7 @@ class SpaceVoter extends HeykeepVoter
         }
 
 
-        if (!$subject instanceof space) {
+        if (!$subject instanceof Space) {
             return false;
         }
 
