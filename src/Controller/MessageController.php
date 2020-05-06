@@ -4,13 +4,16 @@ namespace App\Controller;
 
 use App\Entity\Discussion;
 use App\Entity\Message;
+use App\Entity\User;
 use App\Form\MessageType;
+use App\Mercure\JwtProvider as MercureJwtProvider;
 use App\Repository\MessageRepository;
 use DateTime;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Mercure\Update;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -22,15 +25,17 @@ class MessageController extends AbstractController
     /**
      * @Route("/", name="message_index", methods={"GET"})
      */
-    public function index(MessageRepository $messageRepository): Response
+    public function index(MessageRepository $messageRepository, MercureJwtProvider $generator): Response
     {
         return $this->render('message/index.html.twig', [
             'messages' => $messageRepository->findAll(),
         ]);
+       
+
     }
 
     /**
-     * @Route("/new", name="message_new", methods={"POST"})
+     * @Route("/new/", name="message_new", methods={"POST"})
      */
     public function new(Request $request, MessageBusInterface $messageBus): Response
     {
@@ -45,6 +50,26 @@ class MessageController extends AbstractController
         $message->setContent($newMessage);
         $message->setCreatedDate($now);
         $message->setIdDiscussion($discussion);
+
+        try {
+            $user = $discussion->getIdUser()[0];
+           
+            $target = [];
+            $target = [
+                "http://monsite/instantmessages/{$user->getId()}"
+            ];
+           
+            $update = new Update('http://monsite/instantmessages', json_encode(["success" => [
+                'message' => $message->getContent(),
+                'date' => $message->getCreatedDate(),
+                'user' => ['id' => $user->getId(), 'avatar' => $user->getAvatar(), 'name' => $user->getName()]
+                ]]), $target);
+            $messageBus->dispatch($update);
+    
+        } catch (\Exception $e) {
+            return new JsonResponse(['error' => $e->getMessage()]);
+        }
+
         try {
             $entityManager->persist($message);
             $entityManager->flush();
@@ -52,12 +77,7 @@ class MessageController extends AbstractController
 
             return new JsonResponse(['error' => $e->getMessage()]);
         }
-        try {
-            $messageBus->dispatch($message);
-    
-        } catch (\Exception $e) {
-            return new JsonResponse(['error' => $e->getMessage()]);
-        }
+        
 
         return new JsonResponse(['success' => [
             'message' => $message->getContent(),
