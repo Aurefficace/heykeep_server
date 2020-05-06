@@ -33,7 +33,18 @@
             </tr>
         </tbody>
     </table>
-
+     <div class="container mt-3">
+		<div class="row">
+	<div class="col col-example bg-beige  p-3 m-2 card-dash">
+        <img src="{{ asset('space/'~ space.id~ '/' ~ space.image) }}" class="rounded-circle z-depth-0" alt="espace image" style="max-height: 120px;max-width: 120px;" >
+		<h3 class="blue_text mx-3 my-3 text-center">Liste des membres:</h3>
+         {% for member in space.idMember %}
+         {{member.name}} <br>
+         {% endfor %}
+         </div>
+         </div>
+         </div>
+     <button id="buttonChangeAvatar" class="btn btn-primary px-3 rounded-pill">Ajouter un membre</button>
     <a href="{{ path('space_index') }}"><button type="btn" class="btn btn-light btn-sm">Liste des espaces</button></a>
 
 {% endblock %}
