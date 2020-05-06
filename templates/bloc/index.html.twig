@@ -3,18 +3,18 @@
 {% block title %}Bloc index{% endblock %}
 
 {% block body %}
-    <h1>Bloc index</h1>
+    <h1>Tous vos blocs</h1>
 
     <table class="table">
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Created_date</th>
-                <th>Title</th>
+                <th>Date de création</th>
+                <th>Titre</th>
                 <th>Description</th>
-                <th>Isarchiv</th>
-                <th>Ispublic</th>
-                <th>actions</th>
+                <th>Archivé</th>
+                <th>Public</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -24,20 +24,20 @@
                 <td>{{ bloc.createdDate ? bloc.createdDate|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ bloc.title }}</td>
                 <td>{{ bloc.description }}</td>
-                <td>{{ bloc.isarchiv ? 'Yes' : 'No' }}</td>
-                <td>{{ bloc.ispublic ? 'Yes' : 'No' }}</td>
+                <td>{{ bloc.isarchiv ? 'Oui' : 'Non' }}</td>
+                <td>{{ bloc.ispublic ? 'Oui' : 'Non' }}</td>
                 <td>
-                    <a href="{{ path('bloc_show', {'id': bloc.id}) }}">show</a>
-                    <a href="{{ path('bloc_edit', {'id': bloc.id}) }}">edit</a>
+                    <a href="{{ path('bloc_show', {'id': bloc.id}) }}">Voir</a> -
+                    <a href="{{ path('bloc_edit', {'id': bloc.id}) }}">Editer</a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="7">no records found</td>
+                <td colspan="7">Aucun contenu</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('bloc_new') }}">Create new</a>
+    <a href="{{ path('bloc_new') }}">Ajouter un bloc</a>
 {% endblock %}

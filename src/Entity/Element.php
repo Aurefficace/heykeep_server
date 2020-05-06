@@ -2,9 +2,10 @@
 
 namespace App\Entity;
 
+use App\DBAL\Types\ListeElementType;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
-
+use Fresh\DoctrineEnumBundle\Validator\Constraints as DoctrineAssert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ElementRepository")
@@ -26,7 +27,8 @@ class Element
 
     /**
      * @Assert\NotBlank
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(name="type", type="ListeElementType", nullable=false)
+     * @DoctrineAssert\Enum(entity="App\DBAL\Types\ListeElementType")
      */
     private $type;
 

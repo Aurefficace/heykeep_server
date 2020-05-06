@@ -41,6 +41,7 @@ class BlocController extends AbstractController
             $bloc->setIsarchiv(0);
             $bloc->setIdOwner($this->getUser());
 
+
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($bloc);
             $entityManager->flush();
