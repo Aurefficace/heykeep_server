@@ -24,7 +24,7 @@
                 </div>
                 <div class="col-lg-3 bg-beige p-3 m-2 card-dash">
                     <div>
-                        <h3 class="blue_text mx-3 my-3">fil d'actualités</h3>
+                        <h2 class="blue_text mx-3 my-3">fil d'actualités</h2>
                     </div>
                     <div class="container">
                         <div class="row">
@@ -76,24 +76,35 @@
                             </div>
                             <!-- Grid column -->
 
+                            <h3 class="red_text ml-3 mb-3">activité des discussions</h3>
+                            {% for lastChatActivity in lastsChatActivities %}
+                                {% include 'space/chat_short_display.twig' with {"chat" : lastChatActivity} %}
+                            {% endfor %}
+                            <h3 class="red_text ml-3 mb-3">Activités dans les espaces</h3>
+                                {% for lastSpaceActivity in lastsSpaceActivities %}
+                                    {% include 'space/space_short_display.twig' with {"space" : lastSpaceActivity} %}
+                                {% endfor %}
                         </div>
                         <!-- Grid row -->
                     </div>
                 </div>
                 <div class="col-lg-4 bg-beige p-3 m-2 card-dash">
-                    <h3 class="blue_text mx-3 my-3">mes espaces</h3>
-                    <div class="container row">
+                    <h2 class="blue_text mx-3 my-3">mes espaces</h2>
+                    <div class="container">
+                        <h3 class="red_text ml-3 mb-3">liste de vos espaces</h3>
+                        <div class="row">
                         {% for spaceOwned in spacesOwned %}
                             {% include 'space/space_short_display.twig' with {"space" : spaceOwned} %}
                         {% endfor %}
                         {% for spaceMember in spacesMember %}
                             {% include 'space/space_short_display.twig' with {"space" : spaceMember} %}
                         {% endfor %}
+                        </div>
                     </div>
                 </div>
                 <div class="col-lg-2 bg-beige p-3 m-2 card-dash">
                     <div>
-                        <h3 class="blue_text mx-3 my-3">mes favoris</h3>
+                        <h2 class="blue_text mx-3 my-3">mes favoris</h2>
                     </div>
                     <div class="container">
                         <div class="row">

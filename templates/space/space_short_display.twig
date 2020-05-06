@@ -1,25 +1,27 @@
-
-    <div class="col-lg-5 col-sm-6 mb-2 card p-4 mx-2 card-dash">
-        <div class="row d-flex align-items-center">
-            <div class="col-12 w-100 d-flex justify-content-center align-items-center card-img-top">
-                {% if space.image == '' %}
-                    <img src="{{ asset('space/default.jpg') }}" class="img-fluid z-depth-0 card-dash" alt="espace image">
-                {% else %}
-                    <img src="{{ asset('space/'~ space.id~ '/' ~ space.image) }}" class="img-fluid z-depth-0 card-dash" alt="espace image">
-                {% endif %}
-            </div>
-            <div class="col-12">
-                <h4 class="font-weight-bold red_text pt-2">{{ space.name }}</h4>
-                <p class="blue_text">
-                    {{ space.description }}<br>
-                    Crée le : {{ space.createdDate ? space.createdDate|date('d-m-Y') : '' }}<br>
-                    {{ space.idMember|length }} Membre(s) :
-                    {% for member in space.idMember %}
-                        {{member.name}} -
-                    {% endfor %}
-                </p>
-                <a href="{{ path('space_show', {'id': space.id}) }}" class="btn bg-red rounded-pill font-weight-bold white-text">Visiter</a>
-            </div>
+<div class="col-lg-5 card card-dash p-3 mx-2 mb-3 z-depth-0">
+    <div class="row">
+    <div class="col-lg-4 my-auto">
+        {% if space.image == '' %}
+            <img src="{{ asset('space/default.jpg') }}" class="avatar z-depth-0 card-dash" alt="espace image">
+        {% else %}
+            <img src="{{ asset('space/'~ space.id~ '/' ~ space.image) }}" class="avatar z-depth-0 rounded-circle " alt="espace image">
+        {% endif %}
+    </div>
+    <div class="col-lg-8 pl-0">
+        <h4 class="font-weight-bold red_text pt-2">{{ space.name }}</h4>
+        <p class="small text-muted ml-1 mb-0 mx-auto"> Crée le : {{ space.createdDate ? space.createdDate|date('d/m/Y') : '' }}</p>
+    </div>
+        <div class="row mx-0">
+        <div class="col-lg-10 card-dash p-3 my-2 mx-auto bg-beige">
+            <p class="text-small mb-0 blue_text mx-auto">{{ space.description[:50] ~ ' ...' }}</p>
         </div>
+
+    </div>
+    </div>
+    <div class="row mx-0">
+        <a href="{{ path('space_show', {'id': space.id}) }}" class="btn bg-red rounded-pill font-weight-bold white-text mx-auto">Visiter</a>
+
+        <i class="fas fa-cog red_text my-auto"></i>
     </div>
 
+</div>
