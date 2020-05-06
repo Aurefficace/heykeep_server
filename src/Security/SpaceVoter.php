@@ -10,7 +10,7 @@ class SpaceVoter extends Voter
 {
     const VIEW = 'view';
     const EDIT = 'edit';
-
+    const DELETE =  'delete';
     protected function supports($attribute, $subject)
     {
         
@@ -44,6 +44,8 @@ class SpaceVoter extends Voter
                 return $this->canView($space, $user);
             case self::EDIT:
                 return $this->canEdit($space, $user);
+           case self::DELETE:
+                return $this->canDelete($space, $user);
         }
 
         throw new \LogicException('This code should not be reached!');
@@ -65,5 +67,9 @@ class SpaceVoter extends Voter
     {
         
         return $user === $space->getIdOwner();
+    }
+     private function canDelete(Space $space, User $user)
+    {
+        return $user === $space->getIdOwner();   
     }
 }
