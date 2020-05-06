@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Categorie;
 use App\Entity\Space;
 use App\Form\SpaceType;
 use App\Helpers\Utilities;
@@ -36,8 +37,17 @@ class SpaceController extends BaseController
      */
     public function new(Request $request): Response
     {
+        $user = $this->getUser();
         $space = new Space();
-        $form = $this->createForm(SpaceType::class, $space);
+
+        $tag1 = new Categorie();
+        $tag1->setName('tag1');
+        $space->getCategorie()->add($tag1);
+        $tag2 = new Categorie();
+        $tag2->setName('tag2');
+        $space->getCategorie()->add($tag2);
+
+        $form = $this->createForm(SpaceType::class, $space, ['attr' => ['user' => $user]]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -85,8 +95,9 @@ class SpaceController extends BaseController
      */
     public function edit(Request $request, Space $space): Response
     {
+        $user = $this->getUser();
         $this->denyAccessUnlessGranted('edit', $space);
-        $form = $this->createForm(SpaceType::class, $space);
+        $form = $this->createForm(SpaceType::class, $space, ['attr' => ['user' => $user]]);
         $form->handleRequest($request);
         
 

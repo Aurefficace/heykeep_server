@@ -37,7 +37,13 @@ class SpaceType extends AbstractType
             ->add('imagefile', FileType::class, [
                 'label'  => 'Choisissez votre image d\'espace',
                 'required' => false,
-            ]);
+            ])
+            ->add('categorie', CollectionType::class, [
+                'entry_type' => CategorieType::class,
+//                'entry_options' => ['attr' => ['user'=>$options['attr']['user']]],
+                'entry_options' => $options,
+            ])
+        ;
         ;
     }
 
