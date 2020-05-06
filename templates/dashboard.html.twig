@@ -43,7 +43,7 @@
                 <div class="col-lg-4 bg-beige p-3 m-2 card-dash">
                     <h2 class="blue_text mx-3 my-3">mes espaces</h2>
                     <div class="container">
-                        <h3 class="red_text ml-3 mb-3">liste de vos espaces</h3>
+                        <h3 class="red_text mb-3">liste de vos espaces</h3>
                         <div class="row">
                         {% for spaceOwned in spacesOwned %}
                             {% include 'space/space_short_display.twig' with {"space" : spaceOwned} %}

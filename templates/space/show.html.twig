@@ -1,11 +1,15 @@
 {% extends 'base.html.twig' %}
+{% block stylesheets %} <link href="{{ asset('heykeep/css/heykeep.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('heykeep/css/login.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('heykeep/css/dashboard.css') }}" rel="stylesheet" type="text/css">
+{% endblock %}
 
 {% block title %}Space{% endblock %}
 
 {% block body %}
     <h1>Space</h1>
 
-    <table class="table">
+    <table class="table z-depth-0">
         <tbody>
             <tr>
                 <th>Id</th>

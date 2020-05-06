@@ -1,22 +1,30 @@
 {% extends 'base.html.twig' %}
+{% block stylesheets %}
+    <link href="{{ asset('heykeep/css/register.css') }}" rel="stylesheet" type="text/css">
+{% endblock %}
 
 {% block title %}Mes espaces{% endblock %}
 
 {% block body %}
 
-    <button id="back-to-list-space" type="button" class="btn btn-primary px-3" style="display: none;" onclick="displayFadeToggle('#master-detail');displayFadeToggle('#listmaster');displayFadeToggle('#back-to-list-space');"> <i class="fas fa-th-list" aria-hidden="true"></i> Liste des espaces</button>
-    <button type="button" class="btn btn-primary px-3" onclick="callAjaxMasterDetail('{{ path('space_new')}}','#master-detail','#listmaster', '#back-to-list-space');"><i class="fas fa-plus" aria-hidden="true"></i> Nouvel Espace</button>
-    <div class="container my-5 py-5 z-depth-1">
+      <div class="container py-5 z-depth-0 mb-150">
 
         <!--Section: Content-->
-        <section class="px-md-5 mx-md-5 text-center text-lg-left dark-grey-text">
-            <!--Grid row-->
-            <div id="listmaster" class="row justify-content-center">
+        <section class="px-md-5 mx-md-5 text-center blue_text">
+            <div class="col-lg-6 mx-auto mb-5">
+                <div class="register100-pic js-tilt mx-auto mb-3 mt-3" data-tilt>
+                    <img src="{{ asset('heykeep/img/heykeep_logo.png') }}" alt="logo mobile">
+                </div>
+                <button id="back-to-list-space" type="button" class="btn rounded-pill bg-red px-3 text-white font-weight-bold mx-auto" style="display: none;" onclick="displayFadeToggle('#master-detail');displayFadeToggle('#listmaster');displayFadeToggle('#back-to-list-space');"> <i class="fas fa-th-list" aria-hidden="true"></i> Liste des espaces</button>
+                <button type="button" class="btn rounded-pill bg-red px-3 text-white font-weight-bold mx-auto" onclick="callAjaxMasterDetail('{{ path('space_new')}}','#master-detail','#listmaster', '#back-to-list-space');"><i class="fas fa-plus" aria-hidden="true"></i> Nouvel Espace</button>
+            </div>
 
-                <h1>Liste des espaces</h1>
-                <h2>En tant que Membre</h2>
+            <!--Grid row-->
+            <div id="listmaster" class="d-flex justify-content-center flex-column">
+                <h1 class="red_text mx-auto">Liste des espaces</h1>
+                <h2 class="blue_text mx-auto">En tant que Membre</h2>
                         {%  include 'space/spaces.html.twig' with {'foo': spacesMember}  %}
-                <h2>En tant que administrateur</h2>
+                <h2 class="blue_text mx-auto">En tant qu'administrateur</h2>
                         {%  include 'space/spaces.html.twig' with {'foo': spacesOwner}  %}
             </div>
             <div id="master-detail"></div>
@@ -24,7 +32,10 @@
     </div>
 {% endblock %}
 {% block javascripts %}
-    <script src="{{ asset('heykeep/js/space.js') }}"></script>{% endblock %}
+    <script src="{{ asset('heykeep/js/register.js') }}"></script>
+    <script src="{{ asset('heykeep/js/space.js') }}"></script>
+
+{% endblock %}
 
 
 
