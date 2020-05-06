@@ -128,8 +128,8 @@ class SpaceController extends BaseController
         $this->denyAccessUnlessGranted('delete', $space);
         if ($this->isCsrfTokenValid('delete' . $space->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
-           // $entityManager->remove($space);
-           // $entityManager->flush();
+             $entityManager->remove($space);
+             $entityManager->flush();
             
         }
 

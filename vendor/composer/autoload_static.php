@@ -124,6 +124,10 @@ class ComposerStaticInit26c90bc8d1c9979598ddd2fe5e733aa8
         array (
             'Monolog\\' => 8,
         ),
+        'L' => 
+        array (
+            'Lcobucci\\JWT\\' => 13,
+        ),
         'F' => 
         array (
             'Fresh\\DoctrineEnumBundle\\' => 25,
@@ -486,6 +490,10 @@ class ComposerStaticInit26c90bc8d1c9979598ddd2fe5e733aa8
         'Monolog\\' => 
         array (
             0 => __DIR__ . '/..' . '/monolog/monolog/src/Monolog',
+        ),
+        'Lcobucci\\JWT\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/lcobucci/jwt/src',
         ),
         'Fresh\\DoctrineEnumBundle\\' => 
         array (

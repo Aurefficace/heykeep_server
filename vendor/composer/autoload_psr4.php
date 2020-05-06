@@ -88,6 +88,7 @@ return array(
     'PUGX\\AutocompleterBundle\\' => array($vendorDir . '/pugx/autocompleter-bundle/src'),
     'Nelmio\\CorsBundle\\' => array($vendorDir . '/nelmio/cors-bundle'),
     'Monolog\\' => array($vendorDir . '/monolog/monolog/src/Monolog'),
+    'Lcobucci\\JWT\\' => array($vendorDir . '/lcobucci/jwt/src'),
     'Fresh\\DoctrineEnumBundle\\' => array($vendorDir . '/fresh/doctrine-enum-bundle'),
     'Egulias\\EmailValidator\\' => array($vendorDir . '/egulias/email-validator/EmailValidator'),
     'EasyCorp\\EasyLog\\' => array($vendorDir . '/easycorp/easy-log-handler/src'),

@@ -7,7 +7,7 @@
 	{% block title %}Dashboard{% endblock %}
 	{% block body %}
 		{% if app.user %}
-			<div class="row">
+			<div class="row mb-150">
 				<div class="container mt-5 rounded-pill bg-blue p-3 mb-5  text-center ">
 					<div class="row">
 						<div class="col m-3">
@@ -45,6 +45,10 @@
 						</div>
 						<div class="col col-example bg-beige p-3 m-2 card-dash d-flex justify-content-center flex-column">
 							<h3 class="blue_text mx-3 my-3 text-center">Change ton avatar:</h3>
+							<div class="col-6 mx-auto">
+								<img src="{{ asset('user/profile/'~ app.user.id~ '/' ~ app.user.avatar) }}" class="rounded-circle z-depth-0" alt="avatar image" >
+							</div>
+
 							<button id="buttonChangeAvatar" class="btn bg-red px-3 mx-5 rounded-pill text-center font-weight-bold white-text">Change ton avatar</button>
 							<form id="formChangeAvatar" class="login100-form hidden d-flex justify-content-center flex-column" method="post"
 								  action="{{ path('app_User_reset_avatar') }}">
@@ -59,10 +63,13 @@
 				<div class="container mt-3">
 					<div class="row">
 						<div class="col col-example bg-beige p-3 m-2 card-dash">
-							<h3 class="blue_text mx-3 my-3 text-center">Mes catégories:</h3>
+							<h3 class="blue_text mx-3 my-3 text-center">Mes catégories :</h3>
 						</div>
 						<div class="col col-example bg-beige p-3 m-2 card-dash">
-							<h3 class="blue_text mx-3 my-3 text-center">Gérer mes espaces</h3>
+							<h3 class="blue_text mx-3 my-3 text-center">Gérer mes espaces :</h3>
+							{% for spaceOwned in spacesOwned %}
+								{% include 'space/space_short_display.twig' with {"space" : spaceOwned} %}
+							{% endfor %}
 						</div>
 					</div>
 				</div>

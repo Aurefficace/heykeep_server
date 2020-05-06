@@ -1421,6 +1421,63 @@
         ]
     },
     {
+        "name": "lcobucci/jwt",
+        "version": "3.3.0",
+        "version_normalized": "3.3.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/lcobucci/jwt.git",
+            "reference": "8866a58fa866f6872f2a6ea0e04ad56480f0f440"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/lcobucci/jwt/zipball/8866a58fa866f6872f2a6ea0e04ad56480f0f440",
+            "reference": "8866a58fa866f6872f2a6ea0e04ad56480f0f440",
+            "shasum": ""
+        },
+        "require": {
+            "ext-mbstring": "*",
+            "ext-openssl": "*",
+            "php": "^5.6 || ^7.0"
+        },
+        "require-dev": {
+            "mikey179/vfsstream": "~1.5",
+            "phpmd/phpmd": "~2.2",
+            "phpunit/php-invoker": "~1.1",
+            "phpunit/phpunit": "^5.7 || ^7.3",
+            "squizlabs/php_codesniffer": "~2.3"
+        },
+        "time": "2019-05-22T09:44:23+00:00",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "3.1-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Lcobucci\\JWT\\": "src"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "BSD-3-Clause"
+        ],
+        "authors": [
+            {
+                "name": "Luís Otávio Cobucci Oblonczyk",
+                "email": "lcobucci@gmail.com",
+                "role": "Developer"
+            }
+        ],
+        "description": "A simple library to work with JSON Web Token and JSON Web Signature",
+        "keywords": [
+            "JWS",
+            "jwt"
+        ]
+    },
+    {
         "name": "monolog/monolog",
         "version": "1.25.3",
         "version_normalized": "1.25.3.0",

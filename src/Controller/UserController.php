@@ -10,6 +10,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use App\Helpers\Utilities;
+use App\Entity\Space;
 /**
  * @Route("user")
  */
@@ -18,9 +19,14 @@ class UserController extends AbstractController
     /**
      * @Route("/profile", name="app_user_profile")
      */
-    public function UserAction()
-    {
-        return $this->render('user/userProfile.html.twig');
+    public function UserAction()  {
+        $em = $this->getDoctrine()->getManager();
+        $user=$this->getUser();
+        return $this->render('user/userProfile.html.twig',
+            [
+                'spacesOwned' => $em->getRepository(Space::class)->findBy(array("id_owner" => $user)),
+
+            ]);
     }
 
     /**

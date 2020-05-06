@@ -28,6 +28,7 @@ class DiscussionController extends BaseController
         return $this->render('discussion/index.html.twig', [
             'discussions' => $discussionRepository->findByUserId($userId),
         ]);
+ 
     }
 
     /**

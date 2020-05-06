@@ -24,76 +24,39 @@
                 </div>
                 <div class="col-lg-3 bg-beige p-3 m-2 card-dash">
                     <div>
-                        <h3 class="blue_text mx-3 my-3">fil d'actualités</h3>
+                        <h2 class="blue_text mx-3 my-3">fil d'actualités</h2>
                     </div>
                     <div class="container">
                         <div class="row">
-                            <div class="col-lg-12">
-                                5 Dernières activités dans les espaces (en fonction de l'utilisateur connecté)
-                                {{ dump(lastsSpaceActivities) }}
-                                5 Dernières activités dans les discussions (en fonction de l'utilisateur connecté)
-                                {{ dump(lastsChatActivities) }}
-                                Voir
-                                <ul>
-                                    <li>1 src/Controller/DashboardController.php</li>
-                                    <li>2 src/Repository/SpaceRepository.php</li>
-                                    <li>3 src/Repository/MessageRepository.php (la requête commentée en MySQL fait la même chose que la requête façon doctrine, les 2 sont utilisables.
-                                        Il y a sans doute plus simple mais avec la version plus récente de MySQL ^^ (là 5.7.29))
-                                        <br/>
-                                        <br/>
-                                        <br/>
-                                        <br/>
-                                        <br/>
-                                        <br/></li>
-                                </ul>
-                            </div>
-                            <!-- Grid column -->
-                            <div class="col-lg-5 col-xl-4">
-
-                                <!-- Featured image -->
-                                <div class="view overlay rounded z-depth-1-half mb-lg-0 mb-4">
-                                    <img class="img-fluid" src="https://mdbootstrap.com/img/Photos/Others/images/49.jpg" alt="Sample image">
-                                    <a>
-                                        <div class="mask rgba-white-slight"></div>
-                                    </a>
-                                </div>
-
-                            </div>
-                            <!-- Grid column -->
-
-                            <!-- Grid column -->
-                            <div class="col-lg-7 col-xl-8">
-
-                                <!-- Post title -->
-                                <h5 class="font-weight-bold mb-0"><strong>Titre</strong></h5>
-                                <!-- Excerpt -->
-                                <p class="blue_text mb-0">Lorem Ipsum is my passion, il love it "dolor sit amet"</p>
-                                <!-- Post data -->
-                                <p>par <a class="font-weight-bold">Jean Phill</a>, 19/04/2018</p>
-                                <!-- Read more button -->
-                                <a class="btn bg-blue btn-md mx-0 rounded-pill">Voir</a>
-
-                            </div>
-                            <!-- Grid column -->
-
+                            <h3 class="red_text ml-3 mb-3">activité des discussions</h3>
+                            {% for lastChatActivity in lastsChatActivities %}
+                                {% include 'space/chat_short_display.twig' with {"chat" : lastChatActivity} %}
+                            {% endfor %}
+                            <h3 class="red_text ml-3 mb-3">Activités dans les espaces</h3>
+                                {% for lastSpaceActivity in lastsSpaceActivities %}
+                                    {% include 'space/space_short_display.twig' with {"space" : lastSpaceActivity} %}
+                                {% endfor %}
                         </div>
                         <!-- Grid row -->
                     </div>
                 </div>
                 <div class="col-lg-4 bg-beige p-3 m-2 card-dash">
-                    <h3 class="blue_text mx-3 my-3">mes espaces</h3>
-                    <div class="container row">
+                    <h2 class="blue_text mx-3 my-3">mes espaces</h2>
+                    <div class="container">
+                        <h3 class="red_text ml-3 mb-3">liste de vos espaces</h3>
+                        <div class="row">
                         {% for spaceOwned in spacesOwned %}
                             {% include 'space/space_short_display.twig' with {"space" : spaceOwned} %}
                         {% endfor %}
                         {% for spaceMember in spacesMember %}
                             {% include 'space/space_short_display.twig' with {"space" : spaceMember} %}
                         {% endfor %}
+                        </div>
                     </div>
                 </div>
                 <div class="col-lg-2 bg-beige p-3 m-2 card-dash">
                     <div>
-                        <h3 class="blue_text mx-3 my-3">mes favoris</h3>
+                        <h2 class="blue_text mx-3 my-3">mes favoris</h2>
                     </div>
                     <div class="container">
                         <div class="row">
