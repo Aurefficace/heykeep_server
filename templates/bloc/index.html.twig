@@ -14,6 +14,8 @@
                 <th>Description</th>
                 <th>Archivé</th>
                 <th>Public</th>
+                <th>Contenu</th>
+                <th>Type</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -26,6 +28,8 @@
                 <td>{{ bloc.description }}</td>
                 <td>{{ bloc.isarchiv ? 'Oui' : 'Non' }}</td>
                 <td>{{ bloc.ispublic ? 'Oui' : 'Non' }}</td>
+                <td>{{ bloc.element.content }}</td>
+                <td>{{ bloc.element.type|readable_enum }}</td>
                 <td>
                     <a href="{{ path('bloc_show', {'id': bloc.id}) }}">Voir</a> -
                     <a href="{{ path('bloc_edit', {'id': bloc.id}) }}">Editer</a>

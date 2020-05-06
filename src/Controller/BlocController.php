@@ -6,6 +6,7 @@ use App\Entity\Bloc;
 use App\Entity\Element;
 use App\Form\BlocType;
 use App\Repository\BlocRepository;
+use App\Repository\ElementRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -21,6 +22,8 @@ class BlocController extends AbstractController
      */
     public function index(BlocRepository $blocRepository): Response
     {
+        $em = $this->getDoctrine()->getManager();
+        $user = $this->getUser();
         return $this->render('bloc/index.html.twig', [
             'blocs' => $blocRepository->findAll(),
         ]);
