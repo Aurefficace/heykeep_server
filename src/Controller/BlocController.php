@@ -6,6 +6,7 @@ use App\Entity\Bloc;
 use App\Entity\Element;
 use App\Form\BlocType;
 use App\Repository\BlocRepository;
+use App\Repository\ElementRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -21,8 +22,10 @@ class BlocController extends AbstractController
      */
     public function index(BlocRepository $blocRepository): Response
     {
+        $user = $this->getUser();
+
         return $this->render('bloc/index.html.twig', [
-            'blocs' => $blocRepository->findAll(),
+            'blocs' => $blocRepository->findBlocByIdOwner($user->getId()),
         ]);
     }
 
@@ -70,7 +73,8 @@ class BlocController extends AbstractController
      */
     public function edit(Request $request, Bloc $bloc): Response
     {
-        $form = $this->createForm(BlocType::class, $bloc);
+        $user = $this->getUser();
+        $form = $this->createForm(BlocType::class, $bloc, ['attr' => ['user' => $user]]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
