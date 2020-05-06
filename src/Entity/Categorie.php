@@ -42,7 +42,7 @@ class Categorie
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Categorie", inversedBy="id_cat_parent")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $categorie;
 

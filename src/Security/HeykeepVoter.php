@@ -1,6 +1,7 @@
 <?php
 namespace App\Security;
 
+use App\Entity\Discussion;
 use App\Entity\Space;
 use App\Entity\User;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
