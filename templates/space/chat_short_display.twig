@@ -1,0 +1,13 @@
+<div class="mb-3 mx-3">
+
+    <div class="ml-3">
+        <div class="row">
+            <img title ="{{ chat.getIdUser.name }}" src="{{ asset('user/profile/'~ chat.getIdUser.id~ '/' ~ chat.getIdUser.avatar) }}" class="rounded-circle mr-1" alt="avatar image" style="width: 50px;" >
+            <div class="card card-dash py-2 px-3 mb-2">
+                <p class="text-small mb-0 blue_text">{{ chat.content[:50] ~ ' ...' }}</p>
+            </div>
+        </div>
+        <p class="small text-muted ml-1 mb-0">{{ chat.getCreatedDate|date('d/m/Y H:i:s') }}</p>
+        <p class="small blue_text ml-1 mt-0">Publié dans : <a>{{ chat.getIdDiscussion.name }}</a></p>
+    </div>
+</div>

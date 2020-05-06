@@ -54,7 +54,7 @@ class MessageRepository extends ServiceEntityRepository
                     ->addGroupBy('m2.id_discussion')
                     ->getDQL()
             ))
-            ->setMaxResults(5)
+            ->setMaxResults(6)
             ->addOrderBy('m.created_date', 'DESC')
         ;
 

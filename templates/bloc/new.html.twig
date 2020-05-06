@@ -3,9 +3,9 @@
 {% block title %}New Bloc{% endblock %}
 
 {% block body %}
-    <h1>Ajouter un Bloc</h1>
+    <h1 class="red_text">uploadez un fichier</h1>
 
     {{ include('bloc/_form.html.twig') }}
 
-    <a href="{{ path('bloc_index') }}">Tous les blocs</a>
+    <a class="red_text" href="{{ path('bloc_index') }}">Retour</a>
 {% endblock %}
