@@ -42,11 +42,13 @@
 				<div class="toast-body" id="notifContent"></div>
 			</div>
 			{% block body %}
+			{% endblock %}
 			<span id="usefull-targets"
+					data-idUser="{{app.user.id}}"
 				  data-target-discussion-index="{{ path('discussion_index') }}"
 				  data-target-search-user-autocomplete="{{ path('search_user_autocomplete') }}"
 				  data-target-get-user-autocomplete="{{ path('get_user_autocomplete') }}"></span>
-			{% endblock %}
+			
 			<script type="text/javascript">
 				var $usefullTargets;
 			</script>

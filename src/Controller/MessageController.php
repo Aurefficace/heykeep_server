@@ -52,12 +52,10 @@ class MessageController extends AbstractController
         $message->setIdDiscussion($discussion);
 
         try {
-            $user = $discussion->getIdUser()[0];
            
             $target = [];
-            $target = [
-                "http://monsite/instantmessages/{$user->getId()}"
-            ];
+            foreach ($discussion->getIdUser() as $discussionUser)
+                $target[] = "http://monsite/instantmessages/".$discussionUser->getId();
            
             $update = new Update('http://monsite/instantmessages', json_encode(["success" => [
                 'message' => $message->getContent(),

@@ -1,9 +1,8 @@
 $(document).ready(function () {
   // URL is a built-in JavaScript class to manipulate URLs
   const url = new URL("http://localhost:3000/.well-known/mercure");
-  url.searchParams.append("topic", "http://monsite/instantmessages");
-
-  const eventSource = new EventSource(url, {withCredentials: true});
+  url.searchParams.append("topic", "http://monsite/instantmessages/" +  $usefullTargets.attr("data-idUser"));
+  const eventSource = new EventSource(url, {withCredentials: true} );
   eventSource.onmessage = (event) => {
     event = JSON.parse(event.data)
     console.log(event);
@@ -99,22 +98,22 @@ function addNewMessage() {
   $form.ajaxForm({
     success: function (datas) {
       if (datas.success) {
-        showModal(datas.success, "success", "Success");
-        const $newMessage = $("#message-template").contents().clone();
-        $("#messageList").append($newMessage);
-        $newMessage.find(".message-content").html(datas.success.message);
-        $newMessage.find(".date-message").html(datas.success.date.date);
-        $newMessage.find(".nameUser-message").html(datas.success.user.name);
-        $newMessage
-          .find(".img-message")
-          .attr(
-            "src",
-            "user/profile/" +
-              datas.success.user.id +
-              "/" +
-              datas.success.user.avatar
-          );
-        $newMessage.removeAttr("hidden");
+        // showModal(datas.success, "success", "Success");
+        // const $newMessage = $("#message-template").contents().clone();
+        // $("#messageList").append($newMessage);
+        // $newMessage.find(".message-content").html(datas.success.message);
+        // $newMessage.find(".date-message").html(datas.success.date.date);
+        // $newMessage.find(".nameUser-message").html(datas.success.user.name);
+        // $newMessage
+        //   .find(".img-message")
+        //   .attr(
+        //     "src",
+        //     "user/profile/" +
+        //       datas.success.user.id +
+        //       "/" +
+        //       datas.success.user.avatar
+        //   );
+        // $newMessage.removeAttr("hidden");
         scrollToBottom();
       } else if (datas.error) {
         showModal(datas.success, "error", "Erreur");
