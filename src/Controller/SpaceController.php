@@ -85,9 +85,10 @@ class SpaceController extends BaseController
      */
     public function edit(Request $request, Space $space): Response
     {
+        $this->denyAccessUnlessGranted('edit', $space);
         $form = $this->createForm(SpaceType::class, $space);
         $form->handleRequest($request);
-        $this->denyAccessUnlessGranted('edit', $space);
+        
 
         if ($form->isSubmitted() && $form->isValid()) {
             if ($form['imagefile']->getData()) {
@@ -113,11 +114,12 @@ class SpaceController extends BaseController
      */
     public function delete(Request $request, Space $space): Response
     {
+        $this->denyAccessUnlessGranted('delete', $space);
         if ($this->isCsrfTokenValid('delete' . $space->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($space);
-            $entityManager->flush();
-            $this->denyAccessUnlessGranted('delete', $space);
+           // $entityManager->remove($space);
+           // $entityManager->flush();
+            
         }
 
         return $this->redirectToRoute('space_index');
