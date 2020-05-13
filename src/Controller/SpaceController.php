@@ -40,9 +40,9 @@ class SpaceController extends BaseController
         $user = $this->getUser();
         $space = new Space();
 
-//        $tag1 = new Categorie();
-//        $tag1->setName('tag1');
-//        $space->getCategorie()->add($tag1);
+        $cat = new Categorie();
+        $cat->setName('cat1');
+        $space->getCategorie()->add($cat);
 //        $tag2 = new Categorie();
 //        $tag2->setName('tag2');
 //        $space->getCategorie()->add($tag2);

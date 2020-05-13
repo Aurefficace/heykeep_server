@@ -41,10 +41,10 @@ class SpaceType extends AbstractType
 
 
 
-//            ->add('categorie', CollectionType::class, [
-//                'entry_type' => CategorieType::class,
-//                'entry_options' => $options,
-//            ])
+            ->add('categorie', CollectionType::class, [
+                'entry_type' => CategorieType::class,
+                'entry_options' => $options,
+            ])
 
 
 

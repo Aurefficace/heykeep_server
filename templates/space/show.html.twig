@@ -51,6 +51,18 @@
      <button id="buttonChangeAvatar" class="btn btn-primary px-3 rounded-pill">Ajouter un membre</button>
     <a href="{{ path('space_index') }}"><button type="btn" class="btn btn-light btn-sm">Liste des espaces</button></a>
 
+    <div class="container mt-3">
+        <div class="row">
+            <div class="col col-example bg-beige  p-3 m-2 card-dash">
+                <h3 class="blue_text mx-3 my-3 text-center">Liste des catégories :</h3>
+                {% for cat in space.categorie %}
+                    {{cat.name}} <br>
+                {% endfor %}
+                <a href="{{ path('categorie_new') }}"><button type="btn" class="btn btn-primary px-3 rounded-pill">Nouvelle catégorie</button></a>
+            </div>
+        </div>
+    </div>
+
     <h2>Liste des blocs de cet espace</h2>
     <table class="table">
         <thead>
