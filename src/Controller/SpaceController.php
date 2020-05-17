@@ -42,7 +42,7 @@ class SpaceController extends BaseController
 
         $cat = new Categorie();
         $cat->setName('cat1');
-        $space->getCategorie()->add($cat);
+        $space->addCategorie($cat); // TODO Matthias : utilise addCategorie au lieu de getCategorie()->add($cat) (je sais c'est dans le tuto) mais addCategorie ajoute le lien vers l'espace (va voir dans Space)
 //        $tag2 = new Categorie();
 //        $tag2->setName('tag2');
 //        $space->getCategorie()->add($tag2);
