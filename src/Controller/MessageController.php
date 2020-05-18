@@ -55,13 +55,14 @@ class MessageController extends AbstractController
            
             $target = [];
             foreach ($discussion->getIdUser() as $discussionUser)
-                $target[] = "http://monsite/instantmessages/".$discussionUser->getId();
+                $target[] = "http://127.0.0.1/instantmessages/".$discussionUser->getId();
            
-            $update = new Update('http://monsite/instantmessages', json_encode(["success" => [
+            $update = new Update('http://127.0.0.1/instantmessages/'.$user->getId(), json_encode(["data" => [
                 'message' => $message->getContent(),
                 'date' => $message->getCreatedDate(),
                 'user' => ['id' => $user->getId(), 'avatar' => $user->getAvatar(), 'name' => $user->getName()]
                 ]]), $target);
+                
             $messageBus->dispatch($update);
     
         } catch (\Exception $e) {

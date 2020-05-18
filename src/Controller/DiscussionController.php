@@ -13,6 +13,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 
+
 /**
  * @Route("/discussion")
  */
@@ -28,7 +29,6 @@ class DiscussionController extends BaseController
         return $this->render('discussion/index.html.twig', [
             'discussions' => $discussionRepository->findByUserId($userId),
         ]);
- 
     }
 
     /**
@@ -48,11 +48,10 @@ class DiscussionController extends BaseController
             $entityManager->flush();
 
             return new JsonResponse(['success' => 'Votre conversation à bien été ajouté']);
-        }
-        elseif($form->isSubmitted() ){
+        } elseif ($form->isSubmitted()) {
             return $this->neweditSubmittedGlobal($form);
         }
-        
+
         return $this->render('discussion/new.html.twig', [
             'discussion' => $discussion,
             'form' => $form->createView(),
@@ -64,14 +63,20 @@ class DiscussionController extends BaseController
      */
     public function show(Discussion $discussion, Request $request): Response
     {
-         $messages = $discussion->getMessages();
-         $userId =$this->getUser()->getId();
-        return $this->render('discussion/show.html.twig', [
-            'discussion' => $discussion,
-            'messages' => $messages,
-            'userId' => $userId
-        ]);
+        $messages = $discussion->getMessages();
+        $userId = $this->getUser()->getId();
+        return $this->render(
+            'discussion/show.html.twig',
+            [
+                'discussion' => $discussion,
+                'messages' => $messages,
+                'userId' => $userId
+            ]
+        );
+   
     }
+
+
 
     /**
      * @Route("/{id}/edit", name="discussion_edit", methods={"GET","POST"})

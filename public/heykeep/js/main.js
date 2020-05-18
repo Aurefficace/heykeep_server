@@ -1,5 +1,34 @@
 $(document).ready(function() {
     $usefullTargets = $("#usefull-targets");
+
+      // URL is a built-in JavaScript class to manipulate URLs
+  const url = new URL("http://127.0.0.1:3000/.well-known/mercure");
+  url.searchParams.append("topic", "http://127.0.0.1/instantmessages/" +  $usefullTargets.attr("data-idUser"));
+  const eventSource = new EventSource(url, {withCredentials: true} );
+  console.log('ready disc.js');
+  eventSource.onmessage = (event) => {
+    console.log(event.data);
+    event = JSON.parse('event', event.data)
+    const $newMessage = $("#message-template").contents().clone();
+    $("#messageList").append($newMessage);
+    $newMessage.find(".message-content").html(event.success.message);
+    $newMessage.find(".date-message").html(event.success.date.date);
+    $newMessage.find(".nameUser-message").html(event.success.user.name);
+    $newMessage
+      .find(".img-message")
+      .attr(
+        "src",
+        "user/profile/" +
+          event.success.user.id +
+          "/" +
+          event.success.user.avatar
+      );
+    $newMessage.removeAttr("hidden");
+    scrollToBottom();
+  };
+  eventSource.onerror = (event) => {
+    console.log("rror", event);
+  };
 });
 
 
