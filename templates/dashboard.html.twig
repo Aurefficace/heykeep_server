@@ -36,6 +36,10 @@
                                 {% for lastSpaceActivity in lastsSpaceActivities %}
                                     {% include 'space/space_short_display.twig' with {"space" : lastSpaceActivity} %}
                                 {% endfor %}
+                                <h3 class="red_text ml-3 mb-3">Activités dans les blocs</h3>
+                                {% for lastBlocActivity in lastsBlocActivities %}
+                                    {% include 'bloc/bloc_short_display.twig' with {"bloc" : lastBlocActivity} %}
+                                {% endfor %}
                         </div>
                         <!-- Grid row -->
                     </div>
