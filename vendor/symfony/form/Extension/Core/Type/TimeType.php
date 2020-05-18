@@ -60,16 +60,18 @@ class TimeType extends AbstractType
         }
 
         if ('single_text' === $options['widget']) {
-            // handle seconds ignored by user's browser when with_seconds enabled
-            // https://codereview.chromium.org/450533009/
-            if ($options['with_seconds']) {
-                $builder->addEventListener(FormEvents::PRE_SUBMIT, function (FormEvent $e) {
-                    $data = $e->getData();
-                    if ($data && preg_match('/^\d{2}:\d{2}$/', $data)) {
-                        $e->setData($data.':00');
+            $builder->addEventListener(FormEvents::PRE_SUBMIT, function (FormEvent $e) use ($options) {
+                $data = $e->getData();
+                if ($data && preg_match('/^(?P<hours>\d{2}):(?P<minutes>\d{2})(?::(?P<seconds>\d{2})(?:\.\d+)?)?$/', $data, $matches)) {
+                    if ($options['with_seconds']) {
+                        // handle seconds ignored by user's browser when with_seconds enabled
+                        // https://codereview.chromium.org/450533009/
+                        $e->setData(sprintf('%s:%s:%s', $matches['hours'], $matches['minutes'], isset($matches['seconds']) ? $matches['seconds'] : '00'));
+                    } else {
+                        $e->setData(sprintf('%s:%s', $matches['hours'], $matches['minutes']));
                     }
-                });
-            }
+                }
+            });
 
             if (null !== $options['reference_date']) {
                 $format = 'Y-m-d '.$format;
@@ -93,7 +95,17 @@ class TimeType extends AbstractType
             // so we need to handle the cascade setting here
             $emptyData = $builder->getEmptyData() ?: [];
 
-            if (isset($emptyData['hour'])) {
+            if ($emptyData instanceof \Closure) {
+                $lazyEmptyData = static function ($option) use ($emptyData) {
+                    return static function (FormInterface $form) use ($emptyData, $option) {
+                        $emptyData = $emptyData($form->getParent());
+
+                        return isset($emptyData[$option]) ? $emptyData[$option] : '';
+                    };
+                };
+
+                $hourOptions['empty_data'] = $lazyEmptyData('hour');
+            } elseif (isset($emptyData['hour'])) {
                 $hourOptions['empty_data'] = $emptyData['hour'];
             }
 
@@ -160,14 +172,18 @@ class TimeType extends AbstractType
             $builder->add('hour', self::$widgets[$options['widget']], $hourOptions);
 
             if ($options['with_minutes']) {
-                if (isset($emptyData['minute'])) {
+                if ($emptyData instanceof \Closure) {
+                    $minuteOptions['empty_data'] = $lazyEmptyData('minute');
+                } elseif (isset($emptyData['minute'])) {
                     $minuteOptions['empty_data'] = $emptyData['minute'];
                 }
                 $builder->add('minute', self::$widgets[$options['widget']], $minuteOptions);
             }
 
             if ($options['with_seconds']) {
-                if (isset($emptyData['second'])) {
+                if ($emptyData instanceof \Closure) {
+                    $secondOptions['empty_data'] = $lazyEmptyData('second');
+                } elseif (isset($emptyData['second'])) {
                     $secondOptions['empty_data'] = $emptyData['second'];
                 }
                 $builder->add('second', self::$widgets[$options['widget']], $secondOptions);

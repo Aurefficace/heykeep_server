@@ -25,7 +25,7 @@ class BlocType extends AbstractType
 //            ->add('isarchiv')
             ->add('ispublic')
 //            ->add('id_owner')
-            ->add('id_space', EntityType::class, [
+            ->add('idSpace', EntityType::class, [
                 'class' => Space::class,
                 'choice_label' => 'name',
                 'label' => 'Espace lié',

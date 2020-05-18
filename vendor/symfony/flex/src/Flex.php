@@ -295,7 +295,7 @@ class Flex implements PluginInterface, EventSubscriberInterface
         // new projects are most of the time proprietary
         $manipulator->addMainKey('license', 'proprietary');
 
-        // replace unbounded contraints for symfony/* packages by extra.symfony.require
+        // replace unbounded constraints for symfony/* packages by extra.symfony.require
         $config = json_decode($contents, true);
         if ($symfonyVersion = $config['extra']['symfony']['require'] ?? null) {
             $versions = $this->downloader->getVersions();
@@ -395,8 +395,6 @@ class Flex implements PluginInterface, EventSubscriberInterface
 
     public function install(Event $event = null)
     {
-        $this->updateAutoloadFile();
-
         $rootDir = $this->options->get('root-dir');
 
         if (!file_exists("$rootDir/.env") && !file_exists("$rootDir/.env.local") && file_exists("$rootDir/.env.dist") && false === strpos(file_get_contents("$rootDir/.env.dist"), '.env.local')) {
@@ -446,7 +444,7 @@ class Flex implements PluginInterface, EventSubscriberInterface
                         }
                         $value = strtolower($value[0]);
                         if (!\in_array($value, ['y', 'n', 'a', 'p'])) {
-                            throw new \InvalidArgumentException('Invalid choice');
+                            throw new \InvalidArgumentException('Invalid choice.');
                         }
 
                         return $value;
@@ -668,7 +666,7 @@ class Flex implements PluginInterface, EventSubscriberInterface
         $this->updateComposerLock();
     }
 
-    private function updateAutoloadFile()
+    public function updateAutoloadFile()
     {
         if (!$platform = $this->lock->get('php')['version'] ?? null) {
             return;
@@ -759,18 +757,23 @@ EOPHP
             }
 
             $noRecipe = !isset($manifests[$name]) || (isset($manifests[$name]['not_installable']) && $manifests[$name]['not_installable']);
-            if ($noRecipe && 'symfony-bundle' === $package->getType()) {
-                $manifest = [];
-                $bundle = new SymfonyBundle($this->composer, $package, $job);
+            if ($noRecipe) {
+                $bundles = [];
+
                 if (null === $devPackages) {
                     $devPackages = array_column($this->composer->getLocker()->getLockData()['packages-dev'], 'name');
                 }
                 $envs = \in_array($name, $devPackages) ? ['dev', 'test'] : ['all'];
-                foreach ($bundle->getClassNames() as $class) {
-                    $manifest['manifest']['bundles'][$class] = $envs;
+                $bundle = new SymfonyBundle($this->composer, $package, $job);
+                foreach ($bundle->getClassNames() as $bundleClass) {
+                    $bundles[$bundleClass] = $envs;
                 }
-                if ($manifest) {
-                    $manifest['origin'] = sprintf('%s:%s@auto-generated recipe', $name, $package->getPrettyVersion());
+
+                if ($bundles) {
+                    $manifest = [
+                        'origin' => sprintf('%s:%s@auto-generated recipe', $name, $package->getPrettyVersion()),
+                        'manifest' => ['bundles' => $bundles],
+                    ];
                     $recipes[$name] = new Recipe($package, $name, $job, $manifest);
                 }
             }
@@ -898,6 +901,7 @@ EOPHP
             ScriptEvents::POST_INSTALL_CMD => 'install',
             ScriptEvents::PRE_UPDATE_CMD => 'configureInstaller',
             ScriptEvents::POST_UPDATE_CMD => 'update',
+            ScriptEvents::POST_AUTOLOAD_DUMP => 'updateAutoloadFile',
             PluginEvents::PRE_FILE_DOWNLOAD => 'onFileDownload',
             'auto-scripts' => 'executeAutoScripts',
         ];

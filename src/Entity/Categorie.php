@@ -75,6 +75,8 @@ class Categorie
     {
         $this->id_cat_parent = new ArrayCollection();
         $this->id_bloc = new ArrayCollection();
+        $this->created_date = new \DateTime();
+        $this->isarchiv = true;
     }
 
     public function getId(): ?int

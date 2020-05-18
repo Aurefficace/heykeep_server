@@ -37,46 +37,11 @@ class SpaceController extends BaseController
      */
     public function new(Request $request): Response
     {
-        $user = $this->getUser();
         $space = new Space();
-
-        $cat = new Categorie();
-        $cat->setName('cat1');
-        $space->addCategorie($cat); // TODO Matthias : utilise addCategorie au lieu de getCategorie()->add($cat) (je sais c'est dans le tuto) mais addCategorie ajoute le lien vers l'espace (va voir dans Space)
-//        $tag2 = new Categorie();
-//        $tag2->setName('tag2');
-//        $space->getCategorie()->add($tag2);
-
-        $form = $this->createForm(SpaceType::class, $space, ['attr' => ['user' => $user]]);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $space->setCreatedDate(new \DateTime('today'));
-            $space->setActif(true);
-            $space->setLevel(0);
-            $space->setIdOwner($this->getUser());
-            $space->addIdMember($this->getUser());
-            if ($form['imagefile']->getData()) {
-                $file = $form['imagefile']->getData(); // Récupération du fichier pour l'image de l'espace
-                $space->setImage("spaceimage." . $file->guessExtension()); // Affectation d'un nom standard au fichier d'image de l'espace
-            }
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($space);
-            $entityManager->flush();
-
-            if ($form['imagefile']->getData()) {
-                Utilities::uploadFile($this->getParameter('kernel.project_dir') . '/public/space/' . $space->getId(), $file,"spaceimage.");
-            }
-
-            return $this->redirectToRoute('space_index');
-        } elseif ($form->isSubmitted() && !$form->isValid()) {
-            return $this->neweditSubmittedGlobal($form);
-        }
-
-        return $this->render('space/new.html.twig', [
-            'space' => $space,
-            'form' => $form->createView(),
-        ]);
+        $space->setLevel(0);
+        $space->setIdOwner($this->getUser());
+        $space->addIdMember($this->getUser());
+        return $this->newEdit($request, $space, "new");
     }
 
     /**
@@ -95,26 +60,41 @@ class SpaceController extends BaseController
      */
     public function edit(Request $request, Space $space): Response
     {
+        return $this->newEdit($request, $space, "edit");
+    }
+
+    private function newEdit(Request $request, Space $space, $action) {
         $user = $this->getUser();
         $this->denyAccessUnlessGranted('edit', $space);
         $form = $this->createForm(SpaceType::class, $space, ['attr' => ['user' => $user]]);
         $form->handleRequest($request);
-        
+
+        foreach ($space->getCategorie() as $category) {
+            if(!$category->getIdOwner()) {
+                $category->setIdOwner($user);
+                $category->setLevel(0);
+
+            }
+        }
 
         if ($form->isSubmitted() && $form->isValid()) {
             if ($form['imagefile']->getData()) {
                 $file = $form['imagefile']->getData(); // Récupération du fichier pour l'image de l'espace
                 $space->setImage("spaceimage." . $file->guessExtension()); // Affectation d'un nom standard au fichier d'image de l'espace
             }
-            $this->getDoctrine()->getManager()->flush();
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($space);
+            $entityManager->flush();
             if ($form['imagefile']->getData()) {
                 Utilities::uploadFile($this->getParameter('kernel.project_dir') . '/public/space/' . $space->getId(), $file,"spaceimage.");
             }
 
             return $this->redirectToRoute('space_index');
+        } elseif ($form->isSubmitted() && !$form->isValid()) {
+            return $this->neweditSubmittedGlobal($form);
         }
 
-        return $this->render('space/edit.html.twig', [
+        return $this->render("space/$action.html.twig", [
             'space' => $space,
             'form' => $form->createView(),
         ]);
