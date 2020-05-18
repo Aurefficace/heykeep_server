@@ -108,6 +108,9 @@ class Space
         $this->idMember = new ArrayCollection();
         $this->space_children = new ArrayCollection();
         $this->categorie = new ArrayCollection();
+        $this->created_date = new \DateTime();
+        $this->actif = true;
+
     }
 
     #region Getters and Setters
