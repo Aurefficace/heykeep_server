@@ -58,10 +58,12 @@ class BlocRepository extends ServiceEntityRepository
             ->getResult();
         ;
     }
+   
    public function getLastsActivities(User $user) {
         $queryBuilderBloc = $this->createQueryBuilder('b');
         $queryBuilderBloc
-            ->join('b.idMember', 'u')
+            ->join('b.idSpace', 's')
+            ->join('s.idMember','u')
             ->where($queryBuilderBloc->expr()->eq('u.id',  $user->getId()))
             ->setMaxResults(5)
             ->addOrderBy('b.created_date', 'DESC')
