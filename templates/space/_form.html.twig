@@ -1,6 +1,13 @@
 {{ form_start(form, {'attr': {'class': 'text-center', 'action': action, 'data-callback': "spaceFormCallback"}})}}
 {{ form_row(form.name, {'attr': {'class': 'form-control mb-4' }}) }}
 {{ form_row(form.description, {'attr': {'class': 'form-control mb-4', 'placeholder': 'Description' }}) }}
+<h3>Categories</h3>
+<ul class="categories" data-prototype="{{ form_widget(form.categorie.vars.prototype)|e('html_attr')}}">
+    {% for cat in form.categorie %}
+        <li>{{ form_row(cat.name) }}</li>
+    {% endfor %}
+</ul>
+{#<ul class="categories" data-prototype="{{ form_widget(form.categorie.vars.prototype)|e('html_attr') }}"></ul>#}
 {#  {{ form_row(form.categorie, {'attr': {'class': 'form-control mb-4' }}) }}#}
 {{ form_row(form.imagefile, {'attr': {'onchange':'readURL(this)','class': '', ' aria-describedby': '' }}) }}
 <img  id="imagePreview" src="" />
@@ -8,9 +15,4 @@
 
 
 
-<h3>Categories</h3>
-<ul class="categories">
-    {% for cat in form.categorie %}
-        <li>{{ form_row(cat.name) }}</li>
-    {% endfor %}
-</ul>
+
