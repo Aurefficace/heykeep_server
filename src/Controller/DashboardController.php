@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Controller;
-
+use App \ DBAL \ Types \ ListeElementType ;
 use App\Entity\Message;
 use App\Entity\Space;
 use App\Entity\bloc;
@@ -34,6 +34,9 @@ class DashboardController extends AbstractController
                 'lastsSpaceActivities' => $lastsSpaceActivities,
                 'lastsChatActivities' => $lastsChatActivities,
                 'lastsBlocActivities' => $lastsBlocActivities,
+                'elementTypeText' => ListeElementType::TEXTE,
+                'elementTypeImage' => ListeElementType::IMAGE,
+                'elementTypeLien' => ListeElementType::LIEN
             ]);
             $response->headers->set('set-cookie', $generator->generate($this->getUser()));
             return $response;
