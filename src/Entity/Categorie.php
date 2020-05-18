@@ -67,9 +67,10 @@ class Categorie
     private $isarchiv;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Bloc")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Bloc",  mappedBy="categorie_id")
+     * @ORM\JoinTable(name="categorie_bloc")
      */
-    private $id_bloc;
+    private $blocs;
 
     public function __construct()
     {
@@ -216,13 +217,13 @@ class Categorie
      */
     public function getIdBloc(): Collection
     {
-        return $this->id_bloc;
+        return $this->blocs;
     }
 
     public function addIdBloc(Bloc $idBloc): self
     {
-        if (!$this->id_bloc->contains($idBloc)) {
-            $this->id_bloc[] = $idBloc;
+        if (!$this->blocs->contains($idBloc)) {
+            $this->blocs[] = $idBloc;
         }
 
         return $this;
@@ -230,8 +231,8 @@ class Categorie
 
     public function removeIdBloc(Bloc $idBloc): self
     {
-        if ($this->id_bloc->contains($idBloc)) {
-            $this->id_bloc->removeElement($idBloc);
+        if ($this->blocs->contains($idBloc)) {
+            $this->blocs->removeElement($idBloc);
         }
 
         return $this;

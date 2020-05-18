@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -60,6 +62,16 @@ class Bloc
      */
     private $element;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Categorie", mappedBy="blocs")
+     * @ORM\JoinTable(name="categorie_bloc")
+     */
+    private $categorie_id;
+
+    public function __construct()
+    {
+        $this->categorie_id = new ArrayCollection();
+    }
     public function getId(): ?int
     {
         return $this->id;
@@ -161,6 +173,32 @@ class Bloc
         // set the owning side of the relation if necessary
         if ($element->getBloc() !== $this) {
             $element->setBloc($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Categorie[]
+     */
+    public function getCategorieId(): Collection
+    {
+        return $this->categorie_id;
+    }
+
+    public function addIdCatgeorie(Categorie $idCatgeorie): self
+    {
+        if (!$this->id_user->contains($idCatgeorie)) {
+            $this->id_user[] = $idCatgeorie;
+        }
+
+        return $this;
+    }
+
+    public function removeIdCatgeorie(User $idCatgeorie): self
+    {
+        if ($this->id_user->contains($idCatgeorie)) {
+            $this->id_user->removeElement($idCatgeorie);
         }
 
         return $this;
