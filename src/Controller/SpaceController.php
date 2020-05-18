@@ -37,8 +37,8 @@ class SpaceController extends BaseController
      */
     public function new(Request $request): Response
     {
-        $user = $this->getUser();
         $space = new Space();
+        return $this->newEdit($request, $space, "new");
 
         $form = $this->createForm(SpaceType::class, $space, ['attr' => ['user' => $user]]);
         $form->handleRequest($request);
@@ -88,11 +88,14 @@ class SpaceController extends BaseController
      */
     public function edit(Request $request, Space $space): Response
     {
+        return $this->newEdit($request, $space, "edit");
+    }
+
+    private function newEdit(Request $request, Space $space, $action) {
         $user = $this->getUser();
         $this->denyAccessUnlessGranted('edit', $space);
         $form = $this->createForm(SpaceType::class, $space, ['attr' => ['user' => $user]]);
         $form->handleRequest($request);
-        
 
         if ($form->isSubmitted() && $form->isValid()) {
             if ($form['imagefile']->getData()) {
