@@ -56,8 +56,6 @@ function discussionFormCallback() {
               );
             }
             $("#discussion_id_user").trigger("chosen:updated");
-
-            showModal(data.success, "success", "Success");
           }
           if (data.error) {
             showModal(datas.error, "error", "Erreur");

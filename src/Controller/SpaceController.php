@@ -142,11 +142,13 @@ class SpaceController extends BaseController
         if ($space == null) {
             return new JsonResponse(['error' => "aucun espace trouvé"]);;
         }
-        $categories = [];
+        
+        $categoriesSpace = [];
         foreach ($space->getCategorie() as $categories) {
-            $categories[$categories->getId()] = $categories->getName();
+           
+            $categoriesSpace[$categories->getId()] = $categories->getName();
         }
-        return new JsonResponse(['success' => $categories]);
+        return new JsonResponse(['success' => $categoriesSpace]);
     }
 
     
