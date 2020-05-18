@@ -4,13 +4,14 @@ $(document).ready(function () {
 })
 function BlocFormCallback() {
     console.log("BlocFormCallback");
-    $("#categories_id_space")
+    $("#bloc_idSpace")
       .chosen()
       .change(function () {
-        const id_space = $(this).chosen().val();
+          const id_space = $(this).chosen().val();
+          console.log(id_space);
         $.ajax({
           method: "POST",
-          url: $("#bloc_new").data("target-categories-by-space"),
+          url: $("#bloc-targets").data("target-categories-by-space"),
           data: { id: id_space },
           success: function (data) {
             if (data.success) {
