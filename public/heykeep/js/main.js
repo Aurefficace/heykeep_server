@@ -1,11 +1,14 @@
 $(document).ready(function() {
     $usefullTargets = $("#usefull-targets");
-
+  console.log($usefullTargets)
       // URL is a built-in JavaScript class to manipulate URLs
   const url = new URL("http://127.0.0.1:3000/.well-known/mercure");
-  url.searchParams.append("topic", "http://127.0.0.1/instantmessages/" +  $usefullTargets.attr("data-idUser"));
+  url.searchParams.append("topic", "http://127.0.0.1/instantmessages/" + $usefullTargets.attr("data-idUser"));
   const eventSource = new EventSource(url, {withCredentials: true} );
-  console.log('ready disc.js');
+  console.log('ready disc.js', eventSource);
+  eventSource.onopen = function() {
+    console.log("Connexion au serveur établie.");
+  };
   eventSource.onmessage = (event) => {
     console.log(event.data);
     event = JSON.parse('event', event.data)
@@ -149,8 +152,3 @@ function updateImagePreview($input,$target) {
     reader.readAsDataURL($input.files[0]); // convert to base64 string
   }
 }
-
-// Ajout global des tooltip Bootstrap info bulle quand on passe la souris sur un élément.
-$( function() {
-  $('[data-toggle="tooltip"]').tooltip()
-} );

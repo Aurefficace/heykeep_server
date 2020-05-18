@@ -1,9 +1,11 @@
 {% extends 'base.html.twig' %}
-{% block stylesheets %} <link href="{{ asset('heykeep/css/heykeep.css') }}" rel="stylesheet" type="text/css">
-    <link href="{{ asset('heykeep/css/login.css') }}" rel="stylesheet" type="text/css">
-    <link href="{{ asset('heykeep/css/dashboard.css') }}" rel="stylesheet" type="text/css">
+{% block stylesheets %}
+	<link href="{{ asset('heykeep/css/heykeep.css') }}" rel="stylesheet" type="text/css">
+	<link href="{{ asset('heykeep/css/login.css') }}" rel="stylesheet" type="text/css">
+	<link href="{{ asset('heykeep/css/dashboard.css') }}" rel="stylesheet" type="text/css">
 {% endblock %}
-{% block title %}Dashboard{% endblock %}
+{% block title %}Dashboard
+{% endblock %}
 {% block body %}
     {% if app.user %}
         <div class="container-fluid mb-150">
@@ -112,6 +114,7 @@
 
 {% endblock %}
 {% block javascripts %}
-    <script src="{{ asset('heykeep/js/tilt.jquery.min.js') }}"></script>
-    <script src="{{ asset('heykeep/js/main.js') }}"></script>
+	<script src="{{ asset('heykeep/js/tilt.jquery.min.js') }}"></script>
+	
+
 {% endblock %}
