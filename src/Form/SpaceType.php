@@ -43,9 +43,20 @@ class SpaceType extends AbstractType
 
             ->add('categorie', CollectionType::class, [
                 'entry_type' => CategorieType::class,
-//                'entry_options' => $options, // TODO : Matthias : ton problème est ici, tu passes "$options" au sous FormType et un dump($option);exit(); t'apprends que dedans il y a "data_class = Space" et "data" avec l'espace en paramètre dedans. Donc tu changes ton sous-form en form d'espace et comme Space a aussi "name" il te renvoie pas de soucis à ce niveau...
-                'allow_add' => true,
+                'entry_options' => [
+                    'label' => 'Categorie',
+                ],
+                'label'        => 'Add, move, remove values and press Submit.',
+                'allow_add'    => true,
+                'allow_delete' => true,
+                'prototype'    => true,
+                'required'     => false,
+                'attr'         => [
+                    'class' => 'my-selector',
+                ],
+//                'allow_add' => true,
                 'by_reference'=>false,
+
             ])
 
 

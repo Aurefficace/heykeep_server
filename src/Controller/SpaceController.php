@@ -38,8 +38,6 @@ class SpaceController extends BaseController
     public function new(Request $request): Response
     {
         $space = new Space();
-        $space->setCreatedDate(new \DateTime('today'));
-        $space->setActif(true);
         $space->setLevel(0);
         $space->setIdOwner($this->getUser());
         $space->addIdMember($this->getUser());
@@ -70,6 +68,14 @@ class SpaceController extends BaseController
         $this->denyAccessUnlessGranted('edit', $space);
         $form = $this->createForm(SpaceType::class, $space, ['attr' => ['user' => $user]]);
         $form->handleRequest($request);
+
+        foreach ($space->getCategorie() as $category) {
+            if(!$category->getIdOwner()) {
+                $category->setIdOwner($user);
+                $category->setLevel(0);
+
+            }
+        }
 
         if ($form->isSubmitted() && $form->isValid()) {
             if ($form['imagefile']->getData()) {

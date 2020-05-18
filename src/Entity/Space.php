@@ -73,7 +73,7 @@ class Space
     private $categorie;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Bloc", mappedBy="id_space")
+     * @ORM\OneToMany(targetEntity="App\Entity\Bloc", mappedBy="idSpace")
      */
     private $bloc;
 
@@ -108,6 +108,9 @@ class Space
         $this->idMember = new ArrayCollection();
         $this->space_children = new ArrayCollection();
         $this->categorie = new ArrayCollection();
+        $this->created_date = new \DateTime();
+        $this->actif = true;
+
     }
 
     #region Getters and Setters
