@@ -58,16 +58,18 @@ class BlocRepository extends ServiceEntityRepository
             ->getResult();
         ;
     }
-    public function getLastsActivities(User $user) {
-        $queryBuilderSpace = $this->createQueryBuilder('s');
-        // $queryBuilderSpace
-        //     ->join('s.idMember', 'u')
-        //     ->where($queryBuilderSpace->expr()->eq('u.id',  $user->getId()))
-        //     ->setMaxResults(5)
-        //     ->addOrderBy('s.created_date', 'DESC')
-        // ;
 
-        return $queryBuilderSpace->getQuery()->getResult();
+   public function getLastsActivities(User $user) {
+        $queryBuilderBloc = $this->createQueryBuilder('b');
+        $queryBuilderBloc
+            ->join('b.idSpace', 's')
+            ->join('s.idMember','u')
+            ->where($queryBuilderBloc->expr()->eq('u.id',  $user->getId()))
+            ->setMaxResults(5)
+            ->addOrderBy('b.created_date', 'DESC')
+        ;
+
+        return $queryBuilderBloc->getQuery()->getResult();
     }
 
 }
