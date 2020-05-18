@@ -135,7 +135,6 @@ class ComposerStaticInit26c90bc8d1c9979598ddd2fe5e733aa8
         'E' => 
         array (
             'Egulias\\EmailValidator\\' => 23,
-            'EasyCorp\\EasyLog\\' => 17,
         ),
         'D' => 
         array (
@@ -143,6 +142,7 @@ class ComposerStaticInit26c90bc8d1c9979598ddd2fe5e733aa8
             'Doctrine\\ORM\\' => 13,
             'Doctrine\\Migrations\\' => 20,
             'Doctrine\\Instantiator\\' => 22,
+            'Doctrine\\Inflector\\' => 19,
             'Doctrine\\DBAL\\' => 14,
             'Doctrine\\Common\\Lexer\\' => 22,
             'Doctrine\\Common\\Inflector\\' => 26,
@@ -503,10 +503,6 @@ class ComposerStaticInit26c90bc8d1c9979598ddd2fe5e733aa8
         array (
             0 => __DIR__ . '/..' . '/egulias/email-validator/EmailValidator',
         ),
-        'EasyCorp\\EasyLog\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/easycorp/easy-log-handler/src',
-        ),
         'Doctrine\\Persistence\\' => 
         array (
             0 => __DIR__ . '/..' . '/doctrine/persistence/lib/Doctrine/Persistence',
@@ -522,6 +518,10 @@ class ComposerStaticInit26c90bc8d1c9979598ddd2fe5e733aa8
         'Doctrine\\Instantiator\\' => 
         array (
             0 => __DIR__ . '/..' . '/doctrine/instantiator/src/Doctrine/Instantiator',
+        ),
+        'Doctrine\\Inflector\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/doctrine/inflector/lib/Doctrine/Inflector',
         ),
         'Doctrine\\DBAL\\' => 
         array (
