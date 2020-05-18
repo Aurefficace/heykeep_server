@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Bloc;
+use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
 
@@ -57,16 +58,18 @@ class BlocRepository extends ServiceEntityRepository
             ->getResult();
         ;
     }
-   /* public function getLastsActivities(User $user) {
-        $queryBuilderSpace = $this->createQueryBuilder('s');
-        $queryBuilderSpace
-            ->join('s.idMember', 'u')
-            ->where($queryBuilderSpace->expr()->eq('u.id',  $user->getId()))
+
+   public function getLastsActivities(User $user) {
+        $queryBuilderBloc = $this->createQueryBuilder('b');
+        $queryBuilderBloc
+            ->join('b.idSpace', 's')
+            ->join('s.idMember','u')
+            ->where($queryBuilderBloc->expr()->eq('u.id',  $user->getId()))
             ->setMaxResults(5)
-            ->addOrderBy('s.created_date', 'DESC')
+            ->addOrderBy('b.created_date', 'DESC')
         ;
 
-        return $queryBuilderSpace->getQuery()->getResult();
-    }*/
+        return $queryBuilderBloc->getQuery()->getResult();
+    }
 
 }

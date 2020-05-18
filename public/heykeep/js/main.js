@@ -1,37 +1,37 @@
 $(document).ready(function() {
-    $usefullTargets = $("#usefull-targets");
-  console.log($usefullTargets)
-      // URL is a built-in JavaScript class to manipulate URLs
-  const url = new URL("http://127.0.0.1:3000/.well-known/mercure");
-  url.searchParams.append("topic", "http://127.0.0.1/instantmessages/" + $usefullTargets.attr("data-idUser"));
-  const eventSource = new EventSource(url, {withCredentials: true} );
-  console.log('ready disc.js', eventSource);
-  eventSource.onopen = function() {
-    console.log("Connexion au serveur établie.");
-  };
-  eventSource.onmessage = (event) => {
-    console.log(event.data);
-    event = JSON.parse('event', event.data)
-    const $newMessage = $("#message-template").contents().clone();
-    $("#messageList").append($newMessage);
-    $newMessage.find(".message-content").html(event.success.message);
-    $newMessage.find(".date-message").html(event.success.date.date);
-    $newMessage.find(".nameUser-message").html(event.success.user.name);
-    $newMessage
-      .find(".img-message")
-      .attr(
-        "src",
-        "user/profile/" +
-          event.success.user.id +
-          "/" +
-          event.success.user.avatar
-      );
-    $newMessage.removeAttr("hidden");
-    scrollToBottom();
-  };
-  eventSource.onerror = (event) => {
-    console.log("rror", event);
-  };
+  //   $usefullTargets = $("#usefull-targets");
+  // console.log($usefullTargets)
+  //     // URL is a built-in JavaScript class to manipulate URLs
+  // const url = new URL("http://127.0.0.1:3000/.well-known/mercure");
+  // url.searchParams.append("topic", "http://127.0.0.1/instantmessages/" + $usefullTargets.attr("data-idUser"));
+  // const eventSource = new EventSource(url, {withCredentials: true} );
+  // console.log('ready disc.js', eventSource);
+  // eventSource.onopen = function() {
+  //   console.log("Connexion au serveur établie.");
+  // };
+  // eventSource.onmessage = (event) => {
+  //   console.log(event.data);
+  //   event = JSON.parse('event', event.data)
+  //   const $newMessage = $("#message-template").contents().clone();
+  //   $("#messageList").append($newMessage);
+  //   $newMessage.find(".message-content").html(event.success.message);
+  //   $newMessage.find(".date-message").html(event.success.date.date);
+  //   $newMessage.find(".nameUser-message").html(event.success.user.name);
+  //   $newMessage
+  //     .find(".img-message")
+  //     .attr(
+  //       "src",
+  //       "user/profile/" +
+  //         event.success.user.id +
+  //         "/" +
+  //         event.success.user.avatar
+  //     );
+  //   $newMessage.removeAttr("hidden");
+  //   scrollToBottom();
+  // };
+  // eventSource.onerror = (event) => {
+  //   console.log("rror", event);
+  // };
 });
 
 
@@ -52,6 +52,29 @@ function callAjaxMasterDetail(path, target, parent, externalBackButton) {
         initForm($dataForm);
       }
       hideSpinner($(parent).parent());
+      $dataForm.each(function() {
+          if (typeof $(this).data('callback') !== 'undefined') {
+              runFunctionByName($(this).data('callback'));
+          }
+      })
+    }
+  });
+}
+
+function callAjaxPopup(path) {
+  showSpinner();
+  $.ajax({
+    method: "GET",
+    url: path,
+    success: function (data) {
+      let $modal = $("#centermodal");
+      $modal.find(".modal-body").html(data).fadeIn();
+      $modal.modal();
+      const $dataForm = $modal.find("form");
+      if($dataForm.length > 0) {
+        initForm($dataForm);
+      }
+      hideSpinner();
       $dataForm.each(function() {
           if (typeof $(this).data('callback') !== 'undefined') {
               runFunctionByName($(this).data('callback'));

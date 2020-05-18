@@ -29,7 +29,7 @@ class DashboardController extends AbstractController
         $response = $this->render('dashboard.html.twig',
             [
                 'spacesOwned' => $em->getRepository(Space::class)->findBy(array("id_owner" => $user)),
-                'blocsOwned' => $em->getRepository(Bloc::class)->findBy(array("id_owner" => $user)),
+                'blocsOwned' => $em->getRepository(Bloc::class)->findBy(array("id" => $user)),
                 'spacesMember' => $user->getSpacesMemberNotOwner(),
                 'lastsSpaceActivities' => $lastsSpaceActivities,
                 'lastsChatActivities' => $lastsChatActivities,
