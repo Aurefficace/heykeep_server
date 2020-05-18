@@ -4,7 +4,7 @@
 
 <header>
     <nav class="navbar justify-content-between">
-        <a class="navbar-brand img-fluid logo" href="{{path ('dashboard')}}"><img src="{{ asset('heykeep/img/heykeep_logo.png') }}" alt="logo"></a>
+        <a class="navbar-brand img-fluid logo" href="{{path ('dashboard')}}" data-toggle="tooltip" data-placement="right" title="Dashboard"><img src="{{ asset('heykeep/img/heykeep_logo.png') }}" alt="logo"></a>
         <ul class="navbar-nav ml-auto nav-flex-icons">
             <li class="nav-item avatar">
                 <a class="nav-link p-0" href="#">
@@ -13,12 +13,12 @@
             </li>
             <li class="nav-item">
                 <a href="{{path ('app_user_profile')}}"
-                class="nav-link waves-effect waves-light">
+                class="nav-link waves-effect waves-light" data-toggle="tooltip" data-placement="bottom" title="Profil">
                     <i class="fas fa-cog"></i>
                 </a>
             </li>
             <li class="nav-item">
-                <a href="{{ path('api_logout') }}" class="nav-link waves-effect waves-light">
+                <a href="{{ path('api_logout') }}" class="nav-link waves-effect waves-light" data-toggle="tooltip" data-placement="bottom" title="Se déconnecter">
                     <i class="fas fa-sign-out-alt"></i>
                 </a>
             </li>

@@ -22,7 +22,7 @@ class CategorieType extends AbstractType
             ->add('name')
 //            ->add('created_date')
 //            ->add('level')
-            ->add('image')
+//            ->add('image')
 //            ->add('isarchiv')
 //            ->add('id_space', EntityType::class, [
 //                'class' => Space::class,

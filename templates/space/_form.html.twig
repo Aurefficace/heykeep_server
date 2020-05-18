@@ -5,7 +5,9 @@
 {{ form_row(form.imagefile, {'attr': {'onchange':'readURL(this)','class': '', ' aria-describedby': '' }}) }}
 <img  id="imagePreview" src="" />
 {{ form_row(form.idMember, {'attr': {'class': '', ' aria-describedby': '' }}) }}
-{#{{ form_row(form.categorie, {'attr': {'class': '', ' aria-describedby': '' }}) }}#}
+
+
+
 <h3>Categories</h3>
 <ul class="categories">
     {% for cat in form.categorie %}

@@ -1,4 +1,8 @@
-<table class="table">
+{% block stylesheets %} <link href="{{ asset('heykeep/css/heykeep.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('heykeep/css/login.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('heykeep/css/dashboard.css') }}" rel="stylesheet" type="text/css">
+{% endblock %}
+<table class="table bg-beige card-dash">
     <thead>
     <tr>
         <th>Admin</th>
@@ -36,12 +40,12 @@
             </td>
             <td>
                 <a href="{{ path('space_show', {'id': space.id}) }}">
-                    <button type="button" class="btn btn-primary px-3"><i class="far fa-eye" aria-hidden="true"></i>
+                    <button type="button" class="btn rounded-pill bg-blue px-3 text-white font-weight-bold"><i class="far fa-eye" aria-hidden="true"></i>
                         Afficher
                     </button>
                 </a>
                 {% if app.user.name == space.idOwner %}
-                    <button type="button" class="btn btn-primary px-3"
+                    <button type="button" class="btn rounded-pill bg-red px-3 text-white font-weight-bold"
                             onclick="callAjaxMasterDetail('{{ path('space_edit', {'id': space.id}) }}','#master-detail','#listmaster','#back-to-list-space'); ">
                         <i class="fas fa-plus" aria-hidden="true"></i> Editer
                     </button>

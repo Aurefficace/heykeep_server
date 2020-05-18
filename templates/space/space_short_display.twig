@@ -20,8 +20,9 @@
     </div>
     <div class="row mx-0">
         <a href="{{ path('space_show', {'id': space.id}) }}" class="btn bg-red rounded-pill font-weight-bold white-text mx-auto">Visiter</a>
-
+        {% if app.user.name == space.idOwner %}
         <i class="fas fa-cog red_text my-auto"></i>
+        {% endif %}
     </div>
 
 </div>

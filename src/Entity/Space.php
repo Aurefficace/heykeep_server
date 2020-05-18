@@ -68,7 +68,7 @@ class Space
     private $image;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Categorie", mappedBy="id_space")
+     * @ORM\OneToMany(targetEntity="App\Entity\Categorie", mappedBy="id_space", cascade="persist")
      */
     private $categorie;
 
