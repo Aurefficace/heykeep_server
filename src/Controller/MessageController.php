@@ -57,7 +57,7 @@ class MessageController extends AbstractController
             foreach ($discussion->getIdUser() as $discussionUser)
                 $target[] = "http://127.0.0.1/instantmessages/".$discussionUser->getId();
            
-            $update = new Update('http://127.0.0.1/instantmessages/'.$user->getId(), json_encode(["data" => [
+            $update = new Update('http://127.0.0.1/instantmessages/'.$discussionUser->getId(), json_encode(["data" => [
                 'message' => $message->getContent(),
                 'date' => $message->getCreatedDate(),
                 'user' => ['id' => $user->getId(), 'avatar' => $user->getAvatar(), 'name' => $user->getName()]
@@ -78,11 +78,12 @@ class MessageController extends AbstractController
         }
         
 
-        return new JsonResponse(['success' => [
-            'message' => $message->getContent(),
-            'date' => $message->getCreatedDate(),
-            'user' => ['id' => $user->getId(), 'avatar' => $user->getAvatar(), 'name' => $user->getName()]
-            ]]);
+        // return new JsonResponse(['success' => [
+        //     'message' => $message->getContent(),
+        //     'date' => $message->getCreatedDate(),
+        //     'user' => ['id' => $user->getId(), 'avatar' => $user->getAvatar(), 'name' => $user->getName()]
+        //     ]]);
+        return new JsonResponse(['ok' => 'ok']);
     }
 
     /**

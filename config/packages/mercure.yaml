@@ -2,5 +2,5 @@ mercure:
     enable_profiler: '%kernel.debug%'
     hubs:
         default:
-            url: 'http://localhost:3000/.well-known/mercure'
+            url: 'http://127.0.0.1:3000/.well-known/mercure'
             jwt: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtZXJjdXJlIjp7InB1Ymxpc2giOlsiKiJdfX0.obDjwCgqtPuIvwBlTxUEmibbBf0zypKCNzNKP7Op2UM
