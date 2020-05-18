@@ -61,6 +61,29 @@ function callAjaxMasterDetail(path, target, parent, externalBackButton) {
   });
 }
 
+function callAjaxPopup(path) {
+  showSpinner();
+  $.ajax({
+    method: "GET",
+    url: path,
+    success: function (data) {
+      let $modal = $("#centermodal");
+      $modal.find(".modal-body").html(data).fadeIn();
+      $modal.modal();
+      const $dataForm = $modal.find("form");
+      if($dataForm.length > 0) {
+        initForm($dataForm);
+      }
+      hideSpinner();
+      $dataForm.each(function() {
+          if (typeof $(this).data('callback') !== 'undefined') {
+              runFunctionByName($(this).data('callback'));
+          }
+      })
+    }
+  });
+}
+
 function displayFadeToggle(target) {
   $(target).fadeToggle();
 }

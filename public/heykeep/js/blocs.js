@@ -1,8 +1,9 @@
 $(document).ready(function () {
     console.log('symfony c"est nase')
- 
+    initForm($(".formBloc"));
 })
 function BlocFormCallback() {
+    console.log("BlocFormCallback");
     $("#categories_id_space")
       .chosen()
       .change(function () {
@@ -29,4 +30,8 @@ function BlocFormCallback() {
           },
         });
       });
+}
+
+function newBloc(target) {
+
 }
