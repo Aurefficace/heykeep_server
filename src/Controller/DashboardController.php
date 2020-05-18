@@ -22,7 +22,7 @@ class DashboardController extends AbstractController
         $em = $this->getDoctrine()->getManager();
         $lastsSpaceActivities = $em->getRepository(Space::class)->getLastsActivities($this->getUser());
         $lastsChatActivities = $em->getRepository(Message::class)->getLastsActivities($this->getUser());
-        $lastsBlocActivities= $em->getRepository(Bloc::class)->findBlocByIdOwner($this->getUser());
+        $lastsBlocActivities= $em->getRepository(Bloc::class)->getLastsActivities($this->getUser());
 
 
         $user=$this->getUser();

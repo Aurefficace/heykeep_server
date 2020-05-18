@@ -43,7 +43,7 @@ class Bloc
      * @ORM\ManyToOne(targetEntity="App\Entity\Space", inversedBy="bloc")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $id_space;
+    private $idSpace;
 
     /**
      * @ORM\Column(type="boolean")
@@ -115,12 +115,12 @@ class Bloc
 
     public function getIdSpace(): ?Space
     {
-        return $this->id_space;
+        return $this->idSpace;
     }
 
-    public function setIdSpace(?Space $id_space): self
+    public function setIdSpace(?Space $idSpace): self
     {
-        $this->id_space = $id_space;
+        $this->idSpace = $idSpace;
 
         return $this;
     }

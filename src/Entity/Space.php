@@ -73,7 +73,7 @@ class Space
     private $categorie;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Bloc", mappedBy="id_space")
+     * @ORM\OneToMany(targetEntity="App\Entity\Bloc", mappedBy="idSpace")
      */
     private $bloc;
 
