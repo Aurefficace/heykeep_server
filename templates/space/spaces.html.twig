@@ -39,11 +39,12 @@
                 {% endfor %}
             </td>
             <td>
-                <a href="{{ path('space_show', {'id': space.id}) }}">
-                    <button type="button" class="btn rounded-pill bg-blue px-3 text-white font-weight-bold"><i class="far fa-eye" aria-hidden="true"></i>
-                        Afficher
-                    </button>
-                </a>
+                {#                <a href="{{ path('space_show', {'id': space.id}) }}">#}
+                <button type="button" class="btn rounded-pill bg-blue px-3 text-white font-weight-bold" onclick="callAjaxMasterDetail('{{ path('space_show', {'id': space.id}) }}','#master-detail','#listmaster','#back-to-list-space'); ">
+                    <i class="far fa-eye" aria-hidden="true"></i>
+                    Afficher
+                </button>
+                {#                </a>#}
                 {% if app.user.name == space.idOwner %}
                     <button type="button" class="btn rounded-pill bg-red px-3 text-white font-weight-bold"
                             onclick="callAjaxMasterDetail('{{ path('space_edit', {'id': space.id}) }}','#master-detail','#listmaster','#back-to-list-space'); ">
