@@ -1,5 +1,8 @@
 {{ form_start(form, {'attr': {'class': 'formBloc','action': action, 'data-callback': "BlocFormCallback"}}) }}
 <span id="bloc-targets" data-target-categories-by-space="{{ path('categories_by_space') }}"></span>
     {{ form_widget(form) }}
+    <div id="blocType">
+    <textarea name='contentElement' class="form-control"></textarea>
+    </div>
     <button class="btn">{{ button_label|default('Sauvegarder') }}</button>
 {{ form_end(form) }}

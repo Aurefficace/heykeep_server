@@ -6,6 +6,7 @@ use App\Entity\Bloc;
 use App\Form\BlocType;
 use App\Repository\BlocRepository;
 use App\Entity\Element;
+use App\Helpers\Utilities;
 use App\Repository\ElementRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -39,12 +40,31 @@ class BlocController extends AbstractController
         $form = $this->createForm(BlocType::class, $bloc, ['attr' => ['user' => $user]]);
         $form->handleRequest($request);
 
+        
         if ($form->isSubmitted() && $form->isValid()) {
             $bloc->setCreatedDate(new \DateTime('today'));
             $bloc->setIsarchiv(0);
             $bloc->setIdOwner($this->getUser());
-
-
+            $type = $bloc->getElement()->getType();
+          
+           $contentElement = $request->get('contentElement');
+           switch ($type) {
+            case '0':
+               $bloc->getElement()->setContent($contentElement);
+                break;
+            case '1':
+                $contentElement = $request->files->get('contentElement');
+                dump($contentElement,'fonctionnalité à venir');
+                exit();
+                $bloc->getElement()->setContent("element.".$contentElement->guessExtension());
+                $filePath = $this->getParameter('kernel.project_dir').'/public/user/element/'.$user->getId();
+                Utilities::uploadFile($filePath, $contentElement, "element.");
+                break;
+            case '2':
+                $bloc->getElement()->setContent($contentElement);
+                break;
+        }
+            
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($bloc);
             $entityManager->flush();

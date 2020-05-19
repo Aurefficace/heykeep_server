@@ -24,7 +24,7 @@ class ElementType extends AbstractType
                 'required' => true,
                 'choices' => ListeElementType::getChoices(),
             ])
-            ->add('content', TextType::class, ['label' => 'Contenu'])
+            // ->add('content', TextType::class, ['label' => 'Contenu'])
         ;
     }
 

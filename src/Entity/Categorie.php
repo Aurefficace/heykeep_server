@@ -67,7 +67,7 @@ class Categorie
     private $isarchiv;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Bloc",  mappedBy="categorie_id")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Bloc",  inversedBy="categorie_id")
      * @ORM\JoinTable(name="categorie_bloc")
      */
     private $blocs;

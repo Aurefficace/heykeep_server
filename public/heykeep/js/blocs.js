@@ -1,14 +1,11 @@
 $(document).ready(function () {
-    console.log('symfony c"est nase')
     initForm($(".formBloc"));
 })
 function BlocFormCallback() {
-    console.log("BlocFormCallback");
     $("#bloc_idSpace")
       .chosen()
       .change(function () {
           const id_space = $(this).chosen().val();
-          console.log(id_space);
         $.ajax({
           method: "POST",
           url: $("#bloc-targets").data("target-categories-by-space"),
@@ -31,6 +28,27 @@ function BlocFormCallback() {
           },
         });
       });
+      $("#bloc_element_type")
+      .chosen()
+      .change(function () {
+          const elementType = $(this).chosen().val();
+          const $blocType = $("#blocType");
+          console.log(elementType);
+          if (elementType == 0) {
+            console.log(elementType)
+            $blocType.empty();
+            $blocType.append(  $("<textarea name='contentElement'  class='form-control'></textarea>"));
+          }
+          if (elementType == 1) {
+            $blocType.empty();
+            $blocType.append(  $("<input name='contentElement' type='file'  class='form-control' />"));          }
+          if (elementType == 2) {
+            $blocType.empty();
+            $blocType.append(  $("<input name='contentElement' type='url'  class='form-control' />"));
+          }
+        
+      });
+  
 }
 
 function newBloc(target) {
