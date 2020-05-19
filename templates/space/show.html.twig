@@ -7,98 +7,199 @@
 {% block title %}Space{% endblock %}
 
 {% block body %}
-    <h1>Space</h1>
+    <div class="container-login100">
+    <div class="container mt-3 mb-5">
 
-    <table class="table z-depth-0">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ space.id }}</td>
-            </tr>
-            <tr>
-                <th>Nom</th>
-                <td>{{ space.name }}</td>
-            </tr>
-            <tr>
-                <th>Description</th>
-                <td>{{ space.description }}</td>
-            </tr>
-            <tr>
-                <th>Date de création</th>
-                <td>{{ space.createdDate ? space.createdDate|date('d-m-Y') : '' }}</td>
-            </tr>
-            <tr>
-                <th>Actif</th>
-                <td>{{ space.actif ? 'Oui' : 'Non' }}</td>
-            </tr>
-            <tr>
-                <th>Image</th>
-                <td>{{ space.image }}</td>
-            </tr>
-        </tbody>
-    </table>
-     <div class="container mt-3">
-		<div class="row">
-	<div class="col col-example bg-beige  p-3 m-2 card-dash">
-        <img src="{{ asset('space/'~ space.id~ '/' ~ space.image) }}" class="rounded-circle z-depth-0" alt="espace image" style="max-height: 120px;max-width: 120px;" >
-		<h3 class="blue_text mx-3 my-3 text-center">Liste des membres:</h3>
-         {% for member in space.idMember %}
-         {{member.name}} <br>
-         {% endfor %}
-         </div>
-         </div>
-         </div>
-     <button id="buttonChangeAvatar" class="btn btn-primary px-3 rounded-pill">Ajouter un membre</button>
-    <a href="{{ path('space_index') }}"><button type="btn" class="btn btn-light btn-sm">Liste des espaces</button></a>
 
-    <div class="container mt-3">
-        <div class="row">
-            <div class="col col-example bg-beige  p-3 m-2 card-dash">
-                <h3 class="blue_text mx-3 my-3 text-center">Liste des catégories :</h3>
-                {% for cat in space.categorie %}
-                    {{cat.name}} <br>
-                {% endfor %}
-                <a href="{{ path('categorie_new') }}"><button type="btn" class="btn btn-primary px-3 rounded-pill">Nouvelle catégorie</button></a>
+        <!--Section: Content-->
+        <section class="dark-grey-text text-center">
+
+            <h2 class="font-weight-normal blue_text mb-1">Bienvenue dans votre espace</h2>
+            <!-- Section heading -->
+            <h1 class="font-weight-bold red_text mb-1 pb-2">{{ space.name }}</h1>
+            <a href="{{ path('space_index') }}"><button type="btn" class="btn rounded-pill bg-blue btn-sm white-text">Liste des espaces</button></a>
+            <!-- Section description -->
+            <p class="lead blue_text mx-auto pt-2 mb-4 font-weight-bold">Retrouvez ici toutes les informations de cet espace !</p>
+
+            <!--First row-->
+            <div class="row">
+                <!--Grid column-->
+                <div class="col-md-12 mb-4">
+
+                    <!-- Card -->
+                    <a href="#!" class="card hoverable card-dash">
+
+                        <!-- Card content -->
+                        <div class="card-body my-4">
+
+                            <p><i class="fas fa-th fa-2x red_text"></i></p>
+                            <h5 class="blue_text mb-2 font-weight-bold">Liste des blocs</h5>
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th class="blue_text mb-2 font-weight-bold">Date de création</th>
+                                    <th class="blue_text mb-2 font-weight-bold">Titre</th>
+                                    <th class="blue_text mb-2 font-weight-bold">Description</th>
+                                    <th class="blue_text mb-2 font-weight-bold">Archivé</th>
+                                    <th class="blue_text mb-2 font-weight-bold">Contenu</th>
+                                    <th class="blue_text mb-2 font-weight-bold">Type</th>
+                                    <th class="blue_text mb-2 font-weight-bold">Actions</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for bloc in space.bloc %}
+                                    <tr>
+                                        <td>{{ bloc.createdDate ? bloc.createdDate|date('Y-m-d H:i:s') : '' }}</td>
+                                        <td>{{ bloc.title }}</td>
+                                        <td>{{ bloc.description }}</td>
+                                        <td>{{ bloc.isarchiv ? 'Oui' : 'Non' }}</td>
+                                        <td>{{ bloc.element.content }}</td>
+                                        <td>{{ bloc.element.type|readable_enum }}</td>
+                                        <td>
+                                            <a class="btn bg-red white-text font-weight-bold px-3 rounded-pill" href="{{ path('bloc_show', {'id': bloc.id}) }}">Voir</a> -
+                                            <a class="btn bg-blue white-text font-weight-bold px-3 rounded-pill" href="{{ path('bloc_edit', {'id': bloc.id}) }}">Editer</a>
+                                        </td>
+                                    </tr>
+                                {% else %}
+                                    <tr>
+                                        <td colspan="7">Aucun contenu</td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+
+                        </div>
+
+                    </a>
+
+                    <!-- Card -->
+
+                </div>
+                <!--Grid column-->
+
+                <!--Grid column-->
+                <div class="col-md-3 mb-4">
+
+                    <!-- Card -->
+                    <a href="#!" class="card hoverable card-dash">
+
+                        <!-- Card content -->
+                        <div class="card-body my-4">
+
+                            <p><i class="fas fa-calendar-alt fa-2x red_text"></i></p>
+                            <h5 class="blue_text  mb-2 font-weight-bold">Date de création</h5>
+                            <p class="blue_text text-center">{{ space.createdDate ? space.createdDate|date('d-m-Y') : '' }}</p>
+
+                        </div>
+
+                    </a>
+                    <!-- Card -->
+
+                </div>
+                <!--Grid column-->
+
+
+                <!--Grid column-->
+                <div class="col-md-3 mb-4">
+
+                    <!-- Card -->
+                    <a href="#!" class="card hoverable card-dash">
+
+                        <!-- Card content -->
+                        <div class="card-body my-4">
+
+                            <p><i class="fas fa-image fa-2x red_text"></i></p>
+                            <h5 class="blue_text mb-2 font-weight-bold">Image</h5>
+                            <div class="avatar mx-auto white">
+                                <img src="{{ asset('space/'~ space.id~ '/' ~ space.image) }}" class="rounded-circle"
+                                     alt="Avatar Espace">
+                            </div>
+
+
+                        </div>
+
+                    </a>
+                    <!-- Card -->
+
+                </div>
+                <!--Grid column-->
+
+
+                <!--Grid column-->
+                <div class="col-md-6 mb-4">
+
+                    <!-- Card -->
+                    <a href="#!" class="card hoverable card-dash">
+
+                        <!-- Card content -->
+                        <div class="card-body my-4">
+
+                            <p><i class="fas fa-align-left fa-2x red_text"></i></p>
+                            <h5 class="blue_text mb-2 font-weight-bold">Liste des catégories</h5>
+                            {% for cat in space.categorie %}
+                                <p class="blue_text">{{cat.name}}</p>
+                            {% endfor %}
+
+                        </div>
+
+                    </a>
+
+                    <!-- Card -->
+
+                </div>
+                <!--Grid column-->
+
+                <!--Grid column-->
+                <div class="col-md-6 mb-4">
+
+                    <!-- Card -->
+                    <a href="#!" class="card hoverable card-dash">
+
+                        <!-- Card content -->
+                        <div class="card-body my-4">
+
+                            <p><i class="fas fa-users fa-2x red_text"></i></p>
+                            <h5 class="blue_text mb-2 font-weight-bold">Liste des membres</h5>
+                            {% for member in space.idMember %}
+                                <p class="blue_text">{{member.name}}</p>
+                            {% endfor %}
+                            <button id="buttonChangeAvatar" class="btn bg-red white-text font-weight-bold px-3 rounded-pill">Ajouter un membre</button>
+                        </div>
+
+                    </a>
+                    <!-- Card -->
+
+                </div>
+                <!--Grid column-->
+
+                <!--Grid column-->
+                <div class="col-md-6 mb-4">
+
+                    <!-- Card -->
+                    <a href="#!" class="card hoverable card-dash">
+
+                        <!-- Card content -->
+                        <div class="card-body my-4">
+
+                            <p><i class="fas fa-list fa-2x red_text"></i></p>
+                            <h5 class="blue_text mb-2 font-weight-bold">Description</h5>
+                            <p class="blue_text">{{ space.description }}</p>
+
+                        </div>
+
+                    </a>
+                    <!-- Card -->
+
+                </div>
+                <!--Grid column-->
+
             </div>
-        </div>
+            <!--First row-->
+
+        </section>
+
+
+    </div>
     </div>
 
-    <h2>Liste des blocs de cet espace</h2>
-    <table class="table">
-        <thead>
-        <tr>
-            <th>Id</th>
-            <th>Date de création</th>
-            <th>Titre</th>
-            <th>Description</th>
-            <th>Archivé</th>
-            <th>Public</th>
-            <th>Contenu</th>
-            <th>Type</th>
-            <th>Actions</th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for bloc in space.bloc %}
-            <tr>
-                <td>{{ bloc.id }}</td>
-                <td>{{ bloc.createdDate ? bloc.createdDate|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ bloc.title }}</td>
-                <td>{{ bloc.description }}</td>
-                <td>{{ bloc.isarchiv ? 'Oui' : 'Non' }}</td>
-                <td>{{ bloc.ispublic ? 'Oui' : 'Non' }}</td>
-                <td>{{ bloc.element.content }}</td>
-                <td>{{ bloc.element.type|readable_enum }}</td>
-                <td>
-                    <a href="{{ path('bloc_show', {'id': bloc.id}) }}">Voir</a> -
-                    <a href="{{ path('bloc_edit', {'id': bloc.id}) }}">Editer</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="7">Aucun contenu</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
 {% endblock %}
