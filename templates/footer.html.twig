@@ -27,7 +27,7 @@
                     </a>
                 </li>
                 <li class="nav-item px-3">
-                    <a href="{{path ('bloc_new')}}" class="nav-link waves-effect waves-light" data-toggle="tooltip" data-placement="top"  data-html="true" title="Nouveau <em>texte, image, lien</em>">
+                    <a class="nav-link waves-effect waves-light" data-html="true" data-toggle="tooltip" data-placement="top" title="Nouveau <em>texte, image, lien</em>" onclick="callAjaxPopup('{{ path('bloc_new') }}');" href="#">
                         <i class="fas fa-cloud-upload-alt"></i>
                     </a>
                 </li>

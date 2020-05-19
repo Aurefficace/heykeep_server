@@ -132,6 +132,24 @@ class SpaceController extends BaseController
         }
         return new JsonResponse(['success' => $users]);
     }
+    /**
+     * @Route("/catgeoriesBySpace", name="categories_by_space")
+     */
+    public function getCategoriesBySpace(Request $request, SpaceRepository $spaceRepository): Response
+    {
+        $id_space =  $request->get('id');
+        $space = $spaceRepository->find($id_space);
+        if ($space == null) {
+            return new JsonResponse(['error' => "aucun espace trouvé"]);;
+        }
+        
+        $categoriesSpace = [];
+        foreach ($space->getCategorie() as $categories) {
+           
+            $categoriesSpace[$categories->getId()] = $categories->getName();
+        }
+        return new JsonResponse(['success' => $categoriesSpace]);
+    }
 
     
 }

@@ -58,7 +58,7 @@ class BlocRepository extends ServiceEntityRepository
             ->getResult();
         ;
     }
-   
+
    public function getLastsActivities(User $user) {
         $queryBuilderBloc = $this->createQueryBuilder('b');
         $queryBuilderBloc

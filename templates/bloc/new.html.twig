@@ -1,11 +1,12 @@
-{% extends 'base.html.twig' %}
-
 {% block title %}New Bloc{% endblock %}
 
 {% block body %}
     <h1 class="red_text">uploadez un fichier</h1>
 
-    {{ include('bloc/_form.html.twig') }}
+    {{ include('bloc/_form.html.twig', {'action' : path('bloc_new')}) }}
 
     <a class="red_text" href="{{ path('bloc_index') }}">Retour</a>
+{% endblock %}
+{% block javascripts %}
+<script src="{{ asset('heykeep/js/blocs.js') }}"></script>
 {% endblock %}

@@ -1,18 +1,23 @@
 
-    <div class="col-lg-5 card card-dash p-3 mx-2 mb-3 z-depth-0">
-    <div class="row">
-    
-    <div class="col-lg-8 pl-0">
-    <img src="{{ asset('user/profile/'~ app.user.id~ '/' ~ app.user.avatar) }}" class="rounded-circle z-depth-0" alt="avatar image" >
-        <h4 class="font-weight-bold red_text pt-2">{{ bloc.title }}</h4>
-        <p class="small text-muted ml-1 mb-0 mx-auto"> Crée le : {{ bloc.createdDate ? bloc.createdDate|date('d/m/Y') : '' }}</p>
+   
+<div class="mb-3 mx-3">
+
+    <div class="ml-3">
+        <div class="row">
+             <img src="{{ asset('user/profile/'~ app.user.id~ '/' ~ app.user.avatar) }}" class="rounded-circle z-depth-0" alt="avatar image"style="width: 50px;" >
+            <div class="card card-dash py-2 px-3 mb-2">
+             {% if bloc.element.type == elementTypeImage %}
+            <img src="{{ asset('bloc/'~ bloc.id~ '/' ~ bloc.element.content) }}" class="avatar z-depth-0 rounded-circle " alt="espace image">
+            {% elseif bloc.element.type == elementTypeText %}
+            <p>{{ asset('bloc/'~ bloc.id~ '/' ~ bloc.element.content) }}</p>
+            {% elseif bloc.element.type == elementTypeLien %}
+            <a href="{{bloc.element.content}}"></a>
+             {% endif %}
+             
+                <p class="text-small mb-0 blue_text">{{ bloc.description[:50] ~ ' ...' }}</p>
+            </div>
+        </div>
+        <p class="small text-muted ml-1 mb-0">Crée le : {{ bloc.createdDate ? bloc.createdDate|date('d/m/Y') : '' }}</p>
        
     </div>
-        <div class="row mx-0">
-        <div class="col-lg-10 card-dash p-3 my-2 mx-auto bg-beige">
-            <p class="text-small mb-0 blue_text mx-auto">{{ bloc.description[:50] ~ ' ...' }}</p>
-        </div>
-
-    </div>
-    </div>
-    </div>
+</div>
