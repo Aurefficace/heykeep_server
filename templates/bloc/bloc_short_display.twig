@@ -11,6 +11,7 @@
             {% elseif bloc.element.type == elementTypeText %}
             <p>{{ asset('bloc/'~ bloc.id~ '/' ~ bloc.element.content) }}</p>
             {% elseif bloc.element.type == elementTypeLien %}
+           <a href="{{ asset('bloc/'~ bloc.id~ '/' ~ bloc.element.content) }}">visitez le lien </a>
             <a href="{{bloc.element.content}}"
              {% endif %}
              
