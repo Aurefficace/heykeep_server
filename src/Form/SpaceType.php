@@ -44,17 +44,16 @@ class SpaceType extends AbstractType
             ->add('categorie', CollectionType::class, [
                 'entry_type' => CategorieType::class,
                 'entry_options' => [
-                    'label' => 'Categorie',
+                    'label' => false,
                 ],
-                'label'        => 'Add, move, remove values and press Submit.',
+                'label'        => 'Ajouter, supprimer ou éditer les catégories de l\'espace',
                 'allow_add'    => true,
                 'allow_delete' => true,
                 'prototype'    => true,
                 'required'     => false,
                 'attr'         => [
-                    'class' => 'my-selector',
+                    'class' => 'selector-form-cat',
                 ],
-//                'allow_add' => true,
                 'by_reference'=>false,
 
             ])

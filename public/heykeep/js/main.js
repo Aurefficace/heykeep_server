@@ -175,3 +175,8 @@ function updateImagePreview($input,$target) {
     reader.readAsDataURL($input.files[0]); // convert to base64 string
   }
 }
+
+// Ajout global des tooltip Bootstrap info bulle quand on passe la souris sur un élément.
+$( function() {
+  $('[data-toggle="tooltip"]').tooltip()
+} );

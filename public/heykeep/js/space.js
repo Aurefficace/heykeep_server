@@ -86,6 +86,22 @@ function readURL(input) { // TODO mat à mutualiser car c'est utilisé ailleurs
 //     });
 // }
 
+
+// Editer le formulaire d'ajout de catégorie dans un espace
 function spaceFormCallback() {
-    $('.my-selector').collection();
+    $('.selector-form-cat').collection({
+        add_at_the_end: true,
+        allow_up: false,
+        allow_down: false,
+        up: '<a href="#" class="btn btn-sm" title="Monter"><span class="far fa-arrow-alt-circle-up"></span></a>',
+        down: '<a href="#" class="btn btn-sm" title="Descendre"><span class="far fa-arrow-alt-circle-down"></span></a>',
+        add: '<a href="#" class="btn btn-sm" title="Ajouter un nouvel élément"><span class="fa fa-plus-circle"></span></a>',
+        remove: '<a href="#" class="btn btn-sm" title="Supprimer"><span class="far fa-trash-alt"></span></a>',
+        duplicate: '<a href="#" class="btn btn-sm" title="Dupliquer"><span class="far fa-copy"></span></a>',
+        before_remove: function(collection, element) {
+            return confirm("Etes-vous sûr de vouloir supprimer cette catégorie ?");
+
+            },
+
+    });
 }

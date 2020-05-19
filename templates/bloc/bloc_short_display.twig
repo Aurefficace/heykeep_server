@@ -7,11 +7,11 @@
              <img src="{{ asset('user/profile/'~ app.user.id~ '/' ~ app.user.avatar) }}" class="rounded-circle z-depth-0" alt="avatar image"style="width: 50px;" >
             <div class="card card-dash py-2 px-3 mb-2">
              {% if bloc.element.type == elementTypeImage %}
-            <img src="{{ asset('bloc/'~ bloc.id~ '/' ~ bloc.element.content) }}" class="avatar z-depth-0 rounded-circle " alt="espace image">
+            <img src="{{ asset('space/'~ bloc.idSpace.id~ '/' ~ bloc.element.content) }}" class="avatar z-depth-8 img-thumbnail" style="width: 70px;" alt="espace image">
             {% elseif bloc.element.type == elementTypeText %}
-            <p>{{ asset('bloc/'~ bloc.id~ '/' ~ bloc.element.content) }}</p>
+            <p>{{bloc.element.content}}</p>
             {% elseif bloc.element.type == elementTypeLien %}
-            <a href="{{bloc.element.content}}"
+            <a href="{{bloc.element.content}}">Visitez le lien</a>
              {% endif %}
              
                 <p class="text-small mb-0 blue_text">{{ bloc.description[:50] ~ ' ...' }}</p>

@@ -7,7 +7,7 @@
             <ul class="navbar-nav ml-auto nav-flex-icons">
                 <li class="nav-item px-1" >
                     <a href="{{path ('categorie_index')}}" class="nav-link waves-effect waves-light"  data-toggle="tooltip" data-placement="top" title="Catégories">
-                        <i class="fas fa-pager"></i>
+                        <i class="fas fa-align-left"></i>
                     </a>
                 </li>
                 <li class="nav-item px-1">
@@ -27,7 +27,7 @@
                     </a>
                 </li>
                 <li class="nav-item px-3">
-                    <a class="nav-link waves-effect waves-light" data-toggle="tooltip" data-placement="top" title="Nouveau <em>texte, image, lien</em>" onclick="callAjaxPopup('{{ path('bloc_new') }}');" href="#">
+                    <a class="nav-link waves-effect waves-light" data-html="true" data-toggle="tooltip" data-placement="top" title="Nouveau <em>texte, image, lien</em>" onclick="callAjaxPopup('{{ path('bloc_new') }}');" href="#">
                         <i class="fas fa-cloud-upload-alt"></i>
                     </a>
                 </li>
